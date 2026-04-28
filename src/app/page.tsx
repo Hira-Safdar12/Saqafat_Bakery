@@ -6,19 +6,20 @@ import TopSellers from "./components/home/TopSellers";
 import AboutSection from './components/home/About';
 import MenuCard from "./components/home/Menu";
 import ReviewSection from "./components/home/Reviews";
-
+import NewsletterSection from './components/home/Newsletter';
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <AboutSection/>
-      <MenuCard />
       <TopSellers />
       <Offers />
       <CustomBuffet />
       <NewArrivals />
+        <AboutSection/>
+      <MenuCard />
       <ReviewSection />
+       <NewsletterSection />
     </main>
   );
 }
