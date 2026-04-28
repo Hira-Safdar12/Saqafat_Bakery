@@ -12,13 +12,12 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
+      <AboutSection/>
+      <MenuCard />
       <TopSellers />
       <Offers />
       <CustomBuffet />
       <NewArrivals />
-      {/* TopSellers, Offers, Specials, Arrivals will go here */}
-      <AboutSection/>
-      <MenuCard />
       <ReviewSection />
     </main>
   );

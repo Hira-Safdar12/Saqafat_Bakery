@@ -1,14 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect,useRef, useState } from 'react';
 import Link from 'next/link';
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
+   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  
 
-  useEffect(() => {
-    setMounted(true);
+ useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      const playVideo = async () => {
+        try {
+          await video.play();
+        } catch (err) {
+          console.log('Autoplay blocked but handled safely:', err);
+        }
+      };
+
+      playVideo();
+    }
   }, []);
 
   const handleScrollDown = () => {
@@ -225,27 +238,35 @@ export default function Hero() {
         {/* ── LAYER 2: Background video ────────────────────────────────── */}
        
 
-          <video preload="auto"  
-            className="hero-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            onLoadedData={() => setVideoLoaded(true)}
-            style={{
-              position:   'absolute',
-              inset:       0,
-              width:       '100%',
-              height:      '100%',
-              objectFit:   'cover',
-              objectPosition: 'center',
-              zIndex:      1,
-              opacity:     videoLoaded ? 1 : 0,
-            }}
-          >
-            <source src="/tea.mp4" type="video/mp4" />
-          </video>
-        
+          {/* VIDEO LAYER */}
+      <video
+        ref={videoRef}
+        preload="auto"
+        autoPlay
+        muted
+        loop
+        playsInline
+        onCanPlay={() => setVideoLoaded(true)}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          zIndex: 1,
+
+          /* FIX: no more disappearing video */
+          opacity: videoLoaded ? 1 : 1,
+
+          transition: 'opacity 0.8s ease',
+
+          /* extra stability */
+          filter: 'blur(1.2px) brightness(0.9)',
+        }}
+      >
+        <source src="/tea.mp4" type="video/mp4" />
+      </video>
 
         {/* ── LAYER 3: Dark overlay on top of video (40% per SRS §3.4.1) */}
         <div
@@ -300,7 +321,7 @@ export default function Hero() {
               fontSize:     'clamp(3rem, 7.5vw, 6rem)',
               fontWeight:    900,
               lineHeight:    1.05,
-              color:        '#FAF6EE',
+              color:       '#FFFBF3',
               marginBottom: '1.2rem',
               letterSpacing: '-0.01em',
             }}
