@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -45,9 +46,8 @@ function LocationPinIcon() {
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function Header() {
-  const [scrolled, setScrolled]     = useState(false);
-  const [menuOpen, setMenuOpen]     = useState(false);
-  const [logoHovered, setLogoHovered] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
   const pathname = usePathname();
 
   const handleScroll = useCallback(() => {
@@ -59,25 +59,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  // Lock body scroll when mobile drawer is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Close drawer on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
   function openSelectionFunnel() {
-    // Dispatches a custom event — the SelectionFunnel component listens for this
     window.dispatchEvent(new CustomEvent('saqafat:open-funnel'));
   }
 
   return (
     <>
-      {/* ── Inject global styles (hover states, media queries) ─────────────── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500&display=swap');
 
@@ -89,7 +85,7 @@ export default function Header() {
           --cream-dim:  rgba(250, 246, 238, 0.75);
           --brown:      #3D2B1F;
           --char:       #1A0F08;
-          --header-h:   72px;
+          --header-h:   80px;
         }
 
         .sq-nav-link {
@@ -128,20 +124,16 @@ export default function Header() {
           border-radius: 2px;
         }
 
-        .sq-logo-text {
-          font-family: 'Playfair Display', serif;
-          font-size: 22px;
-          font-weight: 900;
-          color: var(--gold);
-          letter-spacing: 0.06em;
-          line-height: 1;
-          transition: color 0.2s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        .sq-logo-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          padding: 0 1.5rem;
+          flex-shrink: 0;
+          transition: opacity 0.2s;
         }
-        .sq-logo-wrapper:hover .sq-logo-text,
-        .sq-logo-wrapper:focus-visible .sq-logo-text {
-          color: var(--gold-light);
-          transform: scale(1.04);
-        }
+        .sq-logo-wrapper:hover { opacity: 0.85; }
         .sq-logo-wrapper:focus-visible {
           outline: 2px solid var(--gold);
           outline-offset: 4px;
@@ -206,7 +198,6 @@ export default function Header() {
           transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* Mobile drawer */
         .sq-drawer {
           position: fixed;
           inset: 0;
@@ -217,7 +208,6 @@ export default function Header() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 0;
           animation: sq-fade-in 0.25s ease;
         }
         @keyframes sq-fade-in {
@@ -274,7 +264,6 @@ export default function Header() {
         }
         .sq-close-btn:hover { background: var(--gold-dim); border-color: var(--gold); }
 
-        /* Responsive breakpoints */
         @media (max-width: 768px) {
           .sq-nav-left,
           .sq-nav-right {
@@ -284,7 +273,7 @@ export default function Header() {
             display: flex !important;
           }
           .sq-location-btn span {
-            display: none; /* show icon only on mobile */
+            display: none;
           }
         }
 
@@ -295,7 +284,7 @@ export default function Header() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .sq-drawer, .sq-drawer-link, .sq-logo-text {
+          .sq-drawer, .sq-drawer-link {
             animation: none !important;
             transition: none !important;
           }
@@ -306,23 +295,21 @@ export default function Header() {
       <header
         role="banner"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          height: 'var(--header-h)',
-          display: 'flex',
-          alignItems: 'center',
+          position:       'fixed',
+          top:            0,
+          left:           0,
+          right:          0,
+          zIndex:         100,
+          height:         'var(--header-h)',
+          display:        'flex',
+          alignItems:     'center',
           justifyContent: 'space-between',
-          padding: '0 2rem',
-          transition: 'background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease',
-          background: scrolled
-            ? 'rgba(26, 15, 8, 0.92)'
-            : 'transparent',
+          padding:        '0 2rem',
+          transition:     'background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease',
+          background:     scrolled ? 'rgba(26, 15, 8, 0.92)' : 'transparent',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          boxShadow: scrolled
+          boxShadow:      scrolled
             ? '0 1px 0 rgba(201, 168, 76, 0.15), 0 4px 24px rgba(0,0,0,0.3)'
             : 'none',
         }}
@@ -345,45 +332,20 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* CENTER LOGO */}
+        {/* CENTER LOGO — image only, no text beneath */}
         <Link
           href="/"
           className="sq-logo-wrapper"
           aria-label="Saqafat Bakery & Cafe — home"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textDecoration: 'none',
-            padding: '0 1.5rem',
-            flexShrink: 0,
-          }}
         >
-          {/*
-            ── LOGO IMAGE (uncomment when asset is ready) ──────────────────
-            <Image
-              src="/images/logo.svg"
-              alt="Saqafat Bakery & Cafe"
-              width={120}
-              height={48}
-              priority
-              style={{ objectFit: 'contain' }}
-            />
-          */}
-          <span className="sq-logo-text">SAQAFAT</span>
-          <span
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '8px',
-              letterSpacing: '0.28em',
-              textTransform: 'uppercase',
-              color: 'var(--gold-light)',
-              opacity: 0.75,
-              marginTop: '1px',
-            }}
-          >
-            Bakery &amp; Cafe
-          </span>
+          <Image
+            src="/SaqafatLogo.png"
+            alt="Saqafat Bakery & Cafe"
+            width={260}
+            height={110}
+            priority
+            style={{ objectFit: 'contain' }}
+          />
         </Link>
 
         {/* RIGHT NAV + LOCATION PILL */}
@@ -391,10 +353,10 @@ export default function Header() {
           className="sq-nav-right"
           aria-label="Primary navigation right"
           style={{
-            display: 'flex',
-            gap: '2rem',
-            alignItems: 'center',
-            flex: 1,
+            display:        'flex',
+            gap:            '2rem',
+            alignItems:     'center',
+            flex:           1,
             justifyContent: 'flex-end',
           }}
         >
@@ -409,7 +371,6 @@ export default function Header() {
             </Link>
           ))}
 
-          {/* Location pin — reopens Selection Funnel (SRS §3.2) */}
           <button
             className="sq-location-btn"
             onClick={openSelectionFunnel}
@@ -452,16 +413,15 @@ export default function Header() {
             ✕
           </button>
 
-          {/* Brand mark in drawer */}
           <span
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: '13px',
+              fontFamily:    "'Playfair Display', serif",
+              fontSize:      '13px',
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: 'var(--gold)',
-              marginBottom: '2rem',
-              opacity: 0.6,
+              color:         'var(--gold)',
+              marginBottom:  '2rem',
+              opacity:       0.6,
             }}
           >
             Saqafat
@@ -484,7 +444,6 @@ export default function Header() {
 
           <div className="sq-drawer-divider" />
 
-          {/* Location button inside drawer */}
           <button
             className="sq-location-btn"
             onClick={() => {

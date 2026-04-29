@@ -64,6 +64,7 @@ export default function Hero() {
         .hero-scroll   { animation: fadeIn   0.8s ease 1.2s  both; }
         .hero-stats    { animation: fadeUp   0.7s ease 0.95s both; }
 
+        
         /* Button hover states */
         .btn-primary {
           background:     #C9A84C;
@@ -104,8 +105,8 @@ export default function Hero() {
           transition:     border-color 0.25s, color 0.25s, background 0.25s, transform 0.2s;
         }
         .btn-outline:hover {
-          border-color: #C9A84C;
-          color:        #C9A84C;
+          border-color: #C97B3A  ;
+          color:        #C97B3A  ;
           background:   rgba(201,168,76,0.06);
           transform:    translateY(-2px);
         }
@@ -321,7 +322,7 @@ export default function Hero() {
               fontSize:     'clamp(3rem, 7.5vw, 6rem)',
               fontWeight:    900,
               lineHeight:    1.05,
-              color:       '#FFFBF3',
+              color:       '#FAF6EE',
               marginBottom: '1.2rem',
               letterSpacing: '-0.01em',
             }}
@@ -329,7 +330,7 @@ export default function Hero() {
             Saqafatify{' '}
             <span
               style={{
-                color:       '#C9A84C',
+                color:       ' #C9A84C',
                 fontStyle:   'italic',
                 display:     'block',
               }}
