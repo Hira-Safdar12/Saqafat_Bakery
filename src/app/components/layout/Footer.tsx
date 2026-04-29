@@ -137,12 +137,12 @@ export default function Footer() {
         <div style={s.logoCol}>
           {/* Replace src with your own logo */}
           <img
-            src="https://placehold.co/160x55/595959/C97B3A?text=LOGO"
+            src="SaqafatLogo.png"
             alt="Saqafat Bakery"
             style={s.logo}
           />
 
-          <p style={{ ...s.colHeading, marginTop: '32px' }}>Social Media</p>
+          <p style={{ ...s.colHeading, marginTop: '1px' }}>Social Media</p>
           <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
             {/* Facebook */}
             <SocialIcon href="https://www.facebook.com/saqafatbakery/?locale=en_GB" label="Facebook">

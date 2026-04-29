@@ -280,8 +280,8 @@ const styles: any = {
     zIndex: 1,
   },
   subheading: {
-    color: '#8B5E3C',
-    fontSize: '0.85rem',
+    color: '#c97b3a',
+    fontSize: '0.95rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     marginBottom: '6px',

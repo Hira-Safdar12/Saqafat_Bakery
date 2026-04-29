@@ -326,7 +326,7 @@ const styles: any = {
     fontFamily: 'Georgia, serif',
   },
   headingAccent: {
-    color: '#C97B3A',
+    color: '#c97b3a',
     fontStyle: 'italic',
   },
 
