@@ -14,18 +14,18 @@ interface Item {
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const items: Item[] = [
-  { name: 'Chocolate Cake',  price: 'From PKR 1,200', img: '/images/cake.jpg',       badge: 'Bestseller' },
-  { name: 'Croissant',       price: 'From PKR 250',   img: '/images/croissant.jpg'                       },
-  { name: 'Donuts',          price: 'From PKR 350',   img: '/images/donut.jpg',       badge: 'Most Loved' },
-  { name: 'Brownies',        price: 'From PKR 400',   img: '/images/brownie.jpg'                         },
-  { name: 'Cupcakes',        price: 'From PKR 300',   img: '/images/cupcake.jpg'                         },
-  { name: 'Tea Cake',        price: 'From PKR 450',   img: '/images/teacake.jpg'                         },
-  { name: 'Cookies',         price: 'From PKR 200',   img: '/images/cookies.jpg'                         },
-  { name: 'Macarons',        price: 'From PKR 600',   img: '/images/macarons.jpg'                        },
-  { name: 'Pastry',          price: 'From PKR 350',   img: '/images/pastry.jpg'                          },
-  { name: 'Puff',            price: 'From PKR 280',   img: '/images/puff.jpg'                            },
-  { name: 'Sandwich',        price: 'From PKR 500',   img: '/images/sandwich.jpg'                        },
-  { name: 'Rolls',           price: 'From PKR 320',   img: '/images/rolls.jpg'                           },
+  { name: 'Steaks',  price: 'From PKR 1,200', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop', badge: 'Bestseller' },
+  { name: 'Croissant',       price: 'From PKR 250',   img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop' },
+  { name: 'Soup',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop', badge: 'Most Loved' },
+  { name: 'Brownies',        price: 'From PKR 400',   img: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=400&h=300&fit=crop' },
+  { name: 'Cupcakes',        price: 'From PKR 300',   img: 'https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&h=300&fit=crop' },
+  { name: 'Tea Cake',        price: 'From PKR 450',   img: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=300&fit=crop' },
+  { name: 'Cookies',         price: 'From PKR 200',   img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop' },
+  { name: 'Macarons',        price: 'From PKR 600',   img: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=400&h=300&fit=crop' },
+  { name: 'Pizza',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop' },
+  { name: 'Puff',            price: 'From PKR 280',   img: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=300&fit=crop' },
+  { name: 'Sandwich',        price: 'From PKR 500',   img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
+  { name: 'Noodles',           price: 'From PKR 320',   img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop' },
 ];
 
 // ─── COLOR TOKENS (matching About section) ────────────────────────────────────
@@ -367,18 +367,20 @@ export default function TopSellers() {
                     transform: `rotateY(${cardAngle}deg) translateZ(500px)`,
                   }}
                 >
-                  {/* Image */}
-                  <div style={{ position:'relative', width:'100%', height:'155px', background:'#f0e6d3' }}>
-                    <Image
-                      src={item.img}
-                      alt={item.name}
-                      fill
-                      style={{ objectFit:'cover' }}
-                      sizes="220px"
-                      // Lazy load all but first 3
-                      priority={index < 3}
-                    />
-                  </div>
+                 {/* IMAGE */}
+                <div style={{ position: 'relative', width: '100%', height: '155px' }}>
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    fill
+                    sizes="220px"
+                    style={{ objectFit: 'cover' }}
+                    priority={index < 3}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/fallback.jpg';
+                    }}
+                  />
+                </div>
 
                   {/* Badge — gradient style matching About section badge */}
                   {item.badge && (
