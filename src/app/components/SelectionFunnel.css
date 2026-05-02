@@ -1,0 +1,424 @@
+/* =============================================================================
+   SelectionFunnel.css
+   Color theme: consistent with About, TopSellers, Offers, CustomBuffet, NewArrivals
+   Palette:
+     cream bg:       #FFFBF3 / #FFF8EC
+     espresso text:  #1E0F06
+     gold accent:    #C97B3A
+     brown deep:     #5C2E0E
+     brown mid:      #A0673A
+     body text:      #5A3E2B
+     muted:          #9a7055
+============================================================================= */
+
+/* ── Overlay ──────────────────────────────────────────────────────────────── */
+.sf-overlay {
+  position:        fixed;
+  inset:           0;
+  z-index:         9000;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  padding:         1rem;
+  background:      rgba(20, 9, 5, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity:         0;
+}
+.sf-overlay.sf-in  { animation: sf-fade-in  0.4s ease forwards; }
+.sf-overlay.sf-out { animation: sf-fade-out 0.5s ease forwards; }
+
+/* ── Modal ────────────────────────────────────────────────────────────────── */
+.sf-modal {
+  position:      relative;
+  width:         100%;
+  max-width:     480px;
+  max-height:    92vh;
+  overflow-y:    auto;
+  background:    #FFF8EC;
+  border-radius: 20px;
+  border:        1px solid rgba(92, 46, 14, 0.12);
+  box-shadow:    0 32px 80px rgba(92, 46, 14, 0.30),
+                 0 4px 16px rgba(0, 0, 0, 0.12);
+  opacity:       0;
+}
+.sf-modal.sf-in  { animation: sf-slide-up   0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.sf-modal.sf-out { animation: sf-slide-down 0.4s  ease forwards; }
+
+/* Scrollbar inside modal */
+.sf-modal::-webkit-scrollbar       { width: 4px; }
+.sf-modal::-webkit-scrollbar-track { background: #FFF8EC; }
+.sf-modal::-webkit-scrollbar-thumb { background: rgba(201,123,58,0.3); border-radius: 2px; }
+
+/* ── Dark branded header ──────────────────────────────────────────────────── */
+.sf-header {
+  background:    linear-gradient(135deg, #1A0F08 0%, #3D2B1F 100%);
+  border-radius: 20px 20px 0 0;
+  padding:       28px 28px 24px;
+  text-align:    center;
+  position:      relative;
+  overflow:      hidden;
+}
+
+.sf-header-glow {
+  position:      absolute;
+  width:         300px;
+  height:        300px;
+  border-radius: 50%;
+  background:    radial-gradient(circle, rgba(201, 168, 76, 0.15) 0%, transparent 65%);
+  top:           50%;
+  left:          50%;
+  transform:     translate(-50%, -50%);
+  pointer-events:none;
+}
+
+.sf-logo-text {
+  font-family:    'Playfair Display', serif;
+  font-size:      1.8rem;
+  font-weight:    900;
+  color:          #C9A84C;
+  letter-spacing: 0.08em;
+  line-height:    1;
+  position:       relative;
+  z-index:        1;
+}
+
+.sf-logo-sub {
+  font-family:    'DM Sans', sans-serif;
+  font-size:      9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color:          rgba(232, 201, 122, 0.60);
+  margin-top:     3px;
+  position:       relative;
+  z-index:        1;
+}
+
+.sf-header-rule {
+  width:      48px;
+  height:     1px;
+  background: #C9A84C;
+  margin:     14px auto;
+  opacity:    0.6;
+  position:   relative;
+  z-index:    1;
+}
+
+.sf-header h2 {
+  font-family:   'Playfair Display', serif;
+  font-size:     1.1rem;
+  font-weight:   700;
+  color:         #FAF6EE;
+  margin:        0;
+  line-height:   1.3;
+  position:      relative;
+  z-index:       1;
+}
+
+.sf-header p {
+  font-family:   'DM Sans', sans-serif;
+  font-size:     0.8rem;
+  color:         rgba(250, 246, 238, 0.50);
+  margin-top:    6px;
+  margin-bottom: 0;
+  position:      relative;
+  z-index:       1;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.sf-body {
+  padding: 28px 28px 32px;
+}
+
+/* ── Eyebrow — matches all other sections ─────────────────────────────────── */
+.sf-eyebrow {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             10px;
+  margin-bottom:   22px;
+}
+.sf-eyebrow-line {
+  display:       inline-block;
+  width:         28px;
+  height:        2px;
+  background:    #C97B3A;
+  border-radius: 2px;
+}
+.sf-eyebrow-text {
+  font-family:    'DM Sans', sans-serif;
+  font-size:      0.72rem;
+  font-weight:    600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color:          #C97B3A;
+}
+
+/* ── Field group ──────────────────────────────────────────────────────────── */
+.sf-field {
+  margin-bottom: 20px;
+}
+
+.sf-label {
+  display:        block;
+  font-family:    'DM Sans', sans-serif;
+  font-size:      11px;
+  font-weight:    600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          #C97B3A;
+  margin-bottom:  8px;
+}
+
+.sf-label-note {
+  font-weight:    400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color:          #9a7055;
+  font-size:      10px;
+  margin-left:    5px;
+}
+
+.sf-required {
+  color:       #b91c1c;
+  margin-left: 2px;
+}
+
+/* Q3 question text */
+.sf-question {
+  font-family:    'DM Sans', sans-serif;
+  font-size:      12px;
+  font-weight:    600;
+  letter-spacing: 0.04em;
+  color:          #1E0F06;
+  margin-bottom:  8px;
+  line-height:    1.55;
+}
+.sf-question-accent {
+  color:      #C97B3A;
+  font-style: italic;
+}
+
+/* ── Dropdown ─────────────────────────────────────────────────────────────── */
+.sf-select {
+  width:         100%;
+  padding:       12px 40px 12px 16px;
+  border:        1.5px solid rgba(92, 46, 14, 0.18);
+  border-radius: 10px;
+  font-family:   'DM Sans', sans-serif;
+  font-size:     14px;
+  color:         #1E0F06;
+  background:    #FFFBF3
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C97B3A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    no-repeat right 14px center;
+  -webkit-appearance: none;
+  appearance:    none;
+  outline:       none;
+  cursor:        pointer;
+  transition:    border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing:    border-box;
+}
+.sf-select:focus {
+  border-color: #C97B3A;
+  box-shadow:   0 0 0 3px rgba(201, 123, 58, 0.12);
+}
+.sf-select:disabled {
+  opacity:          0.45;
+  cursor:           not-allowed;
+  background-color: #f5ede0;
+}
+.sf-select option {
+  color:      #1E0F06;
+  background: #FFFBF3;
+}
+
+/* ── Progress dots ────────────────────────────────────────────────────────── */
+.sf-dots {
+  display:         flex;
+  justify-content: center;
+  gap:             8px;
+  margin-bottom:   24px;
+}
+.sf-dot {
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    rgba(92, 46, 14, 0.15);
+  transition:    background 0.3s ease, transform 0.3s ease;
+}
+.sf-dot.sf-dot-active {
+  background: #C97B3A;
+  transform:  scale(1.3);
+}
+
+/* ── Continue button — matches all other sections exactly ─────────────────── */
+.sf-btn {
+  position:        relative;
+  width:           100%;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  overflow:        hidden;
+  background:      linear-gradient(135deg, #5C2E0E 0%, #A0673A 100%);
+  color:           #FAF6EE;
+  border:          none;
+  border-radius:   50px;
+  padding:         15px 32px;
+  cursor:          pointer;
+  font-family:     'DM Sans', sans-serif;
+  font-size:       13px;
+  font-weight:     600;
+  letter-spacing:  0.1em;
+  text-transform:  uppercase;
+  box-shadow:      0 8px 24px rgba(92, 46, 14, 0.30);
+  transition:      transform 0.25s ease,
+                   box-shadow 0.25s ease,
+                   background 0.25s ease;
+}
+.sf-btn:hover:not(:disabled) {
+  transform:  translateY(-2px);
+  box-shadow: 0 14px 36px rgba(92, 46, 14, 0.40);
+  background: linear-gradient(135deg, #7a3e18 0%, #C97B3A 100%);
+}
+.sf-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.sf-btn:disabled {
+  opacity: 0.40;
+  cursor:  not-allowed;
+}
+.sf-btn:focus-visible {
+  outline:        2px solid #C97B3A;
+  outline-offset: 3px;
+}
+
+.sf-btn-inner {
+  position:    relative;
+  z-index:     1;
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+}
+
+.sf-btn-arrow {
+  font-size:  1rem;
+  transition: transform 0.3s ease;
+}
+.sf-btn:hover .sf-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Shine sweep — same as all other buttons */
+.sf-btn-shine {
+  position:      absolute;
+  top:           0;
+  left:          -70%;
+  width:         45%;
+  height:        100%;
+  background:    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform:     skewX(-20deg);
+  transition:    left 0.55s ease;
+  pointer-events:none;
+}
+.sf-btn:hover .sf-btn-shine {
+  left: 130%;
+}
+
+/* ── Skip link ────────────────────────────────────────────────────────────── */
+.sf-skip {
+  display:        block;
+  width:          100%;
+  margin-top:     14px;
+  background:     none;
+  border:         none;
+  font-family:    'DM Sans', sans-serif;
+  font-size:      11px;
+  color:          rgba(92, 46, 14, 0.38);
+  cursor:         pointer;
+  text-align:     center;
+  letter-spacing: 0.06em;
+  padding:        4px;
+  transition:     color 0.2s ease;
+}
+.sf-skip:hover {
+  color: #C97B3A;
+}
+
+/* ── Floating food illustrations ──────────────────────────────────────────── */
+.sf-food-left {
+  position:       absolute;
+  left:           clamp(16px, 5vw, 80px);
+  top:            50%;
+  transform:      translateY(-50%);
+  font-size:      clamp(1.8rem, 3.5vw, 3rem);
+  opacity:        0.45;
+  user-select:    none;
+  line-height:    1.6;
+  pointer-events: none;
+  animation:      sf-float 3.5s ease-in-out infinite;
+}
+.sf-food-right {
+  position:       absolute;
+  right:          clamp(16px, 5vw, 80px);
+  top:            50%;
+  transform:      translateY(-50%);
+  font-size:      clamp(1.8rem, 3.5vw, 3rem);
+  opacity:        0.45;
+  user-select:    none;
+  line-height:    1.6;
+  text-align:     right;
+  pointer-events: none;
+  animation:      sf-float-r 4s ease-in-out infinite 0.5s;
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes sf-fade-in  {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes sf-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes sf-slide-up {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes sf-slide-down {
+  from { opacity: 1; transform: translateY(0)    scale(1);    }
+  to   { opacity: 0; transform: translateY(24px) scale(0.97); }
+}
+@keyframes sf-float {
+  0%, 100% { transform: translateY(-50%) rotate(0deg);              }
+  50%       { transform: translateY(calc(-50% - 12px)) rotate(3deg); }
+}
+@keyframes sf-float-r {
+  0%, 100% { transform: translateY(-50%) rotate(0deg);               }
+  50%       { transform: translateY(calc(-50% - 10px)) rotate(-4deg); }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .sf-food-left,
+  .sf-food-right  { display: none; }
+  .sf-modal       { border-radius: 16px; }
+  .sf-body        { padding: 20px 20px 28px; }
+  .sf-header      { padding: 22px 20px 20px; }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sf-overlay,
+  .sf-modal       { animation: none !important; opacity: 1 !important; }
+  .sf-food-left,
+  .sf-food-right  { animation: none !important; }
+  .sf-btn,
+  .sf-dot,
+  .sf-btn-shine,
+  .sf-skip        { transition: none !important; }
+}
