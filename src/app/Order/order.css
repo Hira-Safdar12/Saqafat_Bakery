@@ -1,0 +1,413 @@
+/* ================================
+   ROOT & GLOBAL
+================================ */
+.op-root {
+  font-family: 'Poppins', sans-serif;
+  background: #faf7f2;
+  color: #2b2b2b;
+  min-height: 100vh;
+}
+
+/* ================================
+   BANNER
+================================ */
+.op-banner {
+  background: linear-gradient(135deg, #3e2723, #5d4037);
+  color: #fff;
+  padding: 14px 20px;
+}
+
+.op-banner-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.op-banner-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.op-banner-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.op-banner-branch {
+  display: block;
+  font-weight: 600;
+}
+
+.op-banner-change {
+  background: #ffcc80;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.op-promo-bar {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ffe082;
+}
+
+/* ================================
+   LAYOUT
+================================ */
+.op-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ================================
+   SEARCH
+================================ */
+.op-search-wrap {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.op-search {
+  width: 100%;
+  padding: 12px 40px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.op-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.op-search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ================================
+   CATEGORY TABS
+================================ */
+.op-cats {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.op-cat-tab {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.op-cat-active {
+  background: #6d4c41;
+  color: #fff;
+}
+
+/* ================================
+   GRID
+================================ */
+.op-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ================================
+   ITEM CARD
+================================ */
+.op-item-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.op-item-card:hover {
+  transform: translateY(-5px);
+}
+
+.op-item-img-wrap {
+  position: relative;
+  height: 160px;
+}
+
+.op-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff7043;
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.op-badge-new {
+  background: #42a5f5;
+}
+
+.op-badge-best {
+  background: #ef5350;
+}
+
+.op-badge-loved {
+  background: #ab47bc;
+}
+
+.op-item-body {
+  padding: 14px;
+}
+
+.op-item-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.op-item-desc {
+  font-size: 12px;
+  color: #777;
+  margin: 6px 0;
+}
+
+.op-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.op-item-price {
+  font-weight: 600;
+  color: #4e342e;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.op-add-btn {
+  background: #6d4c41;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.op-add-btn:hover {
+  background: #5d4037;
+}
+
+.op-qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.op-qty-btn {
+  background: #eee;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.op-qty-num {
+  font-weight: 600;
+}
+
+/* ================================
+   CART
+================================ */
+.op-cart {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.op-cart-title {
+  font-weight: 700;
+}
+
+.op-cart-count {
+  background: #6d4c41;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.op-cart-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.op-cart-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.op-cart-qty-btn {
+  border: none;
+  background: #eee;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.op-cart-remove {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+/* ================================
+   CART FOOTER
+================================ */
+.op-cart-footer {
+  margin-top: 10px;
+}
+
+.op-cart-total {
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.op-review-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: #6d4c41;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.op-clear-btn {
+  width: 100%;
+  margin-top: 6px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+}
+
+/* ================================
+   REVIEW PAGE
+================================ */
+.op-review {
+  max-width: 600px;
+}
+
+.op-summary-box {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.op-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.op-summary-divider {
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+/* ================================
+   FORM
+================================ */
+.op-user-form {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.op-field {
+  margin-bottom: 12px;
+}
+
+.op-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.op-textarea {
+  resize: none;
+}
+
+/* ================================
+   WHATSAPP BUTTON
+================================ */
+.op-whatsapp-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================================
+   MOBILE
+================================ */
+@media (max-width: 900px) {
+  .op-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .op-cart {
+    display: none;
+  }
+
+  .op-mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+  }
+
+  .op-mobile-bar-btn {
+    background: #6d4c41;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+}
