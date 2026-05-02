@@ -1,44 +1,105 @@
+html {
+  scroll-behavior: smooth;
+}
+/* =========================
+   FONTS (from layout.tsx variables)
+========================= */
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-dm {
+  font-family: var(--font-dm-sans);
+}
+
+.font-amatic {
+  font-family: var(--font-amatic);
+}
+
+/* =========================
+   SCROLL ANIMATIONS
+========================= */
+
 @keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes scrollRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-/* ✨ Animated glowing border */
+/* =========================
+   BORDER GLOW ANIMATION
+========================= */
+
 @keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-@keyframes scrollLeft {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes scrollRight {
-          0%   { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
 
-        
-                                   /* Menu Section */
-        /* Card lift */
-        .menu-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(0,0,0,0.14) !important;
-        }
+/* =========================
+   GLOW PULSE (FIXED)
+========================= */
 
-        /* ✨ subtle lift */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(159, 124, 98, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(159, 124, 98, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(159, 124, 98, 0.3);
+  }
+}
+
+/* =========================
+   MENU SECTION
+========================= */
+
+/* Card hover effect */
+.menu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* hover effect */
 .menu-btn:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 22px rgba(92, 46, 14, 0.45);
+  
   letter-spacing: 0.18em;
+  animation: glowPulse 1.2s ease-in-out infinite;
 }
 
-/* ✨ glowing sweep effect */
+/* shiny sweep animation */
 .menu-btn::before {
   content: "";
   position: absolute;
@@ -61,19 +122,13 @@
   left: 130%;
 }
 
-/* ✨ soft pulse glow */
-.menu-btn:hover {
-  animation: glowPulse 1.2s ease-in-out infinite;
+/* =========================
+   REVIEW NAV BUTTONS
+========================= */
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #734320, #806149) !important;
+  color: #fff !important;
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(92, 46, 14, 0.35) !important;
 }
-
-                                  /* Review SEction */
-
-        .nav-btn:hover {
-          background: linear-gradient(135deg, #734320, #806149) !important;
-          color: #fff !important;
-          transform: scale(1.08);
-          box-shadow: 0 4px 14px rgba(92, 46, 14, 0.35) !important;
-        }
-
-
-        

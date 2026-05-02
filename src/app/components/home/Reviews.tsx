@@ -257,7 +257,7 @@ export default function ReviewSection() {
   }));
 
   return (
-    <section style={styles.section}>
+    <section id="reviews" style={styles.section}>
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap');
 
@@ -413,14 +413,15 @@ const styles: any = {
     lineHeight: 1.2,
   },
 
-  heading: {
-    fontSize: 'clamp(1.2rem, 3.5vw, 2.2rem)',
-    fontWeight: 800,
-    color: '#1E0F06',
-    letterSpacing: 'clamp(0.04em, 1vw, 0.1em)',
-    margin: 0,
-    lineHeight: 1.2,
-  },
+ heading: {
+  fontSize: 'clamp(2rem, 4vw, 3rem)',
+  fontWeight: 700,
+  color: '#1E0F06',
+  letterSpacing: '0.08em',
+  margin: 0,
+  lineHeight: 1.2,
+  fontFamily: 'var(--font-amatic), sans-serif',
+},
 
   carouselOuter: {
     display: 'flex',

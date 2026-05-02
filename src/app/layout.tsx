@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display, DM_Sans, Amatic_SC } from "next/font/google";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import "./globals.css";
@@ -16,6 +16,12 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
+const amatic = Amatic_SC({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-amatic",
+});
+
 export const metadata: Metadata = {
   title: "Saqafat Bakery",
   description: "Authentic Pakistani flavors, baked with love.",
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfair.variable} ${dmSans.variable}`}
+        className={`${playfair.variable} ${dmSans.variable} ${amatic.variable}`}
         style={{ background: "#1A0F08", margin: 0, padding: 0 }}
       >
         <Header />

@@ -79,11 +79,11 @@ const s: any = {
   },
 
   heading: {
-    fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-    marginBottom: '10px',
-    fontWeight: 600,
-    color: '#1E0F06',
-  },
+  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+  marginBottom: '10px',
+  fontWeight: 600,
+  color: '#1E0F06',
+},
 
   subtext: {
     fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',

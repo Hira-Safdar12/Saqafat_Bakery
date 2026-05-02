@@ -81,7 +81,8 @@ export default function AboutSection() {
   })();
 
   return (
-    <section ref={sectionRef} style={styles.section}>
+     
+    <section  ref={sectionRef} id="#story" style={styles.section}>
       {/* Warm background blobs */}
       <div style={styles.blob1} />
       <div style={styles.blob2} />
@@ -124,7 +125,7 @@ export default function AboutSection() {
 
           <h2 style={styles.heading}>
             About&nbsp;
-            <span style={styles.headingAccent}>This Food</span>
+            <span style={styles.headingAccent}>This Bakery</span>
           </h2>
 
           <p style={styles.body}>
