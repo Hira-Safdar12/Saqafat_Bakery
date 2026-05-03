@@ -1,0 +1,379 @@
+/* =============================================================================
+   THEME (BAKERY STYLE)
+============================================================================= */
+:root {
+  --rv-bg: #FFFBF3;
+  --rv-primary: #5C2E0E;
+  --rv-secondary: #A0673A;
+  --rv-accent: #C97B3A;
+  --rv-text-dark: #1E0F06;
+  --rv-text: #5A3E2B;
+  --rv-text-light: #7a5c44;
+  --rv-white: #FAF6EE;
+}
+
+/* =============================================================================
+   ROOT
+============================================================================= */
+.rv-root {
+  font-family: 'Georgia', serif;
+  background: var(--rv-bg);
+  color: var(--rv-text);
+}
+
+/* =============================================================================
+   HERO
+============================================================================= */
+.rv-hero {
+  padding: 120px 20px 80px;
+  text-align: center;
+  position: relative;
+  background: var(--rv-bg);
+}
+
+.rv-hero-h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--rv-text-dark);
+}
+
+.rv-accent {
+  color: var(--rv-accent);
+  font-style: italic;
+}
+
+.rv-hero-sub {
+  color: var(--rv-text-light);
+}
+
+/* =============================================================================
+   SECTION BASE
+============================================================================= */
+.rv-section {
+  padding: 100px 40px;
+  position: relative;
+  overflow: hidden;
+  background: var(--rv-bg);
+}
+
+/* blobs */
+.rv-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.rv-blob-tl {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,220,120,0.25), transparent 70%);
+  top: -100px;
+  left: -100px;
+}
+
+.rv-blob-br {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(200,100,50,0.1), transparent 70%);
+  bottom: -80px;
+  right: 10%;
+}
+
+/* =============================================================================
+   HEADINGS
+============================================================================= */
+.rv-section-head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.rv-section-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--rv-text-dark);
+}
+
+.rv-section-sub {
+  color: var(--rv-text-light);
+}
+
+/* eyebrow */
+.rv-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.rv-eyebrow-line {
+  width: 36px;
+  height: 2px;
+  background: var(--rv-accent);
+}
+
+.rv-eyebrow-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rv-accent);
+}
+
+/* =============================================================================
+   VIDEO CARDS
+============================================================================= */
+.rv-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.rv-video-card {
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(92,46,14,0.15);
+  background: #000;
+}
+
+.rv-video-card:hover {
+  transform: translateY(-8px);
+}
+
+.rv-video-thumb {
+  position: relative;
+  height: 240px;
+}
+
+.rv-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.rv-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--rv-white);
+  color: var(--rv-primary);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.rv-video-info {
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  color: #fff;
+}
+
+/* =============================================================================
+   TEXT REVIEWS
+============================================================================= */
+.rv-text-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.rv-text-card {
+  background: var(--rv-white);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(92,46,14,0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.5s ease;
+}
+
+.rv-text-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rv-text-card-urdu {
+  font-family: 'Noto Nastaliq Urdu', serif;
+}
+
+/* top */
+.rv-text-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rv-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--rv-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rv-text-name {
+  color: var(--rv-primary);
+  font-weight: 700;
+}
+
+.rv-text-location {
+  font-size: 0.8rem;
+  color: var(--rv-text-light);
+}
+
+/* body */
+.rv-text-body {
+  margin: 16px 0;
+  line-height: 1.7;
+  color: var(--rv-text);
+  border-left: 3px solid rgba(201,123,58,0.35);
+  padding-left: 14px;
+  font-style: italic;
+}
+
+.rv-text-date {
+  font-size: 0.75rem;
+  color: var(--rv-text-light);
+}
+
+/* =============================================================================
+   BUFFET
+============================================================================= */
+.rv-buffet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.rv-buffet-player {
+  background: var(--rv-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(92,46,14,0.12);
+}
+
+.rv-buffet-video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.rv-buffet-info {
+  padding: 16px;
+}
+
+.rv-buffet-title {
+  color: var(--rv-primary);
+}
+
+.rv-buffet-desc {
+  color: var(--rv-text-light);
+}
+
+/* =============================================================================
+   BUTTON
+============================================================================= */
+.rv-primary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #5C2E0E, #A0673A);
+  color: var(--rv-white);
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 6px 24px rgba(92,46,14,0.35);
+}
+
+.rv-primary-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #7a3e18, #C97B3A);
+}
+
+.rv-btn-shine {
+  position: absolute;
+  top: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-20deg);
+}
+
+/* =============================================================================
+   MODAL
+============================================================================= */
+.rv-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,15,6,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.rv-modal-box {
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 90%;
+  max-width: 800px;
+}
+
+.rv-modal-video {
+  width: 100%;
+}
+
+.rv-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: var(--rv-white);
+  color: var(--rv-primary);
+  border-radius: 50%;
+  padding: 5px 10px;
+}
+
+/* =============================================================================
+   CTA
+============================================================================= */
+.rv-cta-section {
+  text-align: center;
+  background: var(--rv-primary);
+  color: var(--rv-white);
+}
+
+.rv-incentive {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  color: #ffd27a;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+@media (max-width: 1024px) {
+  .rv-video-grid,
+  .rv-text-grid,
+  .rv-buffet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .rv-video-grid,
+  .rv-text-grid,
+  .rv-buffet-grid {
+    grid-template-columns: 1fr;
+  }
+}
