@@ -198,9 +198,12 @@ export default function Hero() {
       >
         {/* ── Fallback bg ── */}
         <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(160deg,#1A0F08,#2E1810,#0E0704)',
-          zIndex: 0,
+          position: 'absolute',
+  inset: 0,
+  background: '#1A0F08',   // dark fallback — shows before video loads
+  zIndex: 0,
+          
+       
         }} />
 
         {/* ── Video ── */}

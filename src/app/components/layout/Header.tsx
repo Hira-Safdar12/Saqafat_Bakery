@@ -215,7 +215,7 @@ export default function Header() {
 
         @media (prefers-reduced-motion: reduce) {
           .sq-drawer, .sq-drawer-link { animation: none !important;
-          font-family: 'Amatic SC', cursive; }
+           }
         }
       `}</style>
 
