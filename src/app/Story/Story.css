@@ -1,0 +1,489 @@
+/* =============================================================================
+   THEME
+============================================================================= */
+:root {
+  --st-bg: #FFFBF3;
+  --st-primary: #5C2E0E;
+  --st-secondary: #A0673A;
+  --st-accent: #C97B3A;
+  --st-text-dark: #1E0F06;
+  --st-text: #5A3E2B;
+  --st-text-light: #7a5c44;
+  --st-white: #FAF6EE;
+}
+
+.st-root {
+  font-family: 'Georgia', serif;
+  background: var(--st-bg);
+  color: var(--st-text);
+}
+
+/* =============================================================================
+   HERO (§3.7.1)
+============================================================================= */
+.st-hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.st-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.st-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,15,6,0.5);
+}
+
+.st-hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6));
+}
+
+.st-hero-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,220,120,0.3), transparent);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(80px);
+}
+
+.st-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 20px;
+}
+
+.st-hero-h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.st-hero-accent {
+  color: var(--st-accent);
+  font-style: italic;
+}
+
+.st-hero-sub {
+  opacity: 0.9;
+}
+
+/* unmute */
+.st-unmute-btn {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* scroll cue */
+.st-scroll-cue {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+}
+
+.st-scroll-arrow {
+  display: block;
+  width: 2px;
+  height: 30px;
+  background: #fff;
+  margin: 5px auto;
+}
+
+/* =============================================================================
+   STORY SECTION (§3.7.2)
+============================================================================= */
+.st-story-section {
+  padding: 100px 40px;
+  position: relative;
+}
+
+.st-blob {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.st-blob-tl {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,220,120,0.25), transparent);
+  top: -100px;
+  left: -100px;
+}
+
+.st-blob-br {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(200,100,50,0.1), transparent);
+  bottom: -80px;
+  right: 10%;
+}
+
+.st-story-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+/* image */
+.st-story-img-col {
+  flex: 0 0 420px;
+  position: relative;
+}
+
+.st-story-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.st-story-img-ring {
+  position: absolute;
+  inset: -12px;
+  border: 2px dashed rgba(200,140,60,0.4);
+  border-radius: 20px;
+}
+
+.st-years-badge {
+  position: absolute;
+  bottom: 20px;
+  right: -10px;
+  background: linear-gradient(135deg, #5C2E0E, #A0673A);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 16px;
+}
+
+.st-years-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* text */
+.st-story-text-col {
+  flex: 1;
+}
+
+.st-story-h2 {
+  font-size: 2.2rem;
+  color: var(--st-text-dark);
+}
+
+.st-accent {
+  color: var(--st-accent);
+  font-style: italic;
+}
+
+.st-story-body p {
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.st-chapter-label {
+  color: var(--st-accent);
+}
+
+/* =============================================================================
+   QUOTE (§3.7.3)
+============================================================================= */
+.st-quote-section {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--st-primary);
+  color: #fff;
+}
+
+.st-quote-text {
+  font-size: 1.8rem;
+}
+
+.st-quote-accent {
+  color: var(--st-accent);
+}
+
+.st-founders-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.st-founder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.st-founder-img-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   VISION MISSION (§3.7.4)
+============================================================================= */
+.st-vm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.st-vm-card {
+  background: var(--st-white);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(92,46,14,0.1);
+}
+
+.st-vm-icon {
+  font-size: 2rem;
+}
+
+.st-vm-title {
+  color: var(--st-primary);
+}
+
+.st-vm-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--st-accent);
+  margin: 10px auto;
+}
+
+/* =============================================================================
+   TIMELINE — PERFECT LEFT / RIGHT ZIGZAG
+============================================================================= */
+
+.st-timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 80px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* center vertical line */
+.st-tl-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: var(--st-accent);
+  top: 0;
+  bottom: 0;
+}
+
+/* each row = 3 columns (left | center | right) */
+.st-tl-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: center;
+  position: relative;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.5s ease;
+}
+
+.st-tl-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= LEFT ITEM ================= */
+.st-tl-left .st-tl-box {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+}
+
+/* ================= RIGHT ITEM ================= */
+.st-tl-right .st-tl-box {
+  grid-column: 3;
+  justify-self: start;
+  text-align: left;
+}
+
+/* ================= CENTER DOT ================= */
+.st-tl-dot {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.st-tl-dot-inner {
+  width: 14px;
+  height: 14px;
+  background: var(--st-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(201,123,58,0.2);
+}
+
+/* ================= CONTENT BOX ================= */
+.st-tl-box {
+  background: var(--st-white);
+  padding: 22px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 10px 30px rgba(92,46,14,0.12);
+  transition: 0.3s;
+}
+
+.st-tl-box:hover {
+  transform: translateY(-5px);
+}
+
+/* ================= TEXT ================= */
+.st-tl-year {
+  font-size: 0.8rem;
+  color: var(--st-accent);
+  letter-spacing: 0.1em;
+}
+
+.st-tl-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--st-primary);
+  margin: 6px 0;
+}
+
+.st-tl-desc {
+  font-size: 0.9rem;
+  color: var(--st-text-light);
+  line-height: 1.6;
+}
+
+/* =============================================================================
+   MOBILE FIX (STACKED)
+============================================================================= */
+@media (max-width: 768px) {
+
+  .st-tl-line {
+    left: 20px;
+  }
+
+  .st-tl-item {
+    grid-template-columns: 40px 1fr;
+  }
+
+  .st-tl-dot {
+    grid-column: 1;
+  }
+
+  .st-tl-box {
+    grid-column: 2 !important;
+    text-align: left !important;
+    justify-self: start !important;
+  }
+}
+/* =============================================================================
+   GALLERY (§3.7.5)
+============================================================================= */
+.st-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.st-gallery-card {
+  position: relative;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.st-gallery-card-visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.st-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.st-gallery-caption {
+  color: #fff;
+}
+
+/* =============================================================================
+   CTA
+============================================================================= */
+.st-final-cta {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--st-primary);
+  color: #fff;
+}
+
+.st-primary-btn {
+  background: linear-gradient(135deg, #5C2E0E, #A0673A);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 50px;
+}
+
+.st-ghost-btn {
+  margin-left: 15px;
+  color: #fff;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+@media (max-width: 1024px) {
+  .st-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .st-vm-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .st-story-inner {
+    flex-direction: column;
+  }
+
+  .st-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
