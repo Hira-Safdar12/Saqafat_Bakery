@@ -35,14 +35,46 @@ const timeline: TimelineItem[] = [
 ];
 
 const galleryImages: GalleryImage[] = [
-  { src:'/images/story/branch1.jpg',  alt:'Queen Chowk branch interior',     caption:'Queen Chowk — our first home'           },
-  { src:'/images/story/branch2.jpg',  alt:'University Road branch exterior',  caption:'University Road branch'                 },
-  { src:'/images/story/kitchen1.jpg', alt:'Saqafat kitchen',                  caption:'Where the magic happens'                },
-  { src:'/images/story/staff1.jpg',   alt:'Saqafat team',                     caption:'Our family — the Saqafat team'          },
-  { src:'/images/story/branch3.jpg',  alt:'Satellite Town branch',            caption:'Satellite Town branch'                  },
-  { src:'/images/story/branch4.jpg',  alt:'Bhalwal branch signage',           caption:'Shaheed Road, Bhalwal'                  },
-  { src:'/images/story/customer1.jpg',alt:'Happy customers',                   caption:'Moments that matter'                    },
-  { src:'/images/story/cake1.jpg',    alt:'Custom cake display',              caption:'Crafted with love'                      },
+  {
+    src:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80',
+    alt:'Bakery interior warm lighting',
+    caption:'Queen Chowk — our first home'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1564758866811-478a7d4c6f79?w=1200&q=80',
+    alt:'Bakery storefront exterior',
+    caption:'University Road branch'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=1200&q=80',
+    alt:'Bakery kitchen baking bread',
+    caption:'Where the magic happens'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1600566752227-8f3c0f1a6d9f?w=1200&q=80',
+    alt:'Bakery team working together',
+    caption:'Our family — the Saqafat team'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200&q=80',
+    alt:'Modern cafe interior',
+    caption:'Satellite Town branch'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80',
+    alt:'Bakery display shelves',
+    caption:'Shaheed Road, Bhalwal'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200&q=80',
+    alt:'Happy customers in cafe',
+    caption:'Moments that matter'
+  },
+  {
+    src:'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=1200&q=80',
+    alt:'Custom cake display',
+    caption:'Crafted with love'
+  },
 ];
 
 // =============================================================================
