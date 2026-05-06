@@ -1,7 +1,7 @@
 import CustomBuffet from "./components/home/CustomOrders";
 
 import HeroSection from "./components/home/Hero";
-import NewArrivals from "./components/home/NewArrivals";
+
 import Offers from "./components/home/Offers";
 import TopSellers from "./components/home/TopSellers";
 import AboutSection from './components/home/About';
@@ -19,7 +19,7 @@ export default function Home() {
        <MenuCard />
       <Offers />
       <CustomBuffet />
-      <NewArrivals />
+  
       <ReviewSection />
        <NewsletterSection />
     </main>

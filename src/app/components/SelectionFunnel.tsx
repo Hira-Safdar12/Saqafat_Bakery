@@ -89,7 +89,7 @@ export default function SelectionFunnel({ onComplete }: SelectionFunnelProps) {
       {/* ── Slide-up card ── */}
       <div className={cardClass}>
 
-        <h2 id="sf-title" className="sf-title">Welcome to Saqafat</h2>
+        <h2 id="sf-title" className="sf-title">Welcome to Saqafat </h2>
 
         {/* Field 1 — Location (required) */}
         <div className="sf-field">
@@ -114,7 +114,7 @@ export default function SelectionFunnel({ onComplete }: SelectionFunnelProps) {
         <div className="sf-field">
           <label className="sf-label" htmlFor="sf-location">
             Area <span className="sf-required">*</span>
-            <span className="sf-optional">optional</span>
+            
           </label>
           <div className="sf-select-wrap">
             <select
@@ -158,7 +158,7 @@ export default function SelectionFunnel({ onComplete }: SelectionFunnelProps) {
         >
           {form.branch
             ? `Let's Go ${form.mood === 'yes' ? '😋' : form.mood === 'yayyyy' ? '🎉' : '😏'} →`
-            : 'Select a location to continue'
+            : 'Continue'
           }
         </button>
 
