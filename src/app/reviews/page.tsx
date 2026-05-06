@@ -443,53 +443,7 @@ export default function ReviewsPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          §3.6.3 — BUFFET HALL SHOWCASE
-      ══════════════════════════════════════════════════════════════════ */}
-      <section className="rv-section rv-section-cream" aria-labelledby="rv-buffet-heading">
-        <div className="rv-blob rv-blob-tl" />
-
-        <div className="rv-section-head">
-          <div className="rv-eyebrow">
-            <span className="rv-eyebrow-line" />
-            <span className="rv-eyebrow-text">Buffet Showcase</span>
-            <span className="rv-eyebrow-line" />
-          </div>
-          {/* SRS §3.6.3 exact title */}
-          <h2 id="rv-buffet-heading" className="rv-section-title">
-            Our Buffets <span className="rv-accent">in Action</span>
-          </h2>
-          <p className="rv-section-sub">
-            From weddings to corporate events — see what a Saqafat buffet looks like.
-          </p>
-        </div>
-
-        {/* Video players — NOT autoplay (SRS §3.6.3) */}
-        <div className="rv-buffet-grid">
-          {buffetVideos.map((v) => (
-            <BuffetVideoPlayer key={v.id} video={v} />
-          ))}
-        </div>
-
-        {/* SRS §3.6.3 CTA */}
-        <div className="rv-buffet-cta">
-          <button
-            className="rv-primary-btn"
-            onClick={() => setBuffetModal(true)}
-            aria-label="Book a buffet event"
-          >
-            <span className="rv-btn-inner" style={{ position:'relative', zIndex:1 }}>
-              Book Your Event
-              <span className="rv-btn-arrow">→</span>
-            </span>
-            <span className="rv-btn-shine" />
-          </button>
-        </div>
-      </section>
-
-      {/* Buffet reservation modal */}
-      {buffetModal && <BuffetModal onClose={() => setBuffetModal(false)} />}
-
+      
       {/* ══════════════════════════════════════════════════════════════════
           §3.6.4 — REVIEW SUBMISSION CTA
       ══════════════════════════════════════════════════════════════════ */}

@@ -48,38 +48,42 @@ const categories: Category[] = [
 
 const menuItems: MenuItem[] = [
   // Breads
-  { id:'b1', name:'Plain Bread Loaf',      price:180,  img:'/images/menu/bread-plain.jpg',   category:'bread',   badge:'Bestseller', desc:'Soft, fluffy, freshly baked daily'         },
-  { id:'b2', name:'Milk Bread',            price:220,  img:'/images/menu/bread-milk.jpg',    category:'bread',                       desc:'Rich milk loaf, perfect for toast'          },
-  { id:'b3', name:'Brown Bread',           price:250,  img:'/images/menu/bread-brown.jpg',   category:'bread',                       desc:'Wholesome brown bread'                      },
-  { id:'b4', name:'Bun',                   price:60,   img:'/images/menu/bun.jpg',           category:'bread',                       desc:'Soft dinner buns'                           },
-  // Cakes
-  { id:'c1', name:'Chocolate Cake',        price:1200, img:'/images/menu/cake-choc.jpg',     category:'cakes',   badge:'Bestseller', desc:'Rich dark chocolate, layered cream'         },
-  { id:'c2', name:'Lotus Cake',            price:950,  img:'/images/menu/cake-lotus.jpg',    category:'cakes',   badge:'NEW',        desc:'Biscoff-inspired, caramelised perfection'   },
-  { id:'c3', name:'Strawberry Cheesecake', price:1100, img:'/images/menu/cake-cheese.jpg',   category:'cakes',   badge:'NEW',        desc:'Creamy cheesecake with fresh strawberry'    },
-  { id:'c4', name:'Tea Cake',              price:450,  img:'/images/menu/cake-tea.jpg',      category:'cakes',                       desc:'Light sponge, perfect with chai'            },
-  { id:'c5', name:'Cupcakes (Box of 6)',   price:700,  img:'/images/menu/cupcakes.jpg',      category:'cakes',   badge:'Most Loved', desc:'Assorted flavours, beautifully frosted'     },
-  // Pastries
-  { id:'p1', name:'Croissant',             price:250,  img:'/images/menu/croissant.jpg',     category:'pastry',  badge:'Most Loved', desc:'Buttery, flaky, baked fresh every morning'  },
-  { id:'p2', name:'Nutella Croissant',     price:380,  img:'/images/menu/croissant-nut.jpg', category:'pastry',  badge:'NEW',        desc:'Classic croissant filled with Nutella'      },
-  { id:'p3', name:'Pistachio Pastry',      price:420,  img:'/images/menu/pastry-pist.jpg',   category:'pastry',  badge:'NEW',        desc:'Flaky pastry with pistachio cream'          },
-  { id:'p4', name:'Chocolate Lava',        price:550,  img:'/images/menu/lava.jpg',          category:'pastry',  badge:'NEW',        desc:'Warm molten chocolate centre'               },
-  { id:'p5', name:'Mini Tart Box',         price:700,  img:'/images/menu/tart.jpg',          category:'pastry',  badge:'NEW',        desc:'Assorted mini fruit tarts, box of 6'        },
-  { id:'p6', name:'Puff',                  price:280,  img:'/images/menu/puff.jpg',          category:'pastry',                      desc:'Golden, crispy puff pastry'                 },
-  { id:'p7', name:'Brownie',               price:400,  img:'/images/menu/brownie.jpg',       category:'pastry',                      desc:'Dense, fudgy chocolate brownie'             },
-  // Cookies
-  { id:'k1', name:'Cookies (6 pcs)',       price:200,  img:'/images/menu/cookies.jpg',       category:'cookies',                     desc:'Assorted freshly baked cookies'             },
-  { id:'k2', name:'Macarons (6 pcs)',      price:600,  img:'/images/menu/macarons.jpg',       category:'cookies',                     desc:'French macarons, assorted flavours'         },
-  { id:'k3', name:'Donuts (Box of 4)',     price:350,  img:'/images/menu/donuts.jpg',         category:'cookies', badge:'Most Loved', desc:'Glazed and filled donuts'                   },
-  // Drinks
-  { id:'d1', name:'Doodh Patti Chai',      price:80,   img:'/images/menu/chai.jpg',           category:'drinks',  badge:'Bestseller', desc:'Traditional Pakistani milk tea'             },
-  { id:'d2', name:'Cold Coffee',           price:180,  img:'/images/menu/cold-coffee.jpg',    category:'drinks',                      desc:'Chilled coffee with cream'                  },
-  { id:'d3', name:'Fresh Juice',           price:150,  img:'/images/menu/juice.jpg',          category:'drinks',                      desc:'Seasonal fresh-squeezed juice'              },
-  // Savory
-  { id:'s1', name:'Chicken Sandwich',      price:500,  img:'/images/menu/sandwich.jpg',       category:'savory',  badge:'Bestseller', desc:'Grilled chicken with fresh veggies'         },
-  { id:'s2', name:'Bread Rolls',           price:320,  img:'/images/menu/rolls.jpg',          category:'savory',                      desc:'Soft rolls with spiced filling'             },
-  { id:'s3', name:'Samosa (4 pcs)',        price:200,  img:'/images/menu/samosa.jpg',         category:'savory',                      desc:'Crispy golden samosas'                      },
-];
+  { id:'b1', name:'Plain Bread Loaf', price:180, img:'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800&q=80', category:'bread', badge:'Bestseller', desc:'Soft, fluffy, freshly baked daily' },
+  { id:'b2', name:'Milk Bread', price:220, img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=800&q=80', category:'bread', desc:'Rich milk loaf, perfect for toast' },
+  { id:'b3', name:'Brown Bread', price:250, img:'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800&q=80', category:'bread', desc:'Wholesome brown bread' },
+  { id:'b4', name:'Bun', price:60, img:'https://images.unsplash.com/photo-1598373182133-52452f7691ef?w=800&q=80', category:'bread', desc:'Soft dinner buns' },
 
+  // Cakes
+  { id:'c1', name:'Chocolate Cake', price:1200, img:'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&q=80', category:'cakes', badge:'Bestseller', desc:'Rich dark chocolate, layered cream' },
+  { id:'c2', name:'Lotus Cake', price:950, img:'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80', category:'cakes', badge:'NEW', desc:'Biscoff-inspired, caramelised perfection' },
+  { id:'c3', name:'Strawberry Cheesecake', price:1100, img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80', category:'cakes', badge:'NEW', desc:'Creamy cheesecake with fresh strawberry' },
+  { id:'c4', name:'Tea Cake', price:450, img:'https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=800&q=80', category:'cakes', desc:'Light sponge, perfect with chai' },
+  { id:'c5', name:'Cupcakes (Box of 6)', price:700, img:'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&q=80', category:'cakes', badge:'Most Loved', desc:'Assorted flavours, beautifully frosted' },
+
+  // Pastries
+  { id:'p1', name:'Croissant', price:250, img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80', category:'pastry', badge:'Most Loved', desc:'Buttery, flaky, baked fresh every morning' },
+  { id:'p2', name:'Nutella Croissant', price:380, img:'https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=800&q=80', category:'pastry', badge:'NEW', desc:'Classic croissant filled with Nutella' },
+  { id:'p3', name:'Pistachio Pastry', price:420, img:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80', category:'pastry', badge:'NEW', desc:'Flaky pastry with pistachio cream' },
+  { id:'p4', name:'Chocolate Lava', price:550, img:'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=80', category:'pastry', badge:'NEW', desc:'Warm molten chocolate centre' },
+  { id:'p5', name:'Mini Tart Box', price:700, img:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80', category:'pastry', badge:'NEW', desc:'Assorted mini fruit tarts, box of 6' },
+  { id:'p6', name:'Puff', price:280, img:'https://images.unsplash.com/photo-1589308078056-f0a9e9e2c8a3?w=800&q=80', category:'pastry', desc:'Golden, crispy puff pastry' },
+  { id:'p7', name:'Brownie', price:400, img:'https://images.unsplash.com/photo-1606312619344-64a3c6b6b0c7?w=800&q=80', category:'pastry', desc:'Dense, fudgy chocolate brownie' },
+
+  // Cookies
+  { id:'k1', name:'Cookies (6 pcs)', price:200, img:'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=80', category:'cookies', desc:'Assorted freshly baked cookies' },
+  { id:'k2', name:'Macarons (6 pcs)', price:600, img:'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80', category:'cookies', desc:'French macarons, assorted flavours' },
+  { id:'k3', name:'Donuts (Box of 4)', price:350, img:'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80', category:'cookies', badge:'Most Loved', desc:'Glazed and filled donuts' },
+
+  // Drinks
+  { id:'d1', name:'Doodh Patti Chai', price:80, img:'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80', category:'drinks', badge:'Bestseller', desc:'Traditional Pakistani milk tea' },
+  { id:'d2', name:'Cold Coffee', price:180, img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80', category:'drinks', desc:'Chilled coffee with cream' },
+  { id:'d3', name:'Fresh Juice', price:150, img:'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=800&q=80', category:'drinks', desc:'Seasonal fresh-squeezed juice' },
+
+  // Savory
+  { id:'s1', name:'Chicken Sandwich', price:500, img:'https://images.unsplash.com/photo-1553909489-cd47e0ef937f?w=800&q=80', category:'savory', badge:'Bestseller', desc:'Grilled chicken with fresh veggies' },
+  { id:'s2', name:'Bread Rolls', price:320, img:'https://images.unsplash.com/photo-1604908177522-0403b7f3b7c1?w=800&q=80', category:'savory', desc:'Soft rolls with spiced filling' },
+  { id:'s3', name:'Samosa (4 pcs)', price:200, img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80', category:'savory', desc:'Crispy golden samosas' },
+];
 // =============================================================================
 // HELPERS
 // =============================================================================

@@ -1,516 +1,356 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-// ─── TYPES ────────────────────────────────────────────────────────────────────
 interface Item {
   name: string;
   price: string;
   img: string;
   badge?: string;
+  wide?: boolean;   // span 2 cols in masonry
+  tall?: boolean;   // span 2 rows
 }
 
-// ─── DATA ─────────────────────────────────────────────────────────────────────
 const items: Item[] = [
-  { name: 'Steaks',  price: 'From PKR 1,200', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop', badge: 'Bestseller' },
-  { name: 'Croissant',       price: 'From PKR 250',   img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop' },
-  { name: 'Soup',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop', badge: 'Most Loved' },
-  { name: 'Brownies',        price: 'From PKR 400',   img: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=400&h=300&fit=crop' },
-  { name: 'Cupcakes',        price: 'From PKR 300',   img: 'https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&h=300&fit=crop' },
-  { name: 'Tea Cake',        price: 'From PKR 450',   img: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=300&fit=crop' },
-  { name: 'Cookies',         price: 'From PKR 200',   img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop' },
-  { name: 'Macarons',        price: 'From PKR 600',   img: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=400&h=300&fit=crop' },
-  { name: 'Pizza',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop' },
-  { name: 'Puff',            price: 'From PKR 280',   img: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=300&fit=crop' },
-  { name: 'Sandwich',        price: 'From PKR 500',   img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
-  { name: 'Noodles',           price: 'From PKR 320',   img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop' },
+ { name: 'Cookies',    price: 'From PKR 200',   img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop' },
+  { name: 'Macarons',   price: 'From PKR 600',   img: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=400&h=300&fit=crop', badge: 'Premium' },
+  { name: 'Pizza',      price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=400&fit=crop', tall: true },
+  { name: 'Puff',       price: 'From PKR 280',   img: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=300&fit=crop' },
+  { name: 'Sandwich',   price: 'From PKR 500',   img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
+  { name: 'Noodles',    price: 'From PKR 320',   img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop', badge: 'Chef\'s Pick' },
 ];
 
-// ─── COLOR TOKENS (matching About section) ────────────────────────────────────
-// bg:            #FFFBF3  warm cream  (same as About section bg)
-// heading:       #1E0F06  espresso
-// accent:        #C97B3A  terracotta-gold
-// accent-deep:   #5C2E0E  deep brown
-// accent-mid:    #A0673A  mid brown
-// card-bg:       #FFF8EC  warm white
-// card-border:   rgba(92,46,14,0.10)
-// card-shadow:   rgba(180,80,20,0.14)
-// text-body:     #5A3E2B
-// text-muted:    #9a7055
-// cream:         #FAF6EE
-
 export default function TopSellers() {
-  const router      = useRouter();
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const wrapperRef  = useRef<HTMLDivElement>(null);
-  const angleRef    = useRef(0);
-  const isPaused    = useRef(false);
-  const rafId       = useRef<number>(0);
-  const reducedMotion = useRef(false);
-
-  // Track which card is hovered (for visual highlight without breaking 3D)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const router = useRouter();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion (SRS §4.3)
-    reducedMotion.current =
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reducedMotion.current) return; // skip animation entirely
-
-    const SPEED = 0.12; // degrees per frame
-
-    const rotate = () => {
-      if (!isPaused.current && carouselRef.current) {
-        angleRef.current += SPEED;
-        carouselRef.current.style.transform = `rotateY(${angleRef.current}deg)`;
-      }
-      rafId.current = requestAnimationFrame(rotate);
-    };
-
-    rafId.current = requestAnimationFrame(rotate);
-
-    // ── FIX: cancel rAF on unmount to prevent memory leak ──
-    return () => cancelAnimationFrame(rafId.current);
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
   }, []);
 
-  // Pause carousel when mouse is anywhere over the wrapper
-  const handleWrapperEnter = () => { isPaused.current = true;  };
-  const handleWrapperLeave = () => { isPaused.current = false; };
-
-  const handleCardClick = (item: Item) => {
+  const go = (item: Item) =>
     router.push(`/menu?item=${encodeURIComponent(item.name)}`);
-  };
-
-  // Keyboard handler for accessibility (SRS §4.3)
-  const handleCardKey = (e: React.KeyboardEvent, item: Item) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleCardClick(item);
-    }
-  };
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        /* Section reveal */
-        @keyframes ts-fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0);    }
+        /* ── Animations ── */
+        @keyframes ts-up {
+          from { opacity: 0; transform: translateY(32px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-
-        .ts-title-wrap { animation: ts-fadeUp 0.7s ease 0.1s both; }
-        .ts-carousel    { animation: ts-fadeUp 0.7s ease 0.3s both; }
-        .ts-cta-wrap    { animation: ts-fadeUp 0.7s ease 0.5s both; }
-
-        /* Card: scale via CSS class — does NOT mutate the 3D transform string */
-        .ts-card {
-          position:      absolute;
-          width:         220px;
-          height:        290px;
-          background:    #FFF8EC;
-          border-radius: 14px;
-          overflow:      hidden;
-          cursor:        pointer;
-          box-shadow:    0 16px 48px rgba(180,80,20,0.14), 0 2px 8px rgba(92,46,14,0.08);
-          border:        1px solid rgba(92,46,14,0.10);
-          /* transition only box-shadow & filter — NOT transform, so 3D stays intact */
-          transition:    box-shadow 0.3s ease, filter 0.3s ease;
-          outline:       none;
-        }
-        .ts-card:hover,
-        .ts-card:focus-visible {
-          box-shadow: 0 24px 64px rgba(180,80,20,0.28), 0 4px 16px rgba(92,46,14,0.12);
-          filter:     brightness(1.03);
-        }
-        .ts-card:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 3px;
+        @keyframes ts-line {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
         }
 
-        /* View All button */
-        .ts-btn {
-          position:        relative;
-          display:         inline-flex;
-          align-items:     center;
-          gap:             10px;
-          overflow:        hidden;
-          background:      linear-gradient(135deg, #5C2E0E 0%, #A0673A 100%);
-          color:           #FAF6EE;
-          border:          none;
-          border-radius:   50px;
-          padding:         13px 32px;
-          cursor:          pointer;
-          font-family:     'DM Sans', sans-serif;
-          font-size:       13px;
-          font-weight:     600;
-          letter-spacing:  0.1em;
-          text-transform:  uppercase;
-          box-shadow:      0 6px 24px rgba(92,46,14,0.30);
-          transition:      transform 0.25s ease, box-shadow 0.25s ease;
-          text-decoration: none;
+        .ts-sec { background: #FFFBF3; position: relative; overflow: hidden; }
+
+        /* ── Heading ── */
+        .ts-head {
+          text-align: center;
+          padding: clamp(52px,8vw,96px) clamp(16px,5vw,60px) clamp(36px,5vw,60px);
+          position: relative; z-index: 1;
         }
-        .ts-btn:hover {
-          transform:  translateY(-3px);
-          box-shadow: 0 12px 36px rgba(92,46,14,0.40);
-          background: linear-gradient(135deg, #7a3e18 0%, #C97B3A 100%);
+        .ts-head.anim { animation: ts-up 0.65s ease both; }
+
+        .ts-eyebrow {
+          display: flex; align-items: center;
+          justify-content: center; gap: 10px;
+          margin-bottom: 16px;
         }
-        .ts-btn:active  { transform: translateY(0); }
-        .ts-btn:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 4px;
+        .ts-eyebrow-line {
+          width: 36px; height: 1.5px;
+          background: linear-gradient(90deg, transparent, #C97B3A);
+          transform-origin: left;
         }
-        .ts-btn-arrow {
-          font-size:  1.1rem;
+        .ts-eyebrow-line:last-child {
+          background: linear-gradient(90deg, #C97B3A, transparent);
+          transform-origin: right;
+        }
+        .ts-eyebrow.anim .ts-eyebrow-line { animation: ts-line 0.6s ease 0.2s both; }
+        .ts-eyebrow-txt {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px; font-weight: 500;
+          letter-spacing: 0.26em; text-transform: uppercase;
+          color: #C97B3A;
+        }
+        .ts-h2 {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(2.2rem, 5.5vw, 4rem);
+          font-weight: 600; color: #1E0F06;
+          margin: 0 0 12px; line-height: 1.08;
+          letter-spacing: 0.01em;
+        }
+        .ts-h2 em { color: #C97B3A; font-style: italic; }
+        .ts-sub {
+          font-family: 'DM Sans', sans-serif;
+          font-size: clamp(0.85rem, 1.8vw, 0.98rem);
+          font-weight: 300; color: #7a5c44;
+          line-height: 1.72; max-width: 460px; margin: 0 auto;
+        }
+
+        /* ── MASONRY GRID (desktop) ── */
+        .ts-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-auto-rows: 220px;
+          gap: 14px;
+          padding: 0 clamp(16px,4vw,48px) clamp(40px,6vw,72px);
+          max-width: 1320px;
+          margin: 0 auto;
+          position: relative; z-index: 1;
+        }
+
+        /* ── Grid item ── */
+        .ts-item {
+          position: relative;
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+          background: #1E0F06;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          border: 1px solid rgba(92,46,14,0.08);
+          transition: transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94),
+                      box-shadow 0.32s ease;
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        .ts-item.show {
+          animation: ts-up 0.55s cubic-bezier(0.25,0.46,0.45,0.94) both;
+        }
+        .ts-item:hover {
+          transform: translateY(-4px) scale(1.012);
+          box-shadow: 0 18px 48px rgba(92,46,14,0.2);
+          z-index: 2;
+        }
+
+        /* Wide / tall variants */
+        .ts-item--wide { grid-column: span 2; }
+        .ts-item--tall { grid-row: span 2; }
+
+        /* Image zoom on hover */
+        .ts-item img {
+          transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+        }
+        .ts-item:hover img { transform: scale(1.07) !important; }
+
+        /* Dark gradient overlay */
+        .ts-overlay {
+          position: absolute; inset: 0;
+          background: linear-gradient(
+            to top,
+            rgba(18,6,2,0.82) 0%,
+            rgba(18,6,2,0.3) 50%,
+            transparent 100%
+          );
+          z-index: 1;
+          transition: opacity 0.3s ease;
+        }
+        .ts-item:hover .ts-overlay {
+          background: linear-gradient(
+            to top,
+            rgba(18,6,2,0.88) 0%,
+            rgba(18,6,2,0.45) 55%,
+            rgba(18,6,2,0.08) 100%
+          );
+        }
+
+        /* Card text */
+        .ts-info {
+          position: absolute; bottom: 0; left: 0; right: 0;
+          padding: 16px 18px;
+          z-index: 2;
+          transform: translateY(4px);
           transition: transform 0.3s ease;
         }
-        .ts-btn:hover .ts-btn-arrow { transform: translateX(4px); }
+        .ts-item:hover .ts-info { transform: translateY(0); }
 
-        /* Shine sweep on button */
-        .ts-btn-shine {
-          position:   absolute;
-          top:        0;
-          left:       -70%;
-          width:      45%;
-          height:     100%;
-          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-          transform:  skewX(-20deg);
-          transition: left 0.55s ease;
-          pointer-events: none;
+        .ts-name {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(1.05rem, 2vw, 1.3rem);
+          font-weight: 600; color: #FAF6EE;
+          margin: 0 0 3px; line-height: 1.2;
         }
-        .ts-btn:hover .ts-btn-shine { left: 130%; }
+        .ts-price {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px; font-weight: 500;
+          color: #E8C97A; letter-spacing: 0.06em;
+          margin: 0;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: opacity 0.28s ease 0.05s, transform 0.28s ease 0.05s;
+        }
+        .ts-item:hover .ts-price { opacity: 1; transform: translateY(0); }
 
-        /* Static grid for reduced-motion users */
-        .ts-static-grid {
-          display:               grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap:                   20px;
-          max-width:             1100px;
-          margin:                0 auto;
-          padding:               0 2rem;
-        }
-        .ts-static-card {
-          background:    #FFF8EC;
-          border-radius: 14px;
-          overflow:      hidden;
-          border:        1px solid rgba(92,46,14,0.10);
-          box-shadow:    0 8px 24px rgba(180,80,20,0.10);
-          cursor:        pointer;
-          transition:    box-shadow 0.25s, transform 0.25s;
-          outline:       none;
-        }
-        .ts-static-card:hover,
-        .ts-static-card:focus-visible {
-          box-shadow: 0 16px 40px rgba(180,80,20,0.20);
-          transform:  translateY(-4px);
-        }
-        .ts-static-card:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 3px;
+        /* Badge */
+        .ts-badge {
+          position: absolute; top: 12px; left: 12px;
+          background: linear-gradient(135deg, #5C2E0E, #A0673A);
+          color: #FAF6EE;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px; font-weight: 600;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          padding: 4px 10px; border-radius: 4px;
+          z-index: 2;
         }
 
-        @media (max-width: 768px) {
-          .ts-carousel-wrap { display: none !important; }
-          .ts-static-grid   { display: grid !important; }
-          .ts-title-wrap h2 { font-size: 2rem !important; }
+        /* ── CTA ── */
+        .ts-cta {
+          text-align: center;
+          padding-bottom: clamp(48px,7vw,80px);
+          position: relative; z-index: 1;
+        }
+        .ts-cta.anim { animation: ts-up 0.65s ease 0.4s both; }
+
+        .ts-btn {
+          display: inline-flex; align-items: center; gap: 10px;
+          position: relative; overflow: hidden;
+          background: linear-gradient(135deg, #5C2E0E, #A0673A);
+          color: #FAF6EE;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          text-decoration: none;
+          padding: 14px 36px;
+          border-radius: 50px;
+          border: none; cursor: pointer;
+          box-shadow: 0 6px 22px rgba(92,46,14,0.3);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+        .ts-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 34px rgba(92,46,14,0.38);
+          background: linear-gradient(135deg, #7a3e18, #C97B3A);
+        }
+        .ts-btn-arrow { font-size: 14px; transition: transform 0.28s ease; }
+        .ts-btn:hover .ts-btn-arrow { transform: translateX(5px); }
+        .ts-btn::after {
+          content: '';
+          position: absolute; top: 0; left: -70%;
+          width: 45%; height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+          transform: skewX(-20deg);
+          transition: left 0.5s ease; pointer-events: none;
+        }
+        .ts-btn:hover::after { left: 130%; }
+
+        /* ── Tablet: 2 cols ── */
+        @media (max-width: 900px) {
+          .ts-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 200px;
+            gap: 12px;
+          }
+          .ts-item--wide { grid-column: span 2; }
+          .ts-item--tall { grid-row: span 2; }
         }
 
-        @media (min-width: 769px) {
-          .ts-static-grid { display: none; }
+        /* ── Mobile: 2 cols, no tall/wide ── */
+        @media (max-width: 540px) {
+          .ts-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 160px;
+            gap: 8px;
+            padding: 0 10px clamp(32px,6vw,52px);
+          }
+          .ts-item--wide { grid-column: span 2; }
+          .ts-item--tall { grid-row: span 1; }
+          .ts-name { font-size: 0.95rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .ts-title-wrap, .ts-carousel, .ts-cta-wrap {
-            animation: none !important;
-            opacity:   1 !important;
-          }
-          .ts-carousel-wrap { display: none !important; }
-          .ts-static-grid   { display: grid !important; }
+          .ts-item, .ts-item.show, .ts-head, .ts-cta { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .ts-item img { transition: none !important; }
         }
       `}</style>
 
-      <section
-        style={{
-          position:   'relative',
-          background: '#FFFBF3',       // ← matches About section bg
-          padding:    '100px 0 110px',
-          overflow:   'hidden',
-          fontFamily: "'DM Sans', sans-serif",
-        }}
-        aria-labelledby="ts-heading"
-      >
+      <section ref={sectionRef} className="ts-sec" aria-labelledby="ts-h2">
 
-        {/* ── BG BLOBS (matching About section style) ─────────────────── */}
+        {/* Background blobs */}
         <div style={{
-          position:     'absolute',
-          width:        '500px',
-          height:       '500px',
-          borderRadius: '50%',
-          background:   'radial-gradient(circle, rgba(255,220,120,0.20) 0%, transparent 70%)',
-          top:          '-120px',
-          left:         '-100px',
-          pointerEvents:'none',
+          position: 'absolute', width: '520px', height: '520px', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,215,110,0.18) 0%, transparent 70%)',
+          top: '-140px', left: '-80px', pointerEvents: 'none',
         }} />
         <div style={{
-          position:     'absolute',
-          width:        '400px',
-          height:       '400px',
-          borderRadius: '50%',
-          background:   'radial-gradient(circle, rgba(200,100,50,0.09) 0%, transparent 70%)',
-          bottom:       '-80px',
-          right:        '8%',
-          pointerEvents:'none',
+          position: 'absolute', width: '400px', height: '400px', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(200,100,50,0.09) 0%, transparent 70%)',
+          bottom: '-60px', right: '5%', pointerEvents: 'none',
         }} />
 
-        {/* ── SECTION TITLE ────────────────────────────────────────────── */}
-        <div className="ts-title-wrap" style={{ textAlign: 'center', marginBottom: '70px', padding: '0 2rem' }}>
-
-          {/* Eyebrow label — matching About section pattern */}
-          <div style={{
-            display:       'inline-flex',
-            alignItems:    'center',
-            gap:           '10px',
-            marginBottom:  '16px',
-          }}>
-            <span style={{ display:'inline-block', width:'36px', height:'2px', background:'#C97B3A', borderRadius:'2px' }} />
-            <span style={{
-              fontSize:      '0.78rem',
-              fontWeight:    600,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color:         '#C97B3A',
-              fontFamily:    "'DM Sans', sans-serif",
-            }}>
-              What Everyone Orders
-            </span>
-            <span style={{ display:'inline-block', width:'36px', height:'2px', background:'#C97B3A', borderRadius:'2px' }} />
+        {/* Heading */}
+        <div className={`ts-head${visible ? ' anim' : ''}`}>
+          <div className={`ts-eyebrow${visible ? ' anim' : ''}`}>
+            <span className="ts-eyebrow-line" />
+            <span className="ts-eyebrow-txt">What Everyone Orders</span>
+            <span className="ts-eyebrow-line" />
           </div>
-
-          {/* H2 — espresso heading + terracotta accent, matching About section */}
-          <h2
-            id="ts-heading"
-            style={{
-              fontFamily:   "'Playfair Display', serif",
-              fontSize:     'clamp(2rem, 4vw, 2.8rem)',
-              fontWeight:    800,
-              color:        '#1E0F06',              // ← espresso, matches About
-              margin:       '0 0 12px',
-              lineHeight:    1.15,
-            }}
-          >
-            Our Crowd{' '}
-            <span style={{ color:'#C97B3A', fontStyle:'italic' }}>
-              Favorites
-            </span>
+          <h2 id="ts-h2" className="ts-h2">
+            Our Crowd <em>Favourites</em>
           </h2>
-
-          <p style={{
-            fontFamily:  "'DM Sans', sans-serif",
-            fontSize:    '0.97rem',
-            color:       '#5A3E2B',                // ← body text, matches About
-            maxWidth:    '480px',
-            margin:      '0 auto',
-            lineHeight:  1.75,
-          }}>
-            Twelve of our most-loved bakes — click any to jump straight to it on the menu.
+          <p className="ts-sub">
+            Twelve of our most-loved bakes & bites — click any to jump straight to the menu.
           </p>
         </div>
 
-        {/* ── 3D CAROUSEL (desktop) ────────────────────────────────────── */}
-        <div
-          className="ts-carousel-wrap ts-carousel"
-          ref={wrapperRef}
-          onMouseEnter={handleWrapperEnter}
-          onMouseLeave={handleWrapperLeave}
-          style={{
-            perspective:    '1400px',
-            display:        'flex',
-            justifyContent: 'center',
-            alignItems:     'center',
-            height:         '420px',
-            position:       'relative',
-          }}
-          aria-hidden="true"   // carousel is decorative — static grid is the accessible version
-        >
-          <div
-            ref={carouselRef}
-            style={{
-              width:          '220px',
-              height:         '290px',
-              position:       'relative',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            {items.map((item, index) => {
-              const cardAngle = (360 / items.length) * index;
-              const isHovered = hoveredIndex === index;
-
-              return (
-                <div
-                  key={item.name}
-                  className="ts-card"
-                  role="button"
-                  tabIndex={-1}   // not in tab order — static grid handles a11y
-                  aria-label={`${item.name} — ${item.price}`}
-                  onClick={() => handleCardClick(item)}
-                  onKeyDown={(e) => handleCardKey(e, item)}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  style={{
-                    // ── FIX: NEVER concatenate transform strings in 3D context ──
-                    // Scale is applied via filter:brightness above in CSS.
-                    // The transform here is ONLY the 3D positioning — never mutated.
-                    transform: `rotateY(${cardAngle}deg) translateZ(500px)`,
-                  }}
-                >
-                 {/* IMAGE */}
-                <div style={{ position: 'relative', width: '100%', height: '155px' }}>
-                  <Image
-                    src={item.img}
-                    alt={item.name}
-                    fill
-                    sizes="220px"
-                    style={{ objectFit: 'cover' }}
-                    priority={index < 3}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/fallback.jpg';
-                    }}
-                  />
-                </div>
-
-                  {/* Badge — gradient style matching About section badge */}
-                  {item.badge && (
-                    <span style={{
-                      position:   'absolute',
-                      top:        '10px',
-                      left:       '10px',
-                      background: 'linear-gradient(135deg, #5C2E0E, #A0673A)', // ← matches About badge
-                      color:      '#FAF6EE',                                   // ← cream text
-                      padding:    '4px 10px',
-                      fontSize:   '10px',
-                      fontWeight:  600,
-                      letterSpacing:'0.08em',
-                      textTransform:'uppercase',
-                      borderRadius:'4px',
-                      fontFamily: "'DM Sans', sans-serif",
-                    }}>
-                      {item.badge}
-                    </span>
-                  )}
-
-                  {/* Card content */}
-                  <div style={{ padding:'14px 16px' }}>
-                    <h4 style={{
-                      margin:      0,
-                      fontFamily:  "'Playfair Display', serif",
-                      fontSize:    '1rem',
-                      fontWeight:  700,
-                      color:       '#1E0F06',   // ← espresso, matches About heading
-                      lineHeight:  1.3,
-                    }}>
-                      {item.name}
-                    </h4>
-                    <p style={{
-                      marginTop:  '6px',
-                      marginBottom:0,
-                      color:      '#C97B3A',    // ← terracotta, matches About accent
-                      fontSize:   '13px',
-                      fontWeight:  600,
-                      fontFamily: "'DM Sans', sans-serif",
-                    }}>
-                      {item.price}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ── STATIC GRID (mobile + reduced-motion fallback) ───────────── */}
-        <div
-          className="ts-static-grid"
-          role="list"
-          aria-label="Top seller items"
-        >
-          {items.map((item) => (
+        {/* Masonry Grid */}
+        <div className="ts-grid" role="list">
+          {items.map((item, i) => (
             <div
               key={item.name}
-              className="ts-static-card"
               role="listitem"
               tabIndex={0}
               aria-label={`${item.name} — ${item.price}`}
-              onClick={() => handleCardClick(item)}
-              onKeyDown={(e) => handleCardKey(e, item)}
+              className={[
+                'ts-item',
+                item.wide ? 'ts-item--wide' : '',
+                item.tall ? 'ts-item--tall' : '',
+                visible   ? 'show' : '',
+              ].filter(Boolean).join(' ')}
+              style={{ animationDelay: `${i * 0.055}s` }}
+              onClick={() => go(item)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(item); }
+              }}
             >
-              <div style={{ position:'relative', width:'100%', height:'140px', background:'#f0e6d3' }}>
-                <Image
-                  src={item.img}
-                  alt={item.name}
-                  fill
-                  style={{ objectFit:'cover' }}
-                  sizes="(max-width:768px) 50vw, 200px"
-                />
-                {item.badge && (
-                  <span style={{
-                    position:     'absolute',
-                    top:          '8px',
-                    left:         '8px',
-                    background:   'linear-gradient(135deg, #5C2E0E, #A0673A)',
-                    color:        '#FAF6EE',
-                    padding:      '3px 9px',
-                    fontSize:     '10px',
-                    fontWeight:    600,
-                    letterSpacing:'0.08em',
-                    textTransform:'uppercase',
-                    borderRadius: '4px',
-                    fontFamily:   "'DM Sans', sans-serif",
-                  }}>
-                    {item.badge}
-                  </span>
-                )}
-              </div>
-              <div style={{ padding:'12px 14px' }}>
-                <h4 style={{
-                  margin:     0,
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize:   '0.95rem',
-                  fontWeight:  700,
-                  color:      '#1E0F06',
-                  lineHeight:  1.3,
-                }}>
-                  {item.name}
-                </h4>
-                <p style={{
-                  marginTop:   '5px',
-                  marginBottom: 0,
-                  color:       '#C97B3A',
-                  fontSize:    '13px',
-                  fontWeight:   600,
-                  fontFamily:  "'DM Sans', sans-serif",
-                }}>
-                  {item.price}
-                </p>
+              <Image
+                src={item.img}
+                alt={item.name}
+                fill
+                sizes="(max-width:540px) 50vw, (max-width:900px) 50vw, 25vw"
+                style={{ objectFit: 'cover' }}
+                priority={i < 4}
+              />
+              <div className="ts-overlay" />
+
+              {item.badge && (
+                <span className="ts-badge">{item.badge}</span>
+              )}
+
+              <div className="ts-info">
+                <p className="ts-name">{item.name}</p>
+                <p className="ts-price">{item.price}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* ── VIEW ALL CTA ─────────────────────────────────────────────── */}
-        <div
-          className="ts-cta-wrap"
-          style={{ textAlign:'center', marginTop:'60px' }}
-        >
+        {/* CTA */}
+        <div className={`ts-cta${visible ? ' anim' : ''}`}>
           <a href="/menu" className="ts-btn">
-            <span style={{ position:'relative', zIndex:1, display:'flex', alignItems:'center', gap:'10px' }}>
-              View Full Menu
-              <span className="ts-btn-arrow">→</span>
-            </span>
-            <span className="ts-btn-shine" />
+            View Full Menu
+            <span className="ts-btn-arrow">→</span>
           </a>
         </div>
 
