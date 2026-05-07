@@ -70,7 +70,7 @@ export default function PartnersPage() {
         {/* Background image */}
         <div className="pp-hero-img-wrap">
           <Image
-            src="/images/partners-hero.jpg"
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80"
             alt="Saqafat franchise location"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
