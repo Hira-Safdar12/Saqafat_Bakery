@@ -30,7 +30,7 @@ const rowOne = [
     image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop',
   },
   {
-    title: 'Burgers, Sandwiches & Paninis',
+    title: 'Burgers & Sandwiches',
     desc: 'Stacked sky-high with premium fillings, sauces, and toasted artisan bread.',
     image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop',
   },
@@ -151,13 +151,13 @@ export default function MenuSection() {
   }, []);
 
   return (
-    <section style={styles.section}>
+     <section id="menu" style={styles.section}>
       <div style={styles.bg} />
 
       {/* Heading */}
       <div style={styles.headingWrapper}>
         <p style={styles.subheading}>Our Specialties</p>
-        <h2 style={styles.heading}>Explore Our Menu</h2>
+        <h2   style={styles.heading}>Explore Our Menu</h2>
 
         {/* ── Toggle ── */}
         <div style={styles.toggleWrapper}>
@@ -187,7 +187,7 @@ export default function MenuSection() {
               ref={dessertsBtnRef}
               style={{
                 ...styles.toggleBtn,
-                color: activeTab === 'desserts' ? '#FAF6EE' : '#8B5E3C',
+                color: activeTab === 'desserts' ? '#FAF6EE' : '#67352c',
                 fontWeight: activeTab === 'desserts' ? 700 : 500,
               }}
               onClick={() => setActiveTab('desserts')}
@@ -253,7 +253,7 @@ export default function MenuSection() {
           transition: left 0.5s ease;
         }
         .menu-btn:hover .btn-shine { left: 130%; }
-        .menu-btn:hover { background: linear-gradient(135deg, #7a3e18, #a0673a) !important; }
+        .menu-btn:hover { background: linear-gradient(135deg, #67352c, #a0673a) !important; }
       `}</style>
     </section>
   );
@@ -280,20 +280,21 @@ const styles: any = {
     zIndex: 1,
   },
   subheading: {
-    color: '#8B5E3C',
-    fontSize: '0.85rem',
+    color: '#67352c',
+    fontSize: '0.95rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     marginBottom: '6px',
     fontWeight: 600,
   },
   heading: {
-    fontSize: '2.5rem',
-    fontWeight: 800,
-    margin: '0 0 24px 0',
-    color: '#2a1810',
-    fontFamily: 'Georgia, serif',
-  },
+  fontSize: '2.9rem',
+  fontWeight: 900,
+  margin: '0 0 24px 0',
+  color: '#3e3c3c',
+  fontFamily: 'var(--font-amatic), sans-serif',
+  letterSpacing: '0.05em',
+},
 
   // ── Toggle ──
   toggleWrapper: {
@@ -306,17 +307,17 @@ const styles: any = {
     background: '#EDE0D0',
     borderRadius: '50px',
     padding: '4px',
-    boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.1)',
+    
     border: '1px solid rgba(139,94,60,0.2)',
   },
   togglePill: {
     position: 'absolute',
     top: '4px',
     bottom: '4px',
-    background: 'linear-gradient(135deg, #5C2E0E, #8B5E3C)',
+    background: 'linear-gradient(135deg, #67352c, #8B5E3C)',
     borderRadius: '50px',
     transition: 'left 0.35s cubic-bezier(0.4,0,0.2,1), width 0.35s cubic-bezier(0.4,0,0.2,1)',
-    boxShadow: '0 2px 10px rgba(92,46,14,0.4)',
+    
     zIndex: 0,
     pointerEvents: 'none',
   },
@@ -365,7 +366,7 @@ const styles: any = {
     maxWidth: '240px',
     background: '#fff',
     flexShrink: 0,
-    boxShadow: '0 6px 18px rgba(0,0,0,0.08)',
+    boxShadow: '0 6px 18px #6e463f',
     overflow: 'hidden',
     borderRadius: '0px',
     transition: 'transform 0.25s ease, box-shadow 0.25s ease',
@@ -405,7 +406,7 @@ const styles: any = {
     fontSize: '0.95rem',
     fontWeight: 700,
     margin: '0 0 4px 0',
-    color: '#2a1810',
+    color: '#67352c',
     fontFamily: 'Georgia, serif',
   },
   desc: {
@@ -418,7 +419,7 @@ const styles: any = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'linear-gradient(135deg, #8B5E3C, #A8744A)',
+    background: 'linear-gradient(135deg, #67352c, #A8744A)',
     color: '#FAF6EE',
     fontSize: '0.6rem',
     fontWeight: 700,
@@ -431,7 +432,7 @@ const styles: any = {
     overflow: 'hidden',
     textTransform: 'uppercase',
     transition: 'all 0.35s ease',
-    boxShadow: '0 2px 8px rgba(92,46,14,0.25)',
+    boxShadow: '0 2px 8px rgba(218, 204, 195, 0.25)',
   },
   btnText: { position: 'relative', zIndex: 1 },
   btnShine: {},
