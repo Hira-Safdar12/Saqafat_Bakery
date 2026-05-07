@@ -45,75 +45,95 @@ const categories: { id: CategoryId; label: string; emoji: string }[] = [
 const blogPosts: BlogPost[] = [
   {
     id:'p1', slug:'how-to-make-saqafat-doodh-patti', featured: true,
-    title:    'How to Make the Perfect Doodh Patti Chai at Home',
-    excerpt:  'Our head baker shares the secret to brewing a chai that tastes just like Saqafat\'s iconic doodh patti. With just a few tips, you can recreate the magic in your own kitchen.',
-    author:   'Chef Imran', date: 'April 15, 2026', readTime: 5,
-    category: 'recipes', image: '/images/blog/doodh-patti.jpg',
+    title: 'How to Make the Perfect Doodh Patti Chai at Home',
+    excerpt: 'Our head baker shares the secret to brewing a chai that tastes just like Saqafat\'s iconic doodh patti.',
+    author: 'Chef Imran', date: 'April 15, 2026', readTime: 5,
+    category: 'recipes',
+    image:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=1200&auto=format&fit=crop",
     content: [
-      { type:'text',  value:'The secret to great doodh patti starts with the right tea leaves. We use a blend of Assam and Kenyan CTC tea for maximum colour and flavour...' },
-      { type:'image', value:'/images/blog/chai-brewing.jpg', caption:'Brewing the perfect chai at Saqafat kitchen' },
-      { type:'text',  value:'Simmer the milk low and slow — never boil it violently. This is what gives our chai its creamy, silky texture...' },
+      { type:'text', value:'The secret to great doodh patti starts with the right tea leaves...' },
+      { 
+        type:'image',
+        value:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=1200&auto=format&fit=crop',
+        caption:'Brewing strong Pakistani-style chai'
+      },
+      { type:'text', value:'Simmer the milk low and slow — never boil it violently...' },
       { type:'quote', value:'Good chai is patience in a cup.' },
     ],
   },
+
   {
     id:'p2', slug:'story-of-saqafat-first-branch',
-    title:    'The Story Behind Saqafat\'s First Branch',
-    excerpt:  'Fifteen years ago, a small bakery opened its doors at Queen Chowk, Sargodha. What started as a dream became Pakistan\'s most beloved neighbourhood bakery. Here\'s the untold story.',
-    author:   'Saqafat Team', date: 'April 10, 2026', readTime: 7,
-    category: 'behind-scenes', image: '/images/blog/first-branch.jpg',
+    title: 'The Story Behind Saqafat\'s First Branch',
+    excerpt: 'Fifteen years ago, a small bakery opened its doors...',
+    author: 'Saqafat Team', date: 'April 10, 2026', readTime: 7,
+    category: 'behind-scenes',
+    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80', // bakery shop
   },
+
   {
     id:'p3', slug:'history-of-roti-in-pakistan',
-    title:    'Roti, Naan & Beyond: The Rich History of Bread in Pakistan',
-    excerpt:  'Bread is more than food in Pakistan — it\'s a cultural cornerstone. From the tandoor villages of Punjab to the bakeries of Karachi, we explore bread\'s journey through Pakistani history.',
-    author:   'Aisha Siddiqui', date: 'April 5, 2026', readTime: 8,
-    category: 'food-culture', image: '/images/blog/roti-history.jpg',
+    title: 'Roti, Naan & Beyond: The Rich History of Bread in Pakistan',
+    excerpt: 'Bread is more than food in Pakistan...',
+    author: 'Aisha Siddiqui', date: 'April 5, 2026', readTime: 8,
+    category: 'food-culture',
+    image: "https://images.unsplash.com/photo-1625944237816-0a9d0b2b9b7b?q=80&w=1200&auto=format&fit=crop", // naan/roti
   },
+
   {
     id:'p4', slug:'saqafat-eid-event-2026',
-    title:    'Saqafat Eid Special: Highlights from Our Biggest Event Yet',
-    excerpt:  'This Eid we went all out — live baking stations, giveaways, and hundreds of happy customers. Here\'s a full recap of Saqafat\'s most memorable event to date.',
-    author:   'Saqafat Team', date: 'March 30, 2026', readTime: 4,
-    category: 'events', image: '/images/blog/eid-event.jpg',
+    title: 'Saqafat Eid Special: Highlights from Our Biggest Event Yet',
+    excerpt: 'This Eid we went all out...',
+    author: 'Saqafat Team', date: 'March 30, 2026', readTime: 4,
+    category: 'events',
+    image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200&q=80', // festive food
   },
+
   {
     id:'p5', slug:'meet-our-head-baker',
-    title:    'Meet Chef Imran: The Man Behind Saqafat\'s Recipes',
-    excerpt:  'For 12 years, Chef Imran has been the creative force behind every Saqafat recipe. We sat down with him to learn about his journey, his inspirations, and his favourite dish to make.',
-    author:   'Saqafat Team', date: 'March 20, 2026', readTime: 6,
-    category: 'behind-scenes', image: '/images/blog/chef-imran.jpg',
+    title: 'Meet Chef Imran: The Man Behind Saqafat\'s Recipes',
+    excerpt: 'For 12 years, Chef Imran has been the creative force...',
+    author: 'Saqafat Team', date: 'March 20, 2026', readTime: 6,
+    category: 'behind-scenes',
+    image: 'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?q=80&w=1200&auto=format&fit=crop', // chef portrait
   },
+
   {
     id:'p6', slug:'how-to-make-chocolate-cake',
-    title:    'Recreate Saqafat\'s Famous Chocolate Cake at Home',
-    excerpt:  'Our bestselling chocolate cake has been a customer favourite for over a decade. Today we\'re sharing (almost) everything — the batter, the frosting, and the finishing touches.',
-    author:   'Chef Imran', date: 'March 12, 2026', readTime: 10,
-    category: 'recipes', image: '/images/blog/choc-cake-recipe.jpg',
+    title: 'Recreate Saqafat\'s Famous Chocolate Cake at Home',
+    excerpt: 'Our bestselling chocolate cake...',
+    author: 'Chef Imran', date: 'March 12, 2026', readTime: 10,
+    category: 'recipes',
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1200&auto=format&fit=crop', // chocolate cake
   },
+
   {
     id:'p7', slug:'pakistani-street-food-culture',
-    title:    'From the Streets to the Bakery: Pakistan\'s Food Culture',
-    excerpt:  'Pakistani street food is a world of its own — vibrant, bold, and deeply rooted in tradition. We explore how street food culture has shaped modern Pakistani bakeries like ours.',
-    author:   'Aisha Siddiqui', date: 'March 5, 2026', readTime: 9,
-    category: 'food-culture', image: '/images/blog/street-food.jpg',
+    title: 'From the Streets to the Bakery: Pakistan\'s Food Culture',
+    excerpt: 'Pakistani street food is a world of its own...',
+    author: 'Aisha Siddiqui', date: 'March 5, 2026', readTime: 9,
+    category: 'food-culture',
+    image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop', // samosa/pakora style street food
   },
+
   {
     id:'p8', slug:'saqafat-corporate-catering-event',
-    title:    'Inside Saqafat\'s Biggest Corporate Catering Event',
-    excerpt:  'We recently catered a 400-person corporate event in Sargodha. Here\'s how our team pulled it off — the planning, the food, and the feedback from the client.',
-    author:   'Saqafat Team', date: 'Feb 25, 2026', readTime: 5,
-    category: 'events', image: '/images/blog/corporate-event.jpg',
+    title: 'Inside Saqafat\'s Biggest Corporate Catering Event',
+    excerpt: 'We recently catered a 400-person corporate event...',
+    author: 'Saqafat Team', date: 'Feb 25, 2026', readTime: 5,
+    category: 'events',
+    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1200&auto=format&fit=crop', // catering buffet
   },
+
   {
     id:'p9', slug:'croissant-recipe',
-    title:    'The Art of the Perfect Croissant: Saqafat\'s Method',
-    excerpt:  'Croissants are notoriously difficult to master, but our bakers have perfected the process over years of practice. Follow our step-by-step guide to bake bakery-worthy croissants.',
-    author:   'Chef Imran', date: 'Feb 15, 2026', readTime: 12,
-    category: 'recipes', image: '/images/blog/croissant-recipe.jpg',
+    title: 'The Art of the Perfect Croissant: Saqafat\'s Method',
+    excerpt: 'Croissants are notoriously difficult...',
+    author: 'Chef Imran', date: 'Feb 15, 2026', readTime: 12,
+    category: 'recipes',
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80', // croissant
   },
 ];
-
 // =============================================================================
 // SCROLL REVEAL HOOK
 // =============================================================================
