@@ -57,7 +57,25 @@
   font-size:clamp(0.95rem,2vw,1.1rem); color:rgba(250,246,238,0.60);
   line-height:1.75; margin:0; animation:bl-fade-up 0.8s ease 0.3s both;
 }
+.bl-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers Saqafat Blog */
+  gap: 14px;
+  margin-bottom: 20px;
+}
 
+.bl-eyebrow-line {
+  width: 60px;
+  height: 1px;
+  background: #c89b63;
+}
+
+.bl-eyebrow-text {
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 /* ── FEATURED POST ────────────────────────────────────────────────────────── */
 .bl-featured-section {
   padding:    60px 5%;

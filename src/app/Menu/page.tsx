@@ -547,7 +547,7 @@ export default function MenuPage() {
           autoPlay muted loop playsInline
           poster="/images/menu/hero-poster.jpg"
         >
-          <source src="/videos/menu-hero.mp4" type="video/mp4" />
+          <source src="/tea.mp4" type="video/mp4" />
         </video>
         <div className="mn-hero-overlay" />
         <div className="mn-hero-vignette" />
