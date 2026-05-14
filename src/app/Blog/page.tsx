@@ -70,14 +70,21 @@ const blogPosts: BlogPost[] = [
     category: 'behind-scenes',
     image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80', // bakery shop
   },
-
   {
-    id:'p3', slug:'history-of-roti-in-pakistan',
-    title: 'Roti, Naan & Beyond: The Rich History of Bread in Pakistan',
-    excerpt: 'Bread is more than food in Pakistan...',
-    author: 'Aisha Siddiqui', date: 'April 5, 2026', readTime: 8,
+    id:'p6', slug:'how-to-make-chocolate-cake',
+    title: 'Recreate Saqafat\'s Famous Chocolate Cake at Home',
+    excerpt: 'Our bestselling chocolate cake...',
+    author: 'Chef Imran', date: 'March 12, 2026', readTime: 10,
+    category: 'recipes',
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1200&auto=format&fit=crop', // chocolate cake
+  },
+{
+    id:'p3', slug:'pakistani-street-food-culture',
+    title: 'From the Streets to the Bakery: Pakistan\'s Food Culture',
+    excerpt: 'Pakistani street food is a world of its own...',
+    author: 'Aisha Siddiqui', date: 'March 5, 2026', readTime: 9,
     category: 'food-culture',
-    image: "https://images.unsplash.com/photo-1625944237816-0a9d0b2b9b7b?q=80&w=1200&auto=format&fit=crop", // naan/roti
+    image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop', // samosa/pakora style street food
   },
 
   {
@@ -98,41 +105,8 @@ const blogPosts: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?q=80&w=1200&auto=format&fit=crop', // chef portrait
   },
 
-  {
-    id:'p6', slug:'how-to-make-chocolate-cake',
-    title: 'Recreate Saqafat\'s Famous Chocolate Cake at Home',
-    excerpt: 'Our bestselling chocolate cake...',
-    author: 'Chef Imran', date: 'March 12, 2026', readTime: 10,
-    category: 'recipes',
-    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1200&auto=format&fit=crop', // chocolate cake
-  },
-
-  {
-    id:'p7', slug:'pakistani-street-food-culture',
-    title: 'From the Streets to the Bakery: Pakistan\'s Food Culture',
-    excerpt: 'Pakistani street food is a world of its own...',
-    author: 'Aisha Siddiqui', date: 'March 5, 2026', readTime: 9,
-    category: 'food-culture',
-    image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop', // samosa/pakora style street food
-  },
-
-  {
-    id:'p8', slug:'saqafat-corporate-catering-event',
-    title: 'Inside Saqafat\'s Biggest Corporate Catering Event',
-    excerpt: 'We recently catered a 400-person corporate event...',
-    author: 'Saqafat Team', date: 'Feb 25, 2026', readTime: 5,
-    category: 'events',
-    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1200&auto=format&fit=crop', // catering buffet
-  },
-
-  {
-    id:'p9', slug:'croissant-recipe',
-    title: 'The Art of the Perfect Croissant: Saqafat\'s Method',
-    excerpt: 'Croissants are notoriously difficult...',
-    author: 'Chef Imran', date: 'Feb 15, 2026', readTime: 12,
-    category: 'recipes',
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80', // croissant
-  },
+  
+  
 ];
 // =============================================================================
 // SCROLL REVEAL HOOK
