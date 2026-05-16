@@ -1,15 +1,50 @@
 /* =============================================================================
-   THEME (BAKERY STYLE)
+   THEME — WARM BAKERY / SAQAFAT PALETTE
 ============================================================================= */
 :root {
+  /* backgrounds */
   --rv-bg: #FFFBF3;
-  --rv-primary: #b784602e;
-  --rv-secondary: #A0673A;
+  --rv-bg-soft: #FFF8EC;
+  --rv-surface: #FFF8EC;
+  --rv-dark-surface: #1E0F06;
+
+  /* brand palette */
+  --rv-primary: #5C2E0E;
+  --rv-primary-light: #A0673A;
   --rv-accent: #C97B3A;
+  --rv-accent-soft: #E5B07B;
+
+  /* text */
   --rv-text-dark: #1E0F06;
   --rv-text: #5A3E2B;
-  --rv-text-light: #7a5c44;
-  --rv-white: #FAF6EE;
+  --rv-text-light: #9A7055;
+
+  /* utility */
+  --rv-white: #FFFFFF;
+  --rv-border: rgba(92, 46, 14, 0.12);
+  --rv-shadow: rgba(30, 15, 6, 0.12);
+
+  /* gradients */
+  --rv-gradient-primary:
+    linear-gradient(
+      135deg,
+      #5C2E0E 0%,
+      #A0673A 100%
+    );
+
+  --rv-gradient-hover:
+    linear-gradient(
+      135deg,
+      #6B3412 0%,
+      #C97B3A 100%
+    );
+
+  --rv-gradient-gold:
+    linear-gradient(
+      135deg,
+      #C97B3A 0%,
+      #E5B07B 100%
+    );
 }
 
 /* =============================================================================
@@ -19,29 +54,45 @@
   font-family: 'Georgia', serif;
   background: var(--rv-bg);
   color: var(--rv-text);
+  overflow-x: hidden;
 }
 
 /* =============================================================================
    HERO
 ============================================================================= */
 .rv-hero {
-  padding: 120px 20px 80px;
+  padding: 130px 20px 90px;
   text-align: center;
   position: relative;
-  background: var(--rv-bg);
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(201,123,58,0.08),
+      transparent 45%
+    ),
+    var(--rv-bg);
 }
 
 .rv-hero-h1 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--rv-text-dark);
+  margin-bottom: 18px;
 }
 
-.rv-accent {
+.rv-accent,
+.rv-accent-gold {
   color: var(--rv-accent);
   font-style: italic;
 }
 
 .rv-hero-sub {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.9;
   color: var(--rv-text-light);
 }
 
@@ -49,124 +100,209 @@
    SECTION BASE
 ============================================================================= */
 .rv-section {
-  padding: 100px 40px;
   position: relative;
   overflow: hidden;
+  padding: 110px 40px;
   background: var(--rv-bg);
 }
 
-/* blobs */
+.rv-section-dark {
+  background: var(--rv-dark-surface);
+}
+
+.rv-section-cream {
+  background: var(--rv-bg-soft);
+}
+
+/* =============================================================================
+   DECORATIVE BLOBS
+============================================================================= */
 .rv-blob {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  filter: blur(4px);
 }
 
 .rv-blob-tl {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,220,120,0.25), transparent 70%);
-  top: -100px;
-  left: -100px;
+  width: 520px;
+  height: 520px;
+  top: -140px;
+  left: -120px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(201,123,58,0.16),
+      transparent 70%
+    );
 }
 
 .rv-blob-br {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(200,100,50,0.1), transparent 70%);
-  bottom: -80px;
-  right: 10%;
+  width: 440px;
+  height: 440px;
+  bottom: -120px;
+  right: -80px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(92,46,14,0.08),
+      transparent 72%
+    );
 }
 
 /* =============================================================================
-   HEADINGS
+   SECTION HEADINGS
 ============================================================================= */
 .rv-section-head {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 2;
 }
 
 .rv-section-title {
-  font-size: 2.4rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
   font-weight: 800;
   color: var(--rv-text-dark);
+  margin-bottom: 16px;
 }
 
 .rv-section-sub {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.8;
   color: var(--rv-text-light);
 }
 
-/* eyebrow */
+.rv-title-light {
+  color: var(--rv-white) !important;
+}
+
+.rv-sub-light {
+  color: rgba(255,255,255,0.72) !important;
+}
+
+/* =============================================================================
+   EYEBROW
+============================================================================= */
 .rv-eyebrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
-.rv-eyebrow-line {
-  width: 36px;
+.rv-eyebrow-line,
+.rv-eyebrow-line-gold {
+  width: 42px;
   height: 2px;
+  border-radius: 10px;
   background: var(--rv-accent);
 }
 
-.rv-eyebrow-text {
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
+.rv-eyebrow-text,
+.rv-eyebrow-text-gold {
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
+  font-weight: 700;
   color: var(--rv-accent);
 }
 
 /* =============================================================================
-   VIDEO CARDS
+   VIDEO GRID
 ============================================================================= */
 .rv-video-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 34px;
 }
 
 .rv-video-card {
-  border-radius: 20px;
+  position: relative;
   overflow: hidden;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 10px 30px rgba(92,46,14,0.15);
-  background: #000;
+  border-radius: 28px;
+  background: var(--rv-dark-surface);
+  box-shadow:
+    0 10px 35px rgba(30,15,6,0.10);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .rv-video-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
+  box-shadow:
+    0 20px 50px rgba(30,15,6,0.18);
 }
 
 .rv-video-thumb {
   position: relative;
-  height: 240px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.rv-video-thumb img {
+  transition: transform 0.5s ease;
+}
+
+.rv-video-card:hover img {
+  transform: scale(1.06);
 }
 
 .rv-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.84),
+      rgba(0,0,0,0.15),
+      transparent
+    );
 }
 
 .rv-play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 72px;
+  height: 72px;
   transform: translate(-50%, -50%);
-  background: var(--rv-white);
-  color: var(--rv-primary);
+
   border-radius: 50%;
-  padding: 10px;
+  background: rgba(255,248,236,0.96);
+  color: var(--rv-primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.rv-video-card:hover .rv-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--rv-accent);
+  color: var(--rv-white);
 }
 
 .rv-video-info {
   position: absolute;
   bottom: 0;
-  padding: 15px;
-  color: #fff;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  color: var(--rv-white);
 }
 
 /* =============================================================================
@@ -179,13 +315,24 @@
 }
 
 .rv-text-card {
-  background: var(--rv-white);
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow: 0 10px 30px rgba(92,46,14,0.1);
+  position: relative;
+
+  background: rgba(255,248,236,0.95);
+  border: 1px solid rgba(201,123,58,0.12);
+
+  border-radius: 24px;
+  padding: 28px;
+
+  box-shadow:
+    0 10px 34px rgba(30,15,6,0.06);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
   opacity: 0;
-  transform: translateY(20px);
-  transition: 0.5s ease;
+  transform: translateY(25px);
 }
 
 .rv-text-card-visible {
@@ -193,87 +340,226 @@
   transform: translateY(0);
 }
 
+.rv-text-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201,123,58,0.25);
+
+  box-shadow:
+    0 18px 48px rgba(30,15,6,0.12);
+}
+
 .rv-text-card-urdu {
   font-family: 'Noto Nastaliq Urdu', serif;
 }
 
-/* top */
 .rv-text-top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .rv-avatar {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
+
   border-radius: 50%;
-  background: var(--rv-primary);
-  color: #fff;
+
+  background: var(--rv-gradient-primary);
+  color: var(--rv-white);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 8px 22px rgba(92,46,14,0.18);
+}
+
+.rv-avatar-initials {
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .rv-text-name {
   color: var(--rv-primary);
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .rv-text-location {
-  font-size: 0.8rem;
+  margin-top: 2px;
+  font-size: 0.82rem;
   color: var(--rv-text-light);
 }
 
-/* body */
 .rv-text-body {
-  margin: 16px 0;
-  line-height: 1.7;
-  color: var(--rv-text);
-  border-left: 3px solid rgba(246, 244, 243, 0.35);
-  padding-left: 14px;
+  position: relative;
+
+  margin: 22px 0 18px;
+  padding-left: 18px;
+
+  border-left: 3px solid rgba(201,123,58,0.35);
+
   font-style: italic;
+  line-height: 1.9;
+  color: var(--rv-text);
 }
 
 .rv-text-date {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   color: var(--rv-text-light);
 }
 
+/* =============================================================================
+   LANGUAGE TAG
+============================================================================= */
+.rv-lang-tag {
+  margin-left: auto;
+
+  padding: 5px 10px;
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  background: rgba(201,123,58,0.10);
+  border: 1px solid rgba(201,123,58,0.24);
+
+  color: var(--rv-accent);
+}
+
+.rv-lang-en,
+.rv-lang-ur {
+  background: rgba(201,123,58,0.12);
+  color: var(--rv-accent);
+}
 
 /* =============================================================================
-   BUTTON
+   STARS
+============================================================================= */
+.rv-stars {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0 4px;
+}
+
+.rv-star {
+  font-size: 15px;
+  color: rgba(92,46,14,0.18);
+}
+
+.rv-star-filled {
+  color: var(--rv-accent);
+}
+
+/* =============================================================================
+   BUTTONS
 ============================================================================= */
 .rv-primary-btn {
   position: relative;
+
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   overflow: hidden;
-  background: linear-gradient(135deg, #5C2E0E, #A0673A);
+
+  border: none;
+  border-radius: 999px;
+
+  padding: 15px 34px;
+
+  background: var(--rv-gradient-primary);
   color: var(--rv-white);
-  border-radius: 50px;
-  padding: 14px 32px;
-  font-size: 0.85rem;
+
+  font-size: 0.84rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+
   cursor: pointer;
-  transition: 0.25s;
-  box-shadow: 0 6px 24px rgba(92,46,14,0.35);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+
+  box-shadow:
+    0 10px 28px rgba(92,46,14,0.22);
 }
 
 .rv-primary-btn:hover {
   transform: translateY(-3px);
-  background: linear-gradient(135deg, #7a3e18, #C97B3A);
+
+  background: var(--rv-gradient-hover);
+
+  box-shadow:
+    0 16px 34px rgba(92,46,14,0.28);
 }
 
 .rv-btn-shine {
   position: absolute;
   top: 0;
-  width: 45%;
+  left: -80%;
+
+  width: 40%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,0.22),
+      transparent
+    );
+
   transform: skewX(-20deg);
+
+  animation: rv-btn-shine 3.5s infinite;
+}
+
+@keyframes rv-btn-shine {
+  0% {
+    left: -80%;
+  }
+
+  100% {
+    left: 140%;
+  }
+}
+
+.rv-btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+.rv-primary-btn:hover .rv-btn-arrow {
+  transform: translateX(3px);
+}
+
+.rv-ghost-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.24);
+
+  background: transparent;
+  color: var(--rv-white);
+
+  padding: 13px 28px;
+
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.rv-ghost-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.38);
 }
 
 /* =============================================================================
@@ -282,65 +568,918 @@
 .rv-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(30,15,6,0.8);
+  z-index: 999;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+
+  background: rgba(30,15,6,0.72);
+  backdrop-filter: blur(8px);
 }
 
 .rv-modal-box {
-  background: #000;
-  border-radius: 16px;
+  position: relative;
+
+  width: 92%;
+  max-width: 850px;
+
   overflow: hidden;
-  width: 90%;
-  max-width: 800px;
+
+  border-radius: 26px;
+
+  background: var(--rv-dark-surface);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.35);
 }
 
 .rv-modal-video {
   width: 100%;
+  display: block;
 }
 
 .rv-modal-close {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  background: var(--rv-white);
-  color: var(--rv-primary);
+  top: 16px;
+  right: 16px;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
   border-radius: 50%;
-  padding: 5px 10px;
+
+  background: rgba(255,248,236,0.94);
+  color: var(--rv-primary);
+
+  cursor: pointer;
 }
 
 /* =============================================================================
-   CTA
+   CTA SECTION
 ============================================================================= */
 .rv-cta-section {
   text-align: center;
-  background: var(--rv-primary);
+  background: #A0673A;
   color: var(--rv-white);
 }
 
 .rv-incentive {
-  margin: 20px 0;
-  font-size: 1.2rem;
-  color: #ffd27a;
+  margin: 24px 0;
+  font-size: 1.15rem;
+  color: #FFD6AE;
+}
+
+.rv-cta-glow {
+  display: none;
+}
+
+/* =============================================================================
+   FORM MODAL
+============================================================================= */
+.rv-form-modal {
+  position: relative;
+
+  width: 92%;
+  max-width: 580px;
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  border-radius: 28px;
+
+  background: var(--rv-surface);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.18);
+}
+
+.rv-form-modal-header {
+  position: relative;
+
+  padding: 36px 30px 28px;
+
+  background: var(--rv-gradient-primary);
+}
+
+.rv-form-modal-header h2 {
+  margin: 0 0 8px;
+
+  color: var(--rv-white);
+
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.rv-form-modal-header p {
+  margin: 0;
+
+  color: rgba(255,255,255,0.72);
+
+  line-height: 1.7;
+}
+
+.rv-form {
+  padding: 30px;
+}
+
+.rv-field {
+  margin-bottom: 20px;
+}
+
+.rv-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+
+  color: var(--rv-text);
+}
+
+.rv-required {
+  color: var(--rv-accent);
+}
+
+.rv-input {
+  width: 100%;
+
+  padding: 13px 16px;
+
+  border: 1.5px solid var(--rv-border);
+  border-radius: 14px;
+
+  background: var(--rv-white);
+  color: var(--rv-text-dark);
+
+  font-size: 0.94rem;
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.rv-input:focus {
+  outline: none;
+
+  border-color: var(--rv-accent);
+
+  box-shadow:
+    0 0 0 4px rgba(201,123,58,0.12);
+}
+
+.rv-textarea {
+  resize: vertical;
+}
+
+.rv-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.rv-success {
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.rv-success-icon {
+  width: 64px;
+  height: 64px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: var(--rv-gradient-primary);
+  color: var(--rv-white);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.8rem;
+}
+
+.rv-success h3 {
+  margin-bottom: 10px;
+  color: var(--rv-text-dark);
+}
+
+.rv-success p {
+  margin-bottom: 24px;
+  color: var(--rv-text);
+}
+
+/* =============================================================================
+   REELS
+============================================================================= */
+.rv-reel-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.rv-reel-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 26px;
+
+  aspect-ratio: 9 / 16;
+
+  background: var(--rv-dark-surface);
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,0.22);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.rv-reel-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 24px 54px rgba(0,0,0,0.34);
+}
+
+.rv-reel-video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.rv-reel-grad-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 30%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.55),
+      transparent
+    );
+
+  z-index: 1;
+}
+
+.rv-reel-grad-bot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  height: 68%;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.92),
+      rgba(0,0,0,0.32),
+      transparent
+    );
+
+  z-index: 1;
+}
+
+.rv-reel-playpause {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+
+  z-index: 4;
+}
+
+.rv-reel-playpause-show {
+  opacity: 1;
+}
+
+.rv-reel-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 18px;
+
+  z-index: 3;
+}
+
+.rv-reel-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 10px;
+}
+
+.rv-reel-avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.16);
+  border: 1.5px solid rgba(255,255,255,0.38);
+
+  color: var(--rv-white);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.rv-reel-name {
+  margin: 0;
+
+  color: var(--rv-white);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.rv-reel-loc {
+  margin: 2px 0 0;
+
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+}
+
+.rv-reel-quote {
+  margin: 0 0 10px;
+
+  color: rgba(255,255,255,0.9);
+
+  font-size: 13px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.rv-reel-mute {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0,0,0,0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition: background 0.2s ease;
+}
+
+.rv-reel-mute:hover {
+  background: rgba(0,0,0,0.72);
+}
+
+/* =============================================================================
+   MARQUEE
+============================================================================= */
+.rv-marquee-outer {
+  position: relative;
+  overflow: hidden;
+
+  padding: 10px 0;
+  margin-bottom: 22px;
+}
+
+.rv-marquee-outer::before,
+.rv-marquee-outer::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 120px;
+
+  z-index: 3;
+  pointer-events: none;
+}
+
+.rv-marquee-outer::before {
+  left: 0;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--rv-dark-surface),
+      transparent
+    );
+}
+
+.rv-marquee-outer::after {
+  right: 0;
+
+  background:
+    linear-gradient(
+      to left,
+      var(--rv-dark-surface),
+      transparent
+    );
+}
+
+.rv-marquee-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+
+  user-select: none;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.rv-marquee-left {
+  animation: marquee-left 34s linear infinite;
+}
+
+.rv-marquee-right {
+  animation: marquee-right 34s linear infinite;
+}
+
+.rv-marquee-paused {
+  animation-play-state: paused !important;
+}
+
+.rv-mq-card {
+  flex: 0 0 310px;
+
+  padding: 20px;
+
+  border-radius: 22px;
+
+  background: rgba(255,248,236,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.rv-mq-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,123,58,0.42);
+}
+
+.rv-mq-card-urdu {
+  font-family: 'Noto Nastaliq Urdu', serif;
+}
+
+.rv-mq-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.rv-mq-avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: rgba(201,123,58,0.12);
+  border: 1px solid rgba(201,123,58,0.35);
+
+  color: var(--rv-accent);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.rv-mq-name {
+  margin: 0;
+
+  color: var(--rv-white);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rv-mq-loc {
+  margin: 2px 0 0;
+
+  color: #c7a283;
+
+  font-size: 12px;
+}
+
+.rv-mq-body {
+  margin: 12px 0 10px;
+
+  color: #f4e4d3;
+
+  line-height: 1.7;
+  font-size: 13px;
+
+  max-height: calc(1.7em * 4);
+  overflow: hidden;
+}
+
+.rv-mq-date {
+  font-size: 11px;
+  color: #9a7055;
+}
+
+.rv-mq-card .rv-star {
+  color: rgba(255,255,255,0.14);
+}
+
+.rv-mq-card .rv-star-filled {
+  color: var(--rv-accent);
 }
 
 /* =============================================================================
    RESPONSIVE
 ============================================================================= */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .rv-video-grid,
-  .rv-text-grid,
-  .rv-buffet-grid {
+  .rv-text-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rv-reel-row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
+  .rv-section {
+    padding: 85px 20px;
+  }
+
   .rv-video-grid,
   .rv-text-grid,
-  .rv-buffet-grid {
+  .rv-reel-row {
     grid-template-columns: 1fr;
   }
+
+  .rv-hero {
+    padding: 110px 20px 70px;
+  }
+
+  .rv-section-title {
+    font-size: 2rem;
+  }
+
+  .rv-video-thumb {
+    height: 220px;
+  }
+
+  .rv-mq-card {
+    flex: 0 0 280px;
+  }
+}
+
+@media (max-width: 500px) {
+  .rv-form {
+    padding: 24px 18px;
+  }
+
+  .rv-form-modal-header {
+    padding: 30px 20px 24px;
+  }
+
+  .rv-text-card {
+    padding: 24px;
+  }
+
+  .rv-play-btn {
+    width: 60px;
+    height: 60px;
+  }
+}
+/* =============================================================
+   PATCH — paste these rules at the very END of your review.css
+   They override earlier declarations via the cascade.
+   =============================================================  */
+
+/* ── 1. WRITTEN REVIEWS SECTION — switch to light background ── */
+.rv-section-dark {
+  background: var(--rv-bg-soft);           /* #FFF8EC — warm cream */
+}
+
+/* The heading classes were designed for dark bg — flip them back */
+.rv-title-light {
+  color: var(--rv-text-dark) !important;   /* #1E0F06 */
+}
+
+.rv-sub-light {
+  color: var(--rv-text-light) !important;  /* #9A7055 */
+}
+
+/* Eyebrow gold lines/text already work on light — keep accent colour */
+.rv-eyebrow-line-gold {
+  background: var(--rv-accent) !important;
+}
+.rv-eyebrow-text-gold {
+  color: var(--rv-accent) !important;
+}
+
+/* ── 2. MARQUEE EDGE FADES — must match new section bg exactly ── */
+.rv-marquee-outer::before {
+  background: linear-gradient(to right, var(--rv-bg-soft), transparent);
+}
+.rv-marquee-outer::after {
+  background: linear-gradient(to left, var(--rv-bg-soft), transparent);
+}
+
+/* ── 3. MARQUEE CARDS — light surface, dark text ── */
+.rv-mq-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(201,123,58,0.14);
+  backdrop-filter: none;                   /* not needed on light bg */
+}
+
+.rv-mq-card:hover {
+  border-color: rgba(201,123,58,0.38);
+  box-shadow: 0 8px 28px rgba(30,15,6,0.09);
+}
+
+.rv-mq-name {
+  color: var(--rv-text-dark);              /* #1E0F06 — solid dark  */
+}
+
+.rv-mq-loc {
+  color: var(--rv-text-light);             /* #9A7055               */
+}
+
+.rv-mq-body {
+  color: var(--rv-text);                   /* #5A3E2B — warm brown  */
+}
+
+.rv-mq-date {
+  color: var(--rv-text-light);
+}
+
+/* Stars on light bg */
+.rv-mq-card .rv-star {
+  color: rgba(92,46,14,0.15);
+}
+.rv-mq-card .rv-star-filled {
+  color: var(--rv-accent);                 /* #C97B3A               */
+}
+
+/* Avatar on light bg */
+.rv-mq-avatar {
+  background: rgba(201,123,58,0.10);
+  border: 1.5px solid rgba(201,123,58,0.32);
+  color: var(--rv-accent);
+}
+
+/* ── 4. CTA SECTION — text and colour fixes ── */
+.rv-cta-section {
+  background: var(--rv-gradient-primary);  /* rich brown gradient   */
+  color: var(--rv-white);
+}
+
+/* Main heading */
+.rv-cta-section .rv-section-title,
+.rv-cta-section .rv-title-light {
+  color: var(--rv-white) !important;
+}
+
+/* Subtext */
+.rv-cta-section .rv-section-sub,
+.rv-cta-section .rv-sub-light {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* Eyebrow on CTA */
+.rv-cta-section .rv-eyebrow-line,
+.rv-cta-section .rv-eyebrow-line-gold {
+  background: rgba(255,255,255,0.55) !important;
+}
+.rv-cta-section .rv-eyebrow-text,
+.rv-cta-section .rv-eyebrow-text-gold {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Incentive badge */
+.rv-incentive {
+  color: #FFD6AE;
+  font-size: 1.15rem;
+  margin: 24px 0;
+}
+
+/* CTA button — invert so it reads clearly on dark bg */
+.rv-cta-section .rv-primary-btn {
+  background: var(--rv-white);
+  color: var(--rv-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+.rv-cta-section .rv-primary-btn:hover {
+  background: var(--rv-bg-soft);
+  color: var(--rv-primary);
+  transform: translateY(-3px);
+}
+/* =============================================================
+   PATCH — paste these rules at the very END of your review.css
+   They override earlier declarations via the cascade.
+   =============================================================  */
+
+/* ── 1. WRITTEN REVIEWS SECTION — switch to light background ── */
+.rv-section-dark {
+  background: var(--rv-bg-soft);           /* #FFF8EC — warm cream */
+}
+
+/* The heading classes were designed for dark bg — flip them back */
+.rv-title-light {
+  color: var(--rv-text-dark) !important;   /* #1E0F06 */
+}
+
+.rv-sub-light {
+  color: var(--rv-text-light) !important;  /* #9A7055 */
+}
+
+/* Eyebrow gold lines/text already work on light — keep accent colour */
+.rv-eyebrow-line-gold {
+  background: var(--rv-accent) !important;
+}
+.rv-eyebrow-text-gold {
+  color: var(--rv-accent) !important;
+}
+
+/* ── 2. MARQUEE EDGE FADES — must match new section bg exactly ── */
+.rv-marquee-outer::before {
+  background: linear-gradient(to right, var(--rv-bg-soft), transparent);
+}
+.rv-marquee-outer::after {
+  background: linear-gradient(to left, var(--rv-bg-soft), transparent);
+}
+
+/* ── 3. MARQUEE CARDS — dark card on light section bg ── */
+.rv-mq-card {
+  background: var(--rv-primary);           /* #5C2E0E rich dark brown */
+  border: 1px solid rgba(201,123,58,0.22);
+  backdrop-filter: none;
+}
+
+.rv-mq-card:hover {
+  border-color: rgba(201,123,58,0.55);
+  box-shadow: 0 10px 32px rgba(30,15,6,0.18);
+  transform: translateY(-4px);
+}
+
+.rv-mq-name {
+  color: #FFFFFF;
+}
+
+.rv-mq-loc {
+  color: #c7a07a;
+}
+
+.rv-mq-body {
+  color: #f0dece;                          /* warm off-white, readable */
+}
+
+.rv-mq-date {
+  color: #a07858;
+}
+
+/* Stars on dark card */
+.rv-mq-card .rv-star {
+  color: rgba(255,255,255,0.14);
+}
+.rv-mq-card .rv-star-filled {
+  color: #f5c842;
+}
+
+/* Avatar on dark card */
+.rv-mq-avatar {
+  background: rgba(201,123,58,0.18);
+  border: 1.5px solid rgba(201,123,58,0.45);
+  color: var(--rv-accent-soft);
+}
+
+/* ── 4. CTA SECTION — text and colour fixes ── */
+.rv-cta-section {
+  background: var(--rv-gradient-primary);  /* rich brown gradient   */
+  color: var(--rv-white);
+}
+
+/* Main heading */
+.rv-cta-section .rv-section-title,
+.rv-cta-section .rv-title-light {
+  color: var(--rv-white) !important;
+}
+
+/* Subtext */
+.rv-cta-section .rv-section-sub,
+.rv-cta-section .rv-sub-light {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* Eyebrow on CTA */
+.rv-cta-section .rv-eyebrow-line,
+.rv-cta-section .rv-eyebrow-line-gold {
+  background: rgba(255,255,255,0.55) !important;
+}
+.rv-cta-section .rv-eyebrow-text,
+.rv-cta-section .rv-eyebrow-text-gold {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Incentive badge */
+.rv-incentive {
+  color: #FFD6AE;
+  font-size: 1.15rem;
+  margin: 24px 0;
+}
+
+/* CTA button — invert so it reads clearly on dark bg */
+.rv-cta-section .rv-primary-btn {
+  background: var(--rv-white);
+  color: var(--rv-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+.rv-cta-section .rv-primary-btn:hover {
+  background: var(--rv-bg-soft);
+  color: var(--rv-primary);
+  transform: translateY(-3px);
+}
+/* BEFORE */
+.rv-marquee-outer::before,
+.rv-marquee-outer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;   /* ← this controls the fade width */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* AFTER — reduce to taste */
+.rv-marquee-outer::before,
+.rv-marquee-outer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;    /* ← smaller = less shadow effect */
+  z-index: 3;
+  pointer-events: none;
 }
