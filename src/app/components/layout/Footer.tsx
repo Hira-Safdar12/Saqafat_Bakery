@@ -1,59 +1,136 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-// ── Animated underline link ────────────────────────────────────────────────────
-function FooterLink({ label, href = '#' }: { label: string; href?: string }) {
-  const [hovered, setHovered] = useState(false);
+// ─────────────────────────────────────────────────────────────
+// Animated Footer Link
+// ─────────────────────────────────────────────────────────────
+
+function FooterLink({
+  label,
+  href = '#',
+}: {
+  label: string;
+  href?: string;
+}) {
+  const [hovered, setHovered] =
+    useState(false);
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+
+      const id = href.replace('/#', '');
+
+      const section =
+        document.getElementById(id);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+  };
 
   return (
     <a
       href={href}
+      onClick={handleClick}
       style={{
         position: 'relative',
         display: 'inline-block',
-        color: hovered ? '#C97B3A' : '#fff7ec',
+
+        color: hovered
+          ? '#D89A5B'
+          : '#F6EBDD',
+
         textDecoration: 'none',
-        fontSize: '0.92rem',
-        fontFamily: ' serif',
-        letterSpacing: '0.01em',
-        transition: 'color 0.85s ease',
-        paddingBottom: '2px',
-        cursor: 'pointer',
+
+        fontSize: '0.93rem',
+
+        fontFamily:
+          'Cormorant Garamond, serif',
+
+        letterSpacing: '0.02em',
+
+        transition: 'all 0.3s ease',
+
+        transform: hovered
+          ? 'translateX(5px)'
+          : 'translateX(0)',
+
+        opacity: hovered ? 1 : 0.85,
+
+        paddingBottom: '3px',
+
+        width: 'fit-content',
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() =>
+        setHovered(true)
+      }
+      onMouseLeave={() =>
+        setHovered(false)
+      }
     >
       {label}
-      {/* Right half — expands from center to right */}
-      <span style={{
-        position: 'absolute',
-        bottom: 0,
-        left: '50%',
-        height: '1.5px',
-        width: hovered ? '50%' : '0%',
-        background: '#C97B3A',
-        transition: 'width 0.28s ease',
-        display: 'block',
-      }} />
-      {/* Left half — expands from center to left */}
-      <span style={{
-        position: 'absolute',
-        bottom: 0,
-        right: '50%',
-        height: '1.5px',
-        width: hovered ? '50%' : '0%',
-        background: '#C97B3A',
-        transition: 'width 0.28s ease',
-        display: 'block',
-      }} />
+
+      <span
+        style={{
+          position: 'absolute',
+          left: '50%',
+          bottom: 0,
+
+          width: hovered ? '50%' : '0%',
+
+          height: '1px',
+
+          background: '#D89A5B',
+
+          transition:
+            'width 0.28s ease',
+        }}
+      />
+
+      <span
+        style={{
+          position: 'absolute',
+          right: '50%',
+          bottom: 0,
+
+          width: hovered ? '50%' : '0%',
+
+          height: '1px',
+
+          background: '#D89A5B',
+
+          transition:
+            'width 0.28s ease',
+        }}
+      />
     </a>
   );
 }
 
-// ── Social icon with scale ─────────────────────────────────────────────────────
-function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
-  const [hovered, setHovered] = useState(false);
+// ─────────────────────────────────────────────────────────────
+// Social Icon
+// ─────────────────────────────────────────────────────────────
+
+function SocialIcon({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  const [hovered, setHovered] =
+    useState(false);
+
   return (
     <a
       href={href}
@@ -64,347 +141,1056 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '38px',
-        height: '38px',
+
+        width: '42px',
+        height: '42px',
+
         borderRadius: '50%',
-        background: 'rgba(242, 230, 221, 0.28)',
-        color: hovered ? '#C97B3A' : '#f1ece3',
-        textDecoration: 'none',
-        transition: 'transform 0.22s ease, color 0.22s ease, background 0.22s ease',
-        transform: hovered ? 'scale(1.15)' : 'scale(1)',
+
+        background: hovered
+          ? 'rgba(216,154,91,0.18)'
+          : 'rgba(255,255,255,0.06)',
+
+        color: hovered
+          ? '#D89A5B'
+          : '#f5ede4',
+
+        transition: 'all 0.3s ease',
+
+        transform: hovered
+          ? 'translateY(-4px) scale(1.08)'
+          : 'scale(1)',
+
+        border:
+          '1px solid rgba(255,255,255,0.1)',
+
+        backdropFilter: 'blur(10px)',
+
         flexShrink: 0,
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() =>
+        setHovered(true)
+      }
+      onMouseLeave={() =>
+        setHovered(false)
+      }
     >
       {children}
     </a>
   );
 }
 
-// ── Newsletter ─────────────────────────────────────────────────────────────────
-function Newsletter() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+// ─────────────────────────────────────────────────────────────
+// Accordion Section
+// ─────────────────────────────────────────────────────────────
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
+function AccordionSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] =
+    useState(false);
 
   return (
-    <div>
-      <p style={s.colHeading}>Stay Hungry for Updates</p>
-      <p style={s.newsletterSub}>Fresh deals & stories — straight to your inbox.</p>
-      {submitted ? (
-        <p style={{ color: '#8fbc6e', fontSize: '0.82rem', marginTop: '10px' }}>
-          ✓ You're subscribed! Welcome to the family.
-        </p>
-      ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', marginTop: '12px' }}>
-          <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={s.nlInput}
-          />
-          <button type="submit" style={s.nlBtn} className="nl-btn">
-            Subscribe
-          </button>
-        </form>
-      )}
+    <div
+      style={{
+        borderBottom:
+          '1px solid rgba(255,255,255,0.1)',
+      }}
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width: '100%',
+
+          display: 'flex',
+
+          justifyContent:
+            'space-between',
+
+          alignItems: 'center',
+
+          padding: '18px 0',
+
+          background: 'none',
+
+          border: 'none',
+
+          cursor: 'pointer',
+
+          color: '#D89A5B',
+
+          fontFamily:
+            'Cormorant Garamond, serif',
+
+          fontSize: '0.82rem',
+
+          fontWeight: 700,
+
+          letterSpacing: '0.14em',
+
+          textTransform: 'uppercase',
+
+          textAlign: 'left',
+        }}
+      >
+        {title}
+
+        <span
+          style={{
+            display: 'flex',
+
+            alignItems: 'center',
+
+            justifyContent: 'center',
+
+            width: '28px',
+            height: '28px',
+
+            flexShrink: 0,
+
+            color: '#D89A5B',
+
+            transition:
+              'transform 0.3s ease',
+
+            transform: open
+              ? 'rotate(45deg)'
+              : 'rotate(0deg)',
+          }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            width="18"
+            height="18"
+          >
+            <line
+              x1="12"
+              y1="5"
+              x2="12"
+              y2="19"
+            />
+
+            <line
+              x1="5"
+              y1="12"
+              x2="19"
+              y2="12"
+            />
+          </svg>
+        </span>
+      </button>
+
+      <div
+        style={{
+          maxHeight: open
+            ? '500px'
+            : '0',
+
+          overflow: 'hidden',
+
+          transition:
+            'max-height 0.4s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
+        <div
+          style={{
+            paddingBottom: '18px',
+          }}
+        >
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
 
-// ── Footer ─────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Footer Component
+// ─────────────────────────────────────────────────────────────
+
 export default function Footer() {
-  return (
-    <footer style={s.footer}>
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap');
-        .nl-btn:hover { background: #A0673A !important; }
-        input[type=email]::placeholder { color: rgba(168,152,128,0.5); }
-        input[type=email]:focus { outline: none; border-color: rgba(201,123,58,0.55) !important; }
-      `}</style>
 
-      {/* ── MAIN GRID ── */}
-      <div style={s.grid}>
+  const [isMobile, setIsMobile] =
+    useState(false);
 
-        {/* COL 1: Logo + Social */}
-        <div style={s.logoCol}>
-          {/* Replace src with your own logo */}
-          <img
-            src="SaqafatLogo.png"
-            alt="Saqafat Bakery"
-            style={s.logo}
-          />
+  const [isTablet, setIsTablet] =
+    useState(false);
 
-          <p style={{ ...s.colHeading, marginTop: '1px' }}>Social Media</p>
-          <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
-            {/* Facebook */}
-            <SocialIcon href="https://www.facebook.com/saqafatbakery/?locale=en_GB" label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-              </svg>
-            </SocialIcon>
-            {/* Instagram */}
-            <SocialIcon href="https://www.instagram.com/saqafatbakery/" label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="17" height="17">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-              </svg>
-            </SocialIcon>
-            {/* TikTok */}
-            <SocialIcon href="https://www.tiktok.com/@saqafatbakery" label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" />
-              </svg>
-            </SocialIcon>
+  useEffect(() => {
+
+    const check = () => {
+
+      const w = window.innerWidth;
+
+      setIsMobile(w <= 640);
+
+      setIsTablet(
+        w > 640 && w <= 1024
+      );
+    };
+
+    check();
+
+    window.addEventListener(
+      'resize',
+      check
+    );
+
+    return () =>
+      window.removeEventListener(
+        'resize',
+        check
+      );
+
+  }, []);
+
+  const linkListStyle: React.CSSProperties = {
+    listStyle: 'none',
+
+    padding: 0,
+
+    margin: 0,
+
+    display: 'flex',
+
+    flexDirection: 'column',
+
+    gap: '13px',
+  };
+
+  const colHeadingStyle: React.CSSProperties = {
+    color: '#D89A5B',
+
+    fontSize: '0.82rem',
+
+    fontWeight: 700,
+
+    letterSpacing: '0.14em',
+
+    textTransform: 'uppercase',
+
+    margin: 0,
+
+    marginBottom: '18px',
+
+    fontFamily:
+      'Cormorant Garamond, serif',
+  };
+
+  // ── MOBILE ─────────────────────────────
+
+  if (isMobile) {
+    return (
+      <footer style={s.footer}>
+
+        <style>{googleFonts}</style>
+
+        <div style={s.footerGlow} />
+
+        <div
+          style={{
+            padding:
+              '36px 24px 0',
+          }}
+        >
+
+          <AccordionSection title="Company">
+            <ul style={linkListStyle}>
+              <li><FooterLink label="About" href="/#about" /></li>
+              <li><FooterLink label="Story" href="/story" /></li>
+              <li><FooterLink label="Careers" href="/careers" /></li>
+              <li><FooterLink label="Press" href="/press" /></li>
+            </ul>
+          </AccordionSection>
+
+          <AccordionSection title="Legal">
+            <ul style={linkListStyle}>
+              <li><FooterLink label="Privacy Policy" href="/privacy-policy" /></li>
+              <li><FooterLink label="Terms of Service" href="/terms-of-service" /></li>
+              <li><FooterLink label="Refund Policy" href="/refund-policy" /></li>
+            </ul>
+          </AccordionSection>
+
+          <AccordionSection title="Support">
+            <ul style={linkListStyle}>
+              <li><FooterLink label="Contact Us" href="/reviews" /></li>
+              <li><FooterLink label="Feedback" href="/reviews" /></li>
+              <li><FooterLink label="Report an Issue" href="/report-issue" /></li>
+            </ul>
+          </AccordionSection>
+
+          <AccordionSection title="Contact Us">
+            <ul style={linkListStyle}>
+              <li>
+                <div style={s.contactRow}>
+                  <span style={s.contactIcon}>
+                    <PinIcon />
+                  </span>
+
+                  <span style={s.contactText}>
+                    Plot # 253–A, Street # 06
+                    <br />
+                    Rawalpindi, Pakistan
+                  </span>
+                </div>
+              </li>
+
+              <li>
+                <a
+                  href="mailto:info@saqafatbakery.com"
+                  style={s.contactLink}
+                >
+                  <span style={s.contactIcon}>
+                    <MailIcon />
+                  </span>
+
+                  info@saqafatbakery.com
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://wa.me/923001234567"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={s.contactLink}
+                >
+                  <span style={s.contactIcon}>
+                    <WhatsAppIcon />
+                  </span>
+
+                  +92 300 1234567
+                </a>
+              </li>
+            </ul>
+          </AccordionSection>
+
+        </div>
+
+        {/* SOCIAL */}
+
+        <div
+          style={{
+            padding:
+              '28px 24px 32px',
+          }}
+        >
+          <p
+            style={{
+              color: '#D89A5B',
+
+              fontSize: '0.82rem',
+
+              fontWeight: 700,
+
+              letterSpacing: '0.14em',
+
+              textTransform: 'uppercase',
+
+              margin:
+                '0 0 16px 0',
+
+              fontFamily:
+                'Cormorant Garamond, serif',
+            }}
+          >
+            Social Media
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+              gap: '12px',
+            }}
+          >
+            <SocialIcons />
           </div>
         </div>
 
-        {/* COL 2: Company */}
-        <div style={s.linkCol}>
-          <p style={s.colHeading}>Company</p>
-          <ul style={s.list}>
-            {['About', 'Story', 'Careers', 'Press'].map((l) => (
-              <li key={l}><FooterLink label={l} /></li>
-            ))}
-          </ul>
+        <FooterBottom />
+
+      </footer>
+    );
+  }
+
+  // ── TABLET ─────────────────────────────
+
+  if (isTablet) {
+    return (
+      <footer style={s.footer}>
+
+        <style>{googleFonts}</style>
+
+        <div style={s.footerGlow} />
+
+        <div
+          style={{
+            display: 'grid',
+
+            gridTemplateColumns:
+              '1fr 1fr',
+
+            gap: '28px',
+
+            maxWidth: '1200px',
+
+            margin: '0 auto',
+
+            padding:
+              '42px 32px 20px',
+          }}
+        >
+
+          <div>
+            <img
+              src="/SaqafatLogo.png"
+              alt="Saqafat Bakery"
+              style={{
+                width: '150px',
+                objectFit: 'contain',
+              }}
+            />
+
+            <div
+              style={{
+                marginTop: '24px',
+              }}
+            >
+              <p style={colHeadingStyle}>
+                Social Media
+              </p>
+
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                }}
+              >
+                <SocialIcons />
+              </div>
+            </div>
+          </div>
+
+          <div style={s.card}>
+            <p style={colHeadingStyle}>
+              Company
+            </p>
+
+            <ul style={linkListStyle}>
+              <li><FooterLink label="About" href="/#about" /></li>
+              <li><FooterLink label="Story" href="/story" /></li>
+              <li><FooterLink label="Careers" href="/careers" /></li>
+              <li><FooterLink label="Press" href="/press" /></li>
+            </ul>
+          </div>
+
+          <div style={s.card}>
+            <p style={colHeadingStyle}>
+              Legal
+            </p>
+
+            <ul style={linkListStyle}>
+              <li><FooterLink label="Privacy Policy" href="/privacy-policy" /></li>
+              <li><FooterLink label="Terms of Service" href="/terms-of-service" /></li>
+              <li><FooterLink label="Refund Policy" href="/refund-policy" /></li>
+            </ul>
+          </div>
+
+          <div style={s.card}>
+            <p style={colHeadingStyle}>
+              Contact Us
+            </p>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '15px',
+              }}
+            >
+
+              <div style={s.contactRow}>
+                <span style={s.contactIcon}>
+                  <PinIcon />
+                </span>
+
+                <span style={s.contactText}>
+                  Plot # 253–A, Street # 06
+                  <br />
+                  Rawalpindi, Pakistan
+                </span>
+              </div>
+
+              <a
+                href="mailto:info@saqafatbakery.com"
+                style={s.contactLink}
+              >
+                <span style={s.contactIcon}>
+                  <MailIcon />
+                </span>
+
+                info@saqafatbakery.com
+              </a>
+
+              <a
+                href="https://wa.me/923001234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={s.contactLink}
+              >
+                <span style={s.contactIcon}>
+                  <WhatsAppIcon />
+                </span>
+
+                +92 300 1234567
+              </a>
+
+            </div>
+          </div>
+
         </div>
 
-        {/* COL 3: Legal */}
-        <div style={s.linkCol}>
-          <p style={s.colHeading}>Legal</p>
-          <ul style={s.list}>
-            {['Privacy Policy', 'Terms of Service', 'Refund Policy'].map((l) => (
-              <li key={l}><FooterLink label={l} /></li>
-            ))}
-          </ul>
+        <FooterBottom />
+
+      </footer>
+    );
+  }
+
+  // ── DESKTOP ────────────────────────────
+
+  return (
+    <footer style={s.footer}>
+
+      <style>{googleFonts}</style>
+
+      <div style={s.footerGlow} />
+
+      <div
+        style={{
+          ...s.grid,
+
+          gridTemplateColumns:
+            '1.2fr 1fr 1fr 1fr 1.3fr',
+        }}
+      >
+
+        {/* LOGO */}
+
+        <div
+          style={{
+            display: 'flex',
+
+            flexDirection: 'column',
+
+            alignItems: 'flex-start',
+
+            justifyContent: 'flex-start',
+          }}
+        >
+
+          <img
+            src="/SaqafatLogo.png"
+            alt="Saqafat Bakery"
+            style={{
+              width: '150px',
+              objectFit: 'contain',
+            }}
+          />
+
+          {/* SOCIAL */}
+
+          <div
+            style={{
+              marginTop: '28px',
+
+              display: 'flex',
+
+              flexDirection: 'column',
+
+              alignItems: 'flex-start',
+            }}
+          >
+
+            <p style={colHeadingStyle}>
+              Social Media
+            </p>
+
+            <div
+              style={{
+                display: 'flex',
+
+                gap: '12px',
+
+                marginTop: '14px',
+              }}
+            >
+              <SocialIcons />
+            </div>
+
+          </div>
+
         </div>
 
-        {/* COL 4: Support */}
-        <div style={s.linkCol}>
-          <p style={s.colHeading}>Support</p>
-          <ul style={s.list}>
-            {['Contact Us', 'Feedback', 'Report an Issue'].map((l) => (
-              <li key={l}><FooterLink label={l} /></li>
-            ))}
+        {/* COMPANY */}
+
+        <div style={s.card}>
+
+          <p style={colHeadingStyle}>
+            Company
+          </p>
+
+          <ul style={linkListStyle}>
+            <li><FooterLink label="About" href="/#about" /></li>
+            <li><FooterLink label="Story" href="/story" /></li>
+            <li><FooterLink label="Careers" href="/careers" /></li>
+            <li><FooterLink label="Press" href="/press" /></li>
           </ul>
+
         </div>
 
-        {/* COL 5: Contact + Newsletter */}
-        <div style={s.contactCol}>
-          <p style={s.colHeading}>Contact Us</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '12px' }}>
+        {/* LEGAL */}
 
-            {/* Address */}
+        <div style={s.card}>
+
+          <p style={colHeadingStyle}>
+            Legal
+          </p>
+
+          <ul style={linkListStyle}>
+            <li><FooterLink label="Privacy Policy" href="/privacy-policy" /></li>
+            <li><FooterLink label="Terms of Service" href="/terms-of-service" /></li>
+            <li><FooterLink label="Refund Policy" href="/refund-policy" /></li>
+          </ul>
+
+        </div>
+
+        {/* SUPPORT */}
+
+        <div style={s.card}>
+
+          <p style={colHeadingStyle}>
+            Support
+          </p>
+
+          <ul style={linkListStyle}>
+            <li><FooterLink label="Contact Us" href="/reviews" /></li>
+            <li><FooterLink label="Feedback" href="/reviews" /></li>
+            <li><FooterLink label="Report an Issue" href="/report-issue" /></li>
+          </ul>
+
+        </div>
+
+        {/* CONTACT */}
+
+        <div style={s.card}>
+
+          <p style={colHeadingStyle}>
+            Contact Us
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+
+              flexDirection: 'column',
+
+              gap: '15px',
+            }}
+          >
+
             <div style={s.contactRow}>
               <span style={s.contactIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="16" height="16">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
+                <PinIcon />
               </span>
+
               <span style={s.contactText}>
-                Plot # 253–A, Street # 06,<br />Rawalpindi, Pakistan
+                Plot # 253–A, Street # 06
+                <br />
+                Rawalpindi, Pakistan
               </span>
             </div>
 
-            {/* Email */}
-            <a href="mailto:info@saqafatbakery.com" style={s.contactLink} className="contact-link">
+            <a
+              href="mailto:info@saqafatbakery.com"
+              style={s.contactLink}
+            >
               <span style={s.contactIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="16" height="16">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
+                <MailIcon />
               </span>
+
               info@saqafatbakery.com
             </a>
 
-            {/* WhatsApp */}
-            <a href="https://wa.me/92XXXXXXXXX" target="_blank" rel="noopener noreferrer" style={s.contactLink}>
+            <a
+              href="https://wa.me/923001234567"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={s.contactLink}
+            >
               <span style={s.contactIcon}>
-                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
-                </svg>
+                <WhatsAppIcon />
               </span>
-              +92 XXX XXXXXXX
+
+              +92 300 1234567
             </a>
+
           </div>
 
-          {/* Newsletter */}
-          <div style={{ marginTop: '28px' }}>
-            <Newsletter />
-          </div>
         </div>
+
       </div>
 
-      {/* ── DIVIDER ── */}
-      <div style={s.divider} />
+      <FooterBottom />
 
-      {/* ── COPYRIGHT ── */}
-      <div style={s.bottomBar}>
-        <p style={s.copyright}>
-          Copyright ©{new Date().getFullYear()} All rights reserved | Saqafat Bakery
-        </p>
-      </div>
-
-      
     </footer>
   );
 }
 
-// ── Styles ─────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Shared Components
+// ─────────────────────────────────────────────────────────────
+
+function SocialIcons() {
+  return (
+    <>
+      <SocialIcon
+        href="https://www.facebook.com/saqafatbakery/?locale=en_GB"
+        label="Facebook"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="18"
+          height="18"
+        >
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+        </svg>
+      </SocialIcon>
+
+      <SocialIcon
+        href="https://www.instagram.com/saqafatbakery/"
+        label="Instagram"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          width="18"
+          height="18"
+        >
+          <rect
+            x="2"
+            y="2"
+            width="20"
+            height="20"
+            rx="5"
+          />
+
+          <circle
+            cx="12"
+            cy="12"
+            r="4"
+          />
+
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="0.5"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
+      </SocialIcon>
+
+      <SocialIcon
+        href="https://www.tiktok.com/@saqafatbakery"
+        label="TikTok"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="18"
+          height="18"
+        >
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" />
+        </svg>
+      </SocialIcon>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Footer Bottom
+// ─────────────────────────────────────────────────────────────
+
+function FooterBottom() {
+  return (
+    <>
+      <div
+        style={{
+          height: '1px',
+
+          background:
+            'rgba(255,255,255,0.08)',
+
+          margin: '18px 40px 0',
+        }}
+      />
+
+      <div
+        style={{
+          display: 'flex',
+
+          justifyContent: 'center',
+
+          alignItems: 'center',
+
+          padding: '14px 20px 4px',
+        }}
+      >
+
+        <h2
+          style={{
+            margin: 0,
+
+            fontSize:
+              'clamp(1.4rem, 4vw, 3.2rem)',
+
+            letterSpacing: '.18em',
+
+            textTransform: 'uppercase',
+
+            color: '#D89A5B',
+
+            opacity: 0.5,
+
+            fontWeight: 600,
+
+            userSelect: 'none',
+
+            fontFamily:
+              'Cormorant Garamond, serif',
+          }}
+        >
+          RSI STUDIO
+        </h2>
+
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+
+          justifyContent: 'center',
+
+          padding: '4px 20px 18px',
+        }}
+      >
+
+        <p
+          style={{
+            margin: 0,
+
+            textAlign: 'center',
+
+            color:
+              'rgba(255,255,255,0.4)',
+
+            fontSize: '0.74rem',
+
+            letterSpacing: '0.04em',
+
+            fontFamily:
+              'Cormorant Garamond, serif',
+          }}
+        >
+          Copyright © {new Date().getFullYear()} Saqafat Bakery. All rights reserved.
+        </p>
+
+      </div>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Icons
+// ─────────────────────────────────────────────────────────────
+
+function PinIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      width="17"
+      height="17"
+    >
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle
+        cx="12"
+        cy="10"
+        r="3"
+      />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      width="17"
+      height="17"
+    >
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+
+      <polyline points="22,6 12,13 2,6" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      width="17"
+      height="17"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// STYLES
+// ─────────────────────────────────────────────────────────────
+
+const googleFonts = `
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+`;
+
 const s: any = {
+
   footer: {
-    background: '#35201a',          // matches Monal dark-grey
-    color: '#fdf7ef',
-    fontFamily: 'Georgia, serif',
-    paddingTop: '48px',
+    position: 'relative',
+
     overflow: 'hidden',
+
+    background: `
+      radial-gradient(circle at top left, rgba(216,154,91,0.08), transparent 25%),
+      radial-gradient(circle at bottom right, rgba(255,255,255,0.03), transparent 30%),
+      #24130f
+    `,
+
+    color: '#fdf7ef',
+
+    fontFamily:
+      'Cormorant Garamond, serif',
+  },
+
+  footerGlow: {
+    position: 'absolute',
+
+    top: '-180px',
+    right: '-100px',
+
+    width: '500px',
+    height: '500px',
+
+    background:
+      'rgba(216,154,91,0.08)',
+
+    filter: 'blur(120px)',
+
+    pointerEvents: 'none',
+
+    zIndex: 0,
   },
 
   grid: {
-    display: 'flex',
-    gap: '40px',
-    maxWidth: '1200px',
+    display: 'grid',
+
+    gap: '22px',
+
+    maxWidth: '1320px',
+
     margin: '0 auto',
-    padding: '0 48px 48px',
-    flexWrap: 'wrap',
+
+    padding: '42px 40px 20px',
+
     alignItems: 'flex-start',
+
+    position: 'relative',
+
+    zIndex: 1,
   },
 
-  logoCol: {
-    flex: '0 0 170px',
-    minWidth: '150px',
-  },
-
-  logo: {
-    width: '160px',
-    height: 'auto',
-    display: 'block',
-    objectFit: 'contain',
-  },
-
-  linkCol: {
-    flex: '0 0 130px',
-    minWidth: '110px',
-  },
-
-  contactCol: {
-    flex: 1,
-    minWidth: '240px',
-  },
-
-  colHeading: {
-    color: '#C97B3A',
-    fontSize: '0.92rem',
-    fontWeight: 600,
-    letterSpacing: '0.05em',
-    fontFamily: 'Georgia, serif',
-    margin: '0 0 14px 0',
-  },
-
-  list: {
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
+  card: {},
 
   contactRow: {
     display: 'flex',
+
     alignItems: 'flex-start',
-    gap: '10px',
-    color: '#A89880',
-    fontSize: '0.85rem',
-    lineHeight: 1.55,
+
+    gap: '12px',
+
+    color: '#D8C9B6',
+
+    lineHeight: 1.7,
+
+    fontSize: '0.9rem',
   },
 
   contactLink: {
     display: 'flex',
+
     alignItems: 'center',
-    gap: '10px',
-    color: '#A89880',
+
+    gap: '12px',
+
+    color: '#D8C9B6',
+
     textDecoration: 'none',
-    fontSize: '0.85rem',
-    transition: 'color 0.2s ease',
+
+    fontSize: '0.9rem',
+
+    transition: 'all 0.3s ease',
+
+    fontFamily:
+      'Cormorant Garamond, serif',
   },
 
   contactIcon: {
-    color: '#C97B3A',
+    color: '#D89A5B',
+
     flexShrink: 0,
-    lineHeight: 1,
   },
 
   contactText: {
-    fontSize: '0.85rem',
-    lineHeight: 1.55,
-  },
+    lineHeight: 1.7,
 
-  // Newsletter
-  newsletterSub: {
-    fontSize: '0.77rem',
-    color: 'rgba(168,152,128,0.65)',
-    margin: '4px 0 0',
-    lineHeight: 1.5,
-  },
+    fontFamily:
+      'Cormorant Garamond, serif',
 
-  nlInput: {
-    flex: 1,
-    padding: '9px 12px',
-    background: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(201,123,58,0.3)',
-    borderRight: 'none',
-    borderRadius: '5px 0 0 5px',
-    color: '#E8C99A',
-    fontSize: '0.8rem',
-    fontFamily: 'Georgia, serif',
-    minWidth: 0,
-  },
+    fontSize: '0.9rem',
 
-  nlBtn: {
-    padding: '9px 16px',
-    background: '#C97B3A',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '0 5px 5px 0',
-    fontSize: '0.75rem',
-    fontWeight: 700,
-    letterSpacing: '0.07em',
-    cursor: 'pointer',
-    textTransform: 'uppercase',
-    fontFamily: 'Georgia, serif',
-    transition: 'background 0.2s ease',
-    whiteSpace: 'nowrap',
+    color: '#D8C9B6',
   },
-
-  divider: {
-    height: '1px',
-    background: 'rgba(255,255,255,0.1)',
-    margin: '0 48px',
-  },
-
-  bottomBar: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '18px 48px 10px',
-  },
-
-  copyright: {
-    fontSize: '0.78rem',
-    color: 'rgba(168,152,128,0.6)',
-    letterSpacing: '0.03em',
-    margin: 0,
-    textAlign: 'center',
-  },
-
-  
-}; 
+};

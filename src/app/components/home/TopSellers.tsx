@@ -1,517 +1,768 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-// ─── TYPES ────────────────────────────────────────────────────────────────────
-interface Item {
-  name: string;
-  price: string;
-  img: string;
-  badge?: string;
-}
-
-// ─── DATA ─────────────────────────────────────────────────────────────────────
-const items: Item[] = [
-  { name: 'Steaks',  price: 'From PKR 1,200', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop', badge: 'Bestseller' },
-  { name: 'Croissant',       price: 'From PKR 250',   img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop' },
-  { name: 'Soup',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop', badge: 'Most Loved' },
-  { name: 'Brownies',        price: 'From PKR 400',   img: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=400&h=300&fit=crop' },
-  { name: 'Cupcakes',        price: 'From PKR 300',   img: 'https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&h=300&fit=crop' },
-  { name: 'Tea Cake',        price: 'From PKR 450',   img: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=300&fit=crop' },
-  { name: 'Cookies',         price: 'From PKR 200',   img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop' },
-  { name: 'Macarons',        price: 'From PKR 600',   img: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=400&h=300&fit=crop' },
-  { name: 'Pizza',          price: 'From PKR 350',   img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop' },
-  { name: 'Puff',            price: 'From PKR 280',   img: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=300&fit=crop' },
-  { name: 'Sandwich',        price: 'From PKR 500',   img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
-  { name: 'Noodles',           price: 'From PKR 320',   img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop' },
-];
-
-// ─── COLOR TOKENS (matching About section) ────────────────────────────────────
-// bg:            #FFFBF3  warm cream  (same as About section bg)
-// heading:       #1E0F06  espresso
-// accent:        #C97B3A  terracotta-gold
-// accent-deep:   #5C2E0E  deep brown
-// accent-mid:    #A0673A  mid brown
-// card-bg:       #FFF8EC  warm white
-// card-border:   rgba(92,46,14,0.10)
-// card-shadow:   rgba(180,80,20,0.14)
-// text-body:     #5A3E2B
-// text-muted:    #9a7055
-// cream:         #FAF6EE
-
 export default function TopSellers() {
-  const router      = useRouter();
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const wrapperRef  = useRef<HTMLDivElement>(null);
-  const angleRef    = useRef(0);
-  const isPaused    = useRef(false);
-  const rafId       = useRef<number>(0);
-  const reducedMotion = useRef(false);
-
-  // Track which card is hovered (for visual highlight without breaking 3D)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const router = useRouter();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion (SRS §4.3)
-    reducedMotion.current =
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.08 }
+    );
 
-    if (reducedMotion.current) return; // skip animation entirely
+    if (sectionRef.current) obs.observe(sectionRef.current);
 
-    const SPEED = 0.12; // degrees per frame
-
-    const rotate = () => {
-      if (!isPaused.current && carouselRef.current) {
-        angleRef.current += SPEED;
-        carouselRef.current.style.transform = `rotateY(${angleRef.current}deg)`;
-      }
-      rafId.current = requestAnimationFrame(rotate);
-    };
-
-    rafId.current = requestAnimationFrame(rotate);
-
-    // ── FIX: cancel rAF on unmount to prevent memory leak ──
-    return () => cancelAnimationFrame(rafId.current);
+    return () => obs.disconnect();
   }, []);
 
-  // Pause carousel when mouse is anywhere over the wrapper
-  const handleWrapperEnter = () => { isPaused.current = true;  };
-  const handleWrapperLeave = () => { isPaused.current = false; };
-
-  const handleCardClick = (item: Item) => {
-    router.push(`/menu?item=${encodeURIComponent(item.name)}`);
-  };
-
-  // Keyboard handler for accessibility (SRS §4.3)
-  const handleCardKey = (e: React.KeyboardEvent, item: Item) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleCardClick(item);
-    }
-  };
+  const go = (name: string) =>
+    router.push(`/menu?item=${encodeURIComponent(name)}`);
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        /* Section reveal */
-        @keyframes ts-fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0);    }
-        }
-
-        .ts-title-wrap { animation: ts-fadeUp 0.7s ease 0.1s both; }
-        .ts-carousel    { animation: ts-fadeUp 0.7s ease 0.3s both; }
-        .ts-cta-wrap    { animation: ts-fadeUp 0.7s ease 0.5s both; }
-
-        /* Card: scale via CSS class — does NOT mutate the 3D transform string */
-        .ts-card {
-          position:      absolute;
-          width:         220px;
-          height:        290px;
-          background:    #FFF8EC;
-          border-radius: 14px;
-          overflow:      hidden;
-          cursor:        pointer;
-          box-shadow:    0 16px 48px rgba(180,80,20,0.14), 0 2px 8px rgba(92,46,14,0.08);
-          border:        1px solid rgba(92,46,14,0.10);
-          /* transition only box-shadow & filter — NOT transform, so 3D stays intact */
-          transition:    box-shadow 0.3s ease, filter 0.3s ease;
-          outline:       none;
-        }
-        .ts-card:hover,
-        .ts-card:focus-visible {
-          box-shadow: 0 24px 64px rgba(180,80,20,0.28), 0 4px 16px rgba(92,46,14,0.12);
-          filter:     brightness(1.03);
-        }
-        .ts-card:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 3px;
-        }
-
-        /* View All button */
-        .ts-btn {
-          position:        relative;
-          display:         inline-flex;
-          align-items:     center;
-          gap:             10px;
-          overflow:        hidden;
-          background:      linear-gradient(135deg, #5C2E0E 0%, #A0673A 100%);
-          color:           #FAF6EE;
-          border:          none;
-          border-radius:   50px;
-          padding:         13px 32px;
-          cursor:          pointer;
-          font-family:     'DM Sans', sans-serif;
-          font-size:       13px;
-          font-weight:     600;
-          letter-spacing:  0.1em;
-          text-transform:  uppercase;
-          box-shadow:      0 6px 24px rgba(92,46,14,0.30);
-          transition:      transform 0.25s ease, box-shadow 0.25s ease;
-          text-decoration: none;
-        }
-        .ts-btn:hover {
-          transform:  translateY(-3px);
-          box-shadow: 0 12px 36px rgba(92,46,14,0.40);
-          background: linear-gradient(135deg, #7a3e18 0%, #C97B3A 100%);
-        }
-        .ts-btn:active  { transform: translateY(0); }
-        .ts-btn:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 4px;
-        }
-        .ts-btn-arrow {
-          font-size:  1.1rem;
-          transition: transform 0.3s ease;
-        }
-        .ts-btn:hover .ts-btn-arrow { transform: translateX(4px); }
-
-        /* Shine sweep on button */
-        .ts-btn-shine {
-          position:   absolute;
-          top:        0;
-          left:       -70%;
-          width:      45%;
-          height:     100%;
-          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-          transform:  skewX(-20deg);
-          transition: left 0.55s ease;
-          pointer-events: none;
-        }
-        .ts-btn:hover .ts-btn-shine { left: 130%; }
-
-        /* Static grid for reduced-motion users */
-        .ts-static-grid {
-          display:               grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap:                   20px;
-          max-width:             1100px;
-          margin:                0 auto;
-          padding:               0 2rem;
-        }
-        .ts-static-card {
-          background:    #FFF8EC;
-          border-radius: 14px;
-          overflow:      hidden;
-          border:        1px solid rgba(92,46,14,0.10);
-          box-shadow:    0 8px 24px rgba(180,80,20,0.10);
-          cursor:        pointer;
-          transition:    box-shadow 0.25s, transform 0.25s;
-          outline:       none;
-        }
-        .ts-static-card:hover,
-        .ts-static-card:focus-visible {
-          box-shadow: 0 16px 40px rgba(180,80,20,0.20);
-          transform:  translateY(-4px);
-        }
-        .ts-static-card:focus-visible {
-          outline: 2px solid #C97B3A;
-          outline-offset: 3px;
-        }
-
-        @media (max-width: 768px) {
-          .ts-carousel-wrap { display: none !important; }
-          .ts-static-grid   { display: grid !important; }
-          .ts-title-wrap h2 { font-size: 2rem !important; }
-        }
-
-        @media (min-width: 769px) {
-          .ts-static-grid { display: none; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .ts-title-wrap, .ts-carousel, .ts-cta-wrap {
-            animation: none !important;
-            opacity:   1 !important;
+        @keyframes tsUp {
+          from {
+            opacity:0;
+            transform:translateY(22px);
           }
-          .ts-carousel-wrap { display: none !important; }
-          .ts-static-grid   { display: grid !important; }
+          to {
+            opacity:1;
+            transform:translateY(0);
+          }
+        }
+
+        @keyframes tsLine {
+          from {
+            transform:scaleX(0);
+          }
+          to {
+            transform:scaleX(1);
+          }
+        }
+
+        .ts-sec{
+          background:#FAF6EE;
+          position:relative;
+          overflow:hidden;
+          padding:
+            clamp(48px,7vw,80px)
+            clamp(16px,5vw,52px)
+            clamp(44px,6vw,72px);
+        }
+
+        .ts-blob{
+          position:absolute;
+          border-radius:50%;
+          pointer-events:none;
+          z-index:0;
+        }
+
+        /* ───────────────── HEADING ───────────────── */
+
+        .ts-head{
+          text-align:center;
+          position:relative;
+          z-index:1;
+          margin-bottom:clamp(28px,4vw,48px);
+        }
+
+        .ts-head.vis{
+          animation:tsUp .6s ease both;
+        }
+
+        .ts-eyebrow{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          gap:10px;
+          margin-bottom:12px;
+        }
+
+        .ts-eline{
+          height:1.5px;
+          width:32px;
+          background:linear-gradient(90deg,transparent,#C97B3A);
+          transform-origin:left;
+        }
+
+        .ts-eline:last-child{
+          background:linear-gradient(90deg,#C97B3A,transparent);
+          transform-origin:right;
+        }
+
+        .ts-eyebrow.vis .ts-eline{
+          animation:tsLine .55s ease .1s both;
+        }
+
+        .ts-etxt{
+          font-family:'DM Sans',sans-serif;
+          font-size:10px;
+          font-weight:500;
+          letter-spacing:.26em;
+          text-transform:uppercase;
+          color:#C97B3A;
+        }
+
+        .ts-h2{
+          font-family:'Cormorant Garamond',serif;
+          font-size:clamp(2rem,5vw,3.4rem);
+          font-weight:600;
+          color:#1E0F06;
+          margin:0 0 10px;
+          line-height:1.08;
+        }
+
+        .ts-h2 em{
+          color:#C97B3A;
+          font-style:italic;
+        }
+
+        .ts-sub{
+          font-family:'DM Sans',sans-serif;
+          font-size:clamp(.83rem,1.7vw,.95rem);
+          font-weight:300;
+          color:#7a5c44;
+          line-height:1.7;
+          max-width:420px;
+          margin:0 auto;
+        }
+
+        /* ───────────────── GRID ───────────────── */
+
+        .ts-bento{
+  display:grid;
+
+  /* slightly reduced middle width */
+  grid-template-columns:
+    1fr
+    1.45fr
+    1.45fr
+    1fr;
+
+  grid-template-rows:
+    260px
+    300px;
+
+  gap:16px;
+
+  max-width:1020px;
+  margin:0 auto;
+
+  position:relative;
+  z-index:1;
+}
+
+        /* FIRST ROW */
+
+        .ts-a{
+  grid-column:1/3;
+  grid-row:1/2;
+}
+        .ts-b{
+  grid-column:3/4;
+  grid-row:1/2;
+}
+        .ts-c{
+          grid-column:4/5;
+          grid-row:1/2;
+        }
+
+        /* SECOND ROW */
+
+        .ts-f{
+          grid-column:1/2;
+          grid-row:2/3;
+        }
+
+        .ts-d{
+          grid-column:2/4;
+          grid-row:2/3;
+        }
+
+        .ts-e{
+          grid-column:4/5;
+          grid-row:2/3;
+        }
+
+        /* ───────────────── CARDS ───────────────── */
+
+        .ts-card{
+          position:relative;
+          overflow:hidden;
+          border-radius:22px;
+          cursor:pointer;
+
+          opacity:0;
+          transform:translateY(16px);
+
+          transition:
+            transform .38s cubic-bezier(.25,.46,.45,.94),
+            box-shadow .38s ease,
+            opacity .5s ease;
+
+          border:1.5px solid rgba(255,255,255,.8);
+
+          box-shadow:0 3px 14px rgba(0,0,0,.07);
+        }
+
+        .ts-card.vis{
+          opacity:1;
+          transform:translateY(0);
+        }
+
+        .ts-card:hover{
+          transform:translateY(-4px) scale(1.015);
+          box-shadow:0 18px 42px rgba(92,46,14,.15);
+          z-index:4;
+          border-color:rgba(201,123,58,.28);
+        }
+
+        /* KEEP IMAGE FIT */
+
+        .ts-card img{
+          width:100% !important;
+          height:100% !important;
+          object-fit:cover !important;
+        }
+
+        .ts-card.img-card img{
+          transition:transform .55s cubic-bezier(.25,.46,.45,.94) !important;
+        }
+
+        .ts-card.img-card:hover img{
+          transform:scale(1.08) !important;
+        }
+
+        .ts-scrim{
+          position:absolute;
+          inset:0;
+          z-index:1;
+
+          background:linear-gradient(
+            to top,
+            rgba(18,5,2,.72) 0%,
+            rgba(18,5,2,.12) 50%,
+            transparent 100%
+          );
+        }
+
+        .ts-img-info{
+          position:absolute;
+          bottom:0;
+          left:0;
+          right:0;
+          padding:12px 14px;
+          z-index:2;
+
+          display:flex;
+          flex-direction:column;
+          gap:2px;
+        }
+
+        .ts-iname{
+          font-family:'Cormorant Garamond',serif;
+          font-size:clamp(.9rem,1.6vw,1.12rem);
+          font-weight:600;
+          color:#FAF6EE;
+          margin:0;
+          line-height:1.15;
+        }
+
+        .ts-iprice{
+          font-family:'DM Sans',sans-serif;
+          font-size:10px;
+          font-weight:500;
+          color:#E8C97A;
+          letter-spacing:.06em;
+          margin:0;
+        }
+
+        /* ───────────────── TEXT CARDS ───────────────── */
+
+        .ts-card.txt-card{
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          padding:clamp(18px,3vw,28px)
+                  clamp(16px,2.5vw,24px);
+          cursor:default;
+        }
+
+        .txt-eyebrow{
+          font-family:'DM Sans',sans-serif;
+          font-size:9px;
+          font-weight:600;
+          letter-spacing:.22em;
+          text-transform:uppercase;
+          color:#C97B3A;
+          margin:0 0 10px;
+
+          display:flex;
+          align-items:center;
+          gap:6px;
+        }
+
+        .txt-eyebrow::before{
+          content:'';
+          display:inline-block;
+          width:18px;
+          height:1.5px;
+          background:#C97B3A;
+        }
+
+        .txt-title{
+          font-family:'Cormorant Garamond',serif;
+          font-size:clamp(1.4rem,2.8vw,2rem);
+          font-weight:600;
+          line-height:1.12;
+          margin:0 0 10px;
+        }
+
+        .txt-desc{
+          font-family:'DM Sans',sans-serif;
+          font-size:clamp(.75rem,1.3vw,.85rem);
+          font-weight:300;
+          line-height:1.65;
+          margin:0 0 18px;
+        }
+
+        .txt-pills{
+          display:flex;
+          flex-wrap:wrap;
+          gap:7px;
+          margin-bottom:16px;
+        }
+
+        .txt-pill{
+          display:inline-flex;
+          align-items:center;
+          gap:5px;
+          padding:5px 12px;
+          border-radius:20px;
+          font-family:'DM Sans',sans-serif;
+          font-size:10px;
+          font-weight:500;
+          border:none;
+          cursor:pointer;
+        }
+
+        .txt-pill-primary{
+          background:linear-gradient(135deg,#5C2E0E,#A0673A);
+          color:#FAF6EE;
+        }
+
+        .txt-pill-outline{
+          background:rgba(92,46,14,.07);
+          color:#5C2E0E;
+          border:1px solid rgba(92,46,14,.15) !important;
+        }
+
+        .txt-rating{
+          display:flex;
+          align-items:center;
+          gap:6px;
+          font-family:'DM Sans',sans-serif;
+          font-size:10px;
+          font-weight:500;
+        }
+
+        .txt-stars{
+          color:#E8A030;
+          font-size:12px;
+          letter-spacing:1px;
+        }
+
+        .txt-small-title{
+          font-family:'Cormorant Garamond',serif;
+          font-size:clamp(1.1rem,2vw,1.4rem);
+          font-weight:600;
+          line-height:1.15;
+          margin:0 0 8px;
+        }
+
+        .txt-small-desc{
+          font-family:'DM Sans',sans-serif;
+          font-size:clamp(.72rem,1.2vw,.8rem);
+          font-weight:300;
+          line-height:1.6;
+          margin:0 0 14px;
+        }
+
+        .txt-order-btn{
+          display:inline-flex;
+          align-items:center;
+          gap:7px;
+          padding:8px 16px;
+          border-radius:20px;
+          border:none;
+          cursor:pointer;
+
+          background:linear-gradient(135deg,#5C2E0E,#A0673A);
+          color:#FAF6EE;
+
+          font-family:'DM Sans',sans-serif;
+          font-size:10px;
+          font-weight:600;
+          letter-spacing:.08em;
+          text-transform:uppercase;
+        }
+
+        /* ───────────────── RESPONSIVE ───────────────── */
+
+        @media (max-width:899px){
+
+          .ts-bento{
+            grid-template-columns:repeat(2,1fr);
+            grid-auto-rows:220px;
+            gap:12px;
+          }
+
+          .ts-a,
+          .ts-b,
+          .ts-c,
+          .ts-d,
+          .ts-e,
+          .ts-f{
+            grid-column:auto !important;
+            grid-row:auto !important;
+          }
+
+          .ts-b,
+          .ts-d{
+            grid-column:span 2 !important;
+          }
+        }
+
+        @media (max-width:540px){
+
+          .ts-bento{
+            grid-template-columns:1fr;
+          }
+
+          .ts-b,
+          .ts-d{
+            grid-column:span 1 !important;
+          }
+        }
+
+        @media (prefers-reduced-motion:reduce){
+
+          .ts-card,
+          .ts-card.vis,
+          .ts-head{
+            animation:none !important;
+            opacity:1 !important;
+            transform:none !important;
+          }
         }
       `}</style>
 
       <section
-        style={{
-          position:   'relative',
-          background: '#FFFBF3',       // ← matches About section bg
-          padding:    '100px 0 110px',
-          overflow:   'hidden',
-          fontFamily: "'DM Sans', sans-serif",
-        }}
-        aria-labelledby="ts-heading"
+        ref={sectionRef}
+        className="ts-sec"
+        aria-labelledby="ts-h2"
       >
 
-        {/* ── BG BLOBS (matching About section style) ─────────────────── */}
-        <div style={{
-          position:     'absolute',
-          width:        '500px',
-          height:       '500px',
-          borderRadius: '50%',
-          background:   'radial-gradient(circle, rgba(255,220,120,0.20) 0%, transparent 70%)',
-          top:          '-120px',
-          left:         '-100px',
-          pointerEvents:'none',
-        }} />
-        <div style={{
-          position:     'absolute',
-          width:        '400px',
-          height:       '400px',
-          borderRadius: '50%',
-          background:   'radial-gradient(circle, rgba(200,100,50,0.09) 0%, transparent 70%)',
-          bottom:       '-80px',
-          right:        '8%',
-          pointerEvents:'none',
-        }} />
+        {/* BLOBS */}
 
-        {/* ── SECTION TITLE ────────────────────────────────────────────── */}
-        <div className="ts-title-wrap" style={{ textAlign: 'center', marginBottom: '70px', padding: '0 2rem' }}>
+        <div
+          className="ts-blob"
+          style={{
+            width:'400px',
+            height:'400px',
+            background:'radial-gradient(circle,rgba(255,215,110,.15) 0%,transparent 70%)',
+            top:'-90px',
+            left:'-60px',
+          }}
+        />
 
-          {/* Eyebrow label — matching About section pattern */}
-          <div style={{
-            display:       'inline-flex',
-            alignItems:    'center',
-            gap:           '10px',
-            marginBottom:  '16px',
-          }}>
-            <span style={{ display:'inline-block', width:'36px', height:'2px', background:'#C97B3A', borderRadius:'2px' }} />
-            <span style={{
-              fontSize:      '0.78rem',
-              fontWeight:    600,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color:         '#C97B3A',
-              fontFamily:    "'DM Sans', sans-serif",
-            }}>
+        <div
+          className="ts-blob"
+          style={{
+            width:'300px',
+            height:'300px',
+            background:'radial-gradient(circle,rgba(200,100,50,.07) 0%,transparent 70%)',
+            bottom:'-40px',
+            right:'4%',
+          }}
+        />
+
+        {/* HEADING */}
+
+        <div className={`ts-head${visible ? ' vis' : ''}`}>
+
+          <div className={`ts-eyebrow${visible ? ' vis' : ''}`}>
+            <span className="ts-eline" />
+            <span className="ts-etxt">
               What Everyone Orders
             </span>
-            <span style={{ display:'inline-block', width:'36px', height:'2px', background:'#C97B3A', borderRadius:'2px' }} />
+            <span className="ts-eline" />
           </div>
 
-          {/* H2 — espresso heading + terracotta accent, matching About section */}
           <h2
-            id="ts-heading"
-            style={{
-              fontFamily:   "'Playfair Display', serif",
-              fontSize:     'clamp(2rem, 4vw, 2.8rem)',
-              fontWeight:    800,
-              color:        '#1E0F06',              // ← espresso, matches About
-              margin:       '0 0 12px',
-              lineHeight:    1.15,
-            }}
+            id="ts-h2"
+            className="ts-h2"
           >
-            Our Crowd{' '}
-            <span style={{ color:'#C97B3A', fontStyle:'italic' }}>
-              Favorites
-            </span>
+            Our Crowd <em>Favourites</em>
           </h2>
 
-          <p style={{
-            fontFamily:  "'DM Sans', sans-serif",
-            fontSize:    '0.97rem',
-            color:       '#5A3E2B',                // ← body text, matches About
-            maxWidth:    '480px',
-            margin:      '0 auto',
-            lineHeight:  1.75,
-          }}>
-            Twelve of our most-loved bakes — click any to jump straight to it on the menu.
+          <p className="ts-sub">
+            Handcrafted with love — six of our most-adored creations, made fresh every day.
           </p>
+
         </div>
 
-        {/* ── 3D CAROUSEL (desktop) ────────────────────────────────────── */}
-        <div
-          className="ts-carousel-wrap ts-carousel"
-          ref={wrapperRef}
-          onMouseEnter={handleWrapperEnter}
-          onMouseLeave={handleWrapperLeave}
-          style={{
-            perspective:    '1400px',
-            display:        'flex',
-            justifyContent: 'center',
-            alignItems:     'center',
-            height:         '420px',
-            position:       'relative',
-          }}
-          aria-hidden="true"   // carousel is decorative — static grid is the accessible version
-        >
+        {/* GRID */}
+
+        <div className="ts-bento" role="list">
+
+          {/* A */}
+
           <div
-            ref={carouselRef}
+            className={`ts-card img-card ts-a${visible ? ' vis' : ''}`}
             style={{
-              width:          '220px',
-              height:         '290px',
-              position:       'relative',
-              transformStyle: 'preserve-3d',
+              background:'#EDE0F0',
+              transitionDelay:visible ? '0s' : '0s'
+            }}
+            onClick={() => go('Macarons')}
+          >
+
+            <Image
+               src="/Favourites/burger.avif" alt="Burger" 
+              fill
+              priority
+            />
+
+            <div className="ts-scrim" />
+
+            <div className="ts-img-info">
+              <p className="ts-iname">Fire Grill Burger</p>
+              <p className="ts-iprice">From PKR 800</p>
+            </div>
+
+          </div>
+
+          {/* B */}
+
+          <div
+            className={`ts-card txt-card ts-b${visible ? ' vis' : ''}`}
+            style={{
+              background:'#EDE0F0',
+              transitionDelay:visible ? '.07s' : '0s'
             }}
           >
-            {items.map((item, index) => {
-              const cardAngle = (360 / items.length) * index;
-              const isHovered = hoveredIndex === index;
 
-              return (
-                <div
-                  key={item.name}
-                  className="ts-card"
-                  role="button"
-                  tabIndex={-1}   // not in tab order — static grid handles a11y
-                  aria-label={`${item.name} — ${item.price}`}
-                  onClick={() => handleCardClick(item)}
-                  onKeyDown={(e) => handleCardKey(e, item)}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+            <p className="txt-eyebrow">
+              Our Specialties
+            </p>
+
+            <h3
+              className="txt-title"
+              style={{ color:'#1E0F06' }}
+            >
+              Rolot Paatii
+              <br />
+              <em
+                style={{
+                  color:'#C97B3A',
+                  fontStyle:'italic'
+                }}
+              >
+                Poctanvs
+              </em>
+            </h3>
+
+            <p
+              className="txt-desc"
+              style={{ color:'#5A3E2B' }}
+            >
+             
+             
+            </p>
+
+            <div className="txt-pills">
+
+              <button
+                className="txt-pill txt-pill-primary"
+                onClick={() => go('Menu')}
+              >
+                Try Now
+              </button>
+
+              <span
+                style={{
+                  fontFamily:'DM Sans,sans-serif',
+                  fontSize:'11px',
+                  fontWeight:500,
+                  color:'rgba(92,46,14,.55)',
+                  display:'flex',
+                  alignItems:'center',
+                  gap:'4px'
+                }}
+              >
+                +
+                <span
                   style={{
-                    // ── FIX: NEVER concatenate transform strings in 3D context ──
-                    // Scale is applied via filter:brightness above in CSS.
-                    // The transform here is ONLY the 3D positioning — never mutated.
-                    transform: `rotateY(${cardAngle}deg) translateZ(500px)`,
+                    fontWeight:700,
+                    color:'#C97B3A'
                   }}
                 >
-                 {/* IMAGE */}
-                <div style={{ position: 'relative', width: '100%', height: '155px' }}>
-                  <Image
-                    src={item.img}
-                    alt={item.name}
-                    fill
-                    sizes="220px"
-                    style={{ objectFit: 'cover' }}
-                    priority={index < 3}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/fallback.jpg';
-                    }}
-                  />
-                </div>
+                  93%
+                </span>
+                rating
+              </span>
 
-                  {/* Badge — gradient style matching About section badge */}
-                  {item.badge && (
-                    <span style={{
-                      position:   'absolute',
-                      top:        '10px',
-                      left:       '10px',
-                      background: 'linear-gradient(135deg, #5C2E0E, #A0673A)', // ← matches About badge
-                      color:      '#FAF6EE',                                   // ← cream text
-                      padding:    '4px 10px',
-                      fontSize:   '10px',
-                      fontWeight:  600,
-                      letterSpacing:'0.08em',
-                      textTransform:'uppercase',
-                      borderRadius:'4px',
-                      fontFamily: "'DM Sans', sans-serif",
-                    }}>
-                      {item.badge}
-                    </span>
-                  )}
+              <button
+                className="txt-pill txt-pill-outline"
+                onClick={() => go('Menu')}
+              >
+                Menu
+              </button>
 
-                  {/* Card content */}
-                  <div style={{ padding:'14px 16px' }}>
-                    <h4 style={{
-                      margin:      0,
-                      fontFamily:  "'Playfair Display', serif",
-                      fontSize:    '1rem',
-                      fontWeight:  700,
-                      color:       '#1E0F06',   // ← espresso, matches About heading
-                      lineHeight:  1.3,
-                    }}>
-                      {item.name}
-                    </h4>
-                    <p style={{
-                      marginTop:  '6px',
-                      marginBottom:0,
-                      color:      '#C97B3A',    // ← terracotta, matches About accent
-                      fontSize:   '13px',
-                      fontWeight:  600,
-                      fontFamily: "'DM Sans', sans-serif",
-                    }}>
-                      {item.price}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ── STATIC GRID (mobile + reduced-motion fallback) ───────────── */}
-        <div
-          className="ts-static-grid"
-          role="list"
-          aria-label="Top seller items"
-        >
-          {items.map((item) => (
-            <div
-              key={item.name}
-              className="ts-static-card"
-              role="listitem"
-              tabIndex={0}
-              aria-label={`${item.name} — ${item.price}`}
-              onClick={() => handleCardClick(item)}
-              onKeyDown={(e) => handleCardKey(e, item)}
-            >
-              <div style={{ position:'relative', width:'100%', height:'140px', background:'#f0e6d3' }}>
-                <Image
-                  src={item.img}
-                  alt={item.name}
-                  fill
-                  style={{ objectFit:'cover' }}
-                  sizes="(max-width:768px) 50vw, 200px"
-                />
-                {item.badge && (
-                  <span style={{
-                    position:     'absolute',
-                    top:          '8px',
-                    left:         '8px',
-                    background:   'linear-gradient(135deg, #5C2E0E, #A0673A)',
-                    color:        '#FAF6EE',
-                    padding:      '3px 9px',
-                    fontSize:     '10px',
-                    fontWeight:    600,
-                    letterSpacing:'0.08em',
-                    textTransform:'uppercase',
-                    borderRadius: '4px',
-                    fontFamily:   "'DM Sans', sans-serif",
-                  }}>
-                    {item.badge}
-                  </span>
-                )}
-              </div>
-              <div style={{ padding:'12px 14px' }}>
-                <h4 style={{
-                  margin:     0,
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize:   '0.95rem',
-                  fontWeight:  700,
-                  color:      '#1E0F06',
-                  lineHeight:  1.3,
-                }}>
-                  {item.name}
-                </h4>
-                <p style={{
-                  marginTop:   '5px',
-                  marginBottom: 0,
-                  color:       '#C97B3A',
-                  fontSize:    '13px',
-                  fontWeight:   600,
-                  fontFamily:  "'DM Sans', sans-serif",
-                }}>
-                  {item.price}
-                </p>
-              </div>
             </div>
-          ))}
-        </div>
 
-        {/* ── VIEW ALL CTA ─────────────────────────────────────────────── */}
-        <div
-          className="ts-cta-wrap"
-          style={{ textAlign:'center', marginTop:'60px' }}
-        >
-          <a href="/menu" className="ts-btn">
-            <span style={{ position:'relative', zIndex:1, display:'flex', alignItems:'center', gap:'10px' }}>
-              View Full Menu
-              <span className="ts-btn-arrow">→</span>
-            </span>
-            <span className="ts-btn-shine" />
-          </a>
+            <div className="txt-rating">
+              <span className="txt-stars">★★★★★</span>
+              <span>4.9</span>
+              <span>(2,400+ reviews)</span>
+            </div>
+
+          </div>
+
+          {/* C */}
+
+          <div
+            className={`ts-card img-card ts-c${visible ? ' vis' : ''}`}
+            style={{
+              background:'#E8F0E0',
+              transitionDelay:visible ? '.14s' : '0s'
+            }}
+            onClick={() => go('Croissant')}
+          >
+
+            <Image
+              src="/Favourites/pasta.jpg"  
+              alt="Pasta"
+              fill
+              priority
+            />
+
+            <div className="ts-scrim" />
+
+            <div className="ts-img-info">
+              <p className="ts-iname">Creamy Alfredo Pasta</p>
+              <p className="ts-iprice">From PKR 2,250</p>
+            </div>
+
+          </div>
+
+          {/* F */}
+
+          <div
+            className={`ts-card img-card ts-f${visible ? ' vis' : ''}`}
+            style={{
+              background:'#EEF3E7',
+              transitionDelay:visible ? '.21s' : '0s'
+            }}
+            onClick={() => go('Cupcake')}
+          >
+
+            <Image
+               src="/Favourites/biryani.jpg"  
+                alt="Biryani"
+              fill
+              priority
+            />
+
+            <div className="ts-scrim" />
+
+            <div className="ts-img-info">
+              <p className="ts-iname">Signature Dum Biryani</p>
+              <p className="ts-iprice">From PKR 1,200</p>
+            </div>
+
+          </div>
+
+          {/* D */}
+
+          <div
+            className={`ts-card img-card ts-d${visible ? ' vis' : ''}`}
+            style={{
+              background:'#F5EDE0',
+              transitionDelay:visible ? '.28s' : '0s'
+            }}
+            onClick={() => go('Cupcakes')}
+          >
+
+            <Image
+               src="/Favourites/pizza.jpg" alt="Pizza"
+              fill
+              priority
+            />
+
+            <div className="ts-scrim" />
+
+            <div className="ts-img-info">
+              <p className="ts-iname">Melted Mozzarella Pizza</p>
+              <p className="ts-iprice">Most Loved</p>
+            </div>
+
+          </div>
+
+          {/* E */}
+
+          <div
+            className={`ts-card txt-card ts-e${visible ? ' vis' : ''}`}
+            style={{
+              background:'#F5E6D8',
+              transitionDelay:visible ? '.35s' : '0s'
+            }}
+          >
+
+            <h3
+              className="txt-small-title"
+              style={{ color:'#1E0F06' }}
+            >
+              The Risde Soh
+              <br />
+              <em
+                style={{
+                  fontStyle:'italic',
+                  color:'#C97B3A',
+                  fontSize:'.85em'
+                }}
+              >
+                Signature Series
+              </em>
+            </h3>
+
+            <p
+              className="txt-small-desc"
+              style={{ color:'#5A3E2B' }}
+            >
+              Handcrafted, artisan-quality bakes that have been satisfying
+              taste buds since 2009.
+            </p>
+
+            <button
+              className="txt-order-btn"
+              onClick={() => go('Menu')}
+            >
+              Order ↗
+            </button>
+
+          </div>
+
         </div>
 
       </section>
