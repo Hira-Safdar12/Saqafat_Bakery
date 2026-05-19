@@ -35,107 +35,30 @@ interface Category {
 }
 
 // =============================================================================
-// CATEGORIES — exact names from your code, unique ids, no emoji, no color
+// CATEGORIES
 // =============================================================================
 const categories: Category[] = [
-  {
-    id: 'pizza',
-    label: 'Pizza',
-    description: 'Stone-fired, loaded & fresh',
-    img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80',
-  },
-  {
-    id: 'burgers',
-    label: 'Burgers, Sandwiches & Panini',
-    description: 'Stacked, grilled, pressed & loaded',
-    img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80',
-  },
-  {
-    id: 'pasta',
-    label: 'Pasta & Lasagna',
-    description: 'Creamy, spiced & hearty',
-    img: 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=800&q=80',
-  },
-  {
-    id: 'steaks',
-    label: 'Steaks',
-    description: 'Premium cuts, bold sauces',
-    img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80',
-  },
-  {
-    id: 'chinese',
-    label: 'Chinese',
-    description: 'Wok-tossed & full of flavour',
-    img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80',
-  },
-  {
-    id: 'rice',
-    label: 'Rice',
-    description: 'Fragrant & flavourful',
-    img: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&q=80',
-  },
-  {
-    id: 'noodles',
-    label: 'Noodles',
-    description: 'Stir-fried, saucy & slurp-worthy',
-    img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80',
-  },
-  {
-    id: 'soups',
-    label: 'Soups',
-    description: 'Warm, comforting & hearty',
-    img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80',
-  },
-  {
-    id: 'salads',
-    label: 'Salads',
-    description: 'Fresh, crisp & colourful',
-    img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80',
-  },
-  {
-    id: 'starters',
-    label: 'Starters',
-    description: 'Perfect openers & snacks',
-    img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&q=80',
-  },
-  {
-    id: 'beef',
-    label: 'Beef',
-    description: 'Bold, hearty beef dishes',
-    img: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80',
-  },
-  {
-    id: 'desserts',
-    label: 'Desserts',
-    description: 'Sweet endings done right',
-    img: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=80',
-  },
-  
-  {
-    id: 'beverages',
-    label: 'Beverages',
-    description: 'Shakes, coffees & refreshing sips',
-    img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80',
-  },
-  {
-    id: 'desi',
-    label: 'Desi Cuisine',
-    description: 'Authentic karahi & kebab classics',
-    img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80',
-  },
-  {
-    id: 'continental',
-    label: 'Continential Chicken',
-    description: 'Crispy, saucy & irresistible',
-    img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&q=80',
-  },
+  { id: 'pizza',       label: 'Pizza',                    description: 'Stone-fired, loaded & fresh',          img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80' },
+  { id: 'burgers',     label: 'Burgers, Sandwiches & Panini', description: 'Stacked, grilled, pressed & loaded', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80' },
+  { id: 'pasta',       label: 'Pasta & Lasagna',          description: 'Creamy, spiced & hearty',              img: 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=800&q=80' },
+  { id: 'steaks',      label: 'Steaks',                   description: 'Premium cuts, bold sauces',            img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80' },
+  { id: 'chinese',     label: 'Chinese',                  description: 'Wok-tossed & full of flavour',         img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80' },
+  { id: 'rice',        label: 'Rice',                     description: 'Fragrant & flavourful',                img: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&q=80' },
+  { id: 'noodles',     label: 'Noodles',                  description: 'Stir-fried, saucy & slurp-worthy',    img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80' },
+  { id: 'soups',       label: 'Soups',                    description: 'Warm, comforting & hearty',            img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80' },
+  { id: 'salads',      label: 'Salads',                   description: 'Fresh, crisp & colourful',             img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80' },
+  { id: 'starters',    label: 'Starters',                 description: 'Perfect openers & snacks',             img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&q=80' },
+  { id: 'beef',        label: 'Beef',                     description: 'Bold, hearty beef dishes',             img: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80' },
+  { id: 'desserts',    label: 'Desserts',                 description: 'Sweet endings done right',             img: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=80' },
+  { id: 'beverages',   label: 'Beverages',                description: 'Shakes, coffees & refreshing sips',   img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80' },
+  { id: 'desi',        label: 'Desi Cuisine',             description: 'Authentic karahi & kebab classics',   img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80' },
+  { id: 'continental', label: 'Continential Chicken',     description: 'Crispy, saucy & irresistible',        img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&q=80' },
 ];
 
 // =============================================================================
 // MENU ITEMS
 // =============================================================================
 const menuItems: MenuItem[] = [
-
   // ── Pizza ──
   { id:'pz1', name:'Alfredo Pizza',                  priceLabel:'From Rs. 675', price:675, category:'pizza', badge:'Most Loved',
     img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80',
@@ -238,33 +161,33 @@ const menuItems: MenuItem[] = [
     desc:'Our premium beef masterpiece — jalapeño cream, herb butter and all the trimmings.', spiceLevel:3 },
 
   // ── Chinese ──
-  { id:'ch1', name:'Spicy Honey Wings',    priceLabel:'Rs. 685',        price:685,  category:'chinese', badge:'Most Loved',
+  { id:'ch1', name:'Spicy Honey Wings',      priceLabel:'Rs. 685',        price:685,  category:'chinese', badge:'Most Loved',
     img:'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&q=80',
     desc:'Crispy chicken wings glazed in a sticky sweet-heat honey sauce.', spiceLevel:2 },
-  { id:'ch2', name:'Tempura Chicken',      priceLabel:'Rs. 685',        price:685,  category:'chinese',
+  { id:'ch2', name:'Tempura Chicken',        priceLabel:'Rs. 685',        price:685,  category:'chinese',
     img:'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80',
     desc:'Light Japanese-style battered chicken strips, crispy and golden.' },
-  { id:'ch3', name:'Thai Sweet Chili Wings', priceLabel:'Rs. 740',      price:740,  category:'chinese',
+  { id:'ch3', name:'Thai Sweet Chili Wings', priceLabel:'Rs. 740',        price:740,  category:'chinese',
     img:'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=800&q=80',
     desc:'Crispy wings tossed in a tangy Thai sweet chili glaze.', spiceLevel:1 },
-  { id:'ch4', name:'American Chop Suey',   priceLabel:'Rs. 1,045',      price:1045, category:'chinese',
+  { id:'ch4', name:'American Chop Suey',     priceLabel:'Rs. 1,045',      price:1045, category:'chinese',
     img:'https://images.unsplash.com/photo-1555126634-323283e090fa?w=800&q=80',
     desc:'Crispy noodles topped with a rich mixed vegetable and chicken sauce.' },
-  { id:'ch5', name:'Chicken Cashewnut',    priceLabel:'From Rs. 1,325', price:1325, category:'chinese',
+  { id:'ch5', name:'Chicken Cashewnut',      priceLabel:'From Rs. 1,325', price:1325, category:'chinese',
     img:'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&q=80',
     desc:'Tender chicken stir-fried with roasted cashews in a savoury sauce.' },
-  { id:'ch6', name:'Mongolian Crispy',     priceLabel:'From Rs. 1,100', price:1100, category:'chinese', badge:'NEW',
+  { id:'ch6', name:'Mongolian Crispy',       priceLabel:'From Rs. 1,100', price:1100, category:'chinese', badge:'NEW',
     img:'https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=800&q=80',
     desc:'Crispy beef or chicken in a bold Mongolian sauce with spring onions.' },
 
   // ── Noodles ──
-  { id:'nd1', name:'Chicken Chow Mein',    priceLabel:'Rs. 945', price:945, category:'noodles', badge:'Bestseller',
+  { id:'nd1', name:'Chicken Chow Mein', priceLabel:'Rs. 945', price:945, category:'noodles', badge:'Bestseller',
     img:'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80',
     desc:'Stir-fried noodles with tender chicken, vegetables and soy sauce.' },
-  { id:'nd2', name:'Beef Chow Mein',       priceLabel:'Rs. 995', price:995, category:'noodles',
+  { id:'nd2', name:'Beef Chow Mein',    priceLabel:'Rs. 995', price:995, category:'noodles',
     img:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80',
     desc:'Classic wok-tossed beef noodles with vegetables and savoury soy glaze.' },
-  { id:'nd3', name:'Hakka Noodles',        priceLabel:'Rs. 895', price:895, category:'noodles',
+  { id:'nd3', name:'Hakka Noodles',     priceLabel:'Rs. 895', price:895, category:'noodles',
     img:'https://images.unsplash.com/photo-1555126634-323283e090fa?w=800&q=80',
     desc:'Indo-Chinese style Hakka noodles tossed with peppers and sauces.', spiceLevel:1 },
 
@@ -297,10 +220,10 @@ const menuItems: MenuItem[] = [
     desc:'Fiery Szechuan-spiced broth with chicken and vegetables.', spiceLevel:3 },
 
   // ── Salads ──
-  { id:'sl1', name:'Caesar Salad',       priceLabel:'Rs. 595', price:595, category:'salads',
+  { id:'sl1', name:'Caesar Salad',          priceLabel:'Rs. 595', price:595, category:'salads',
     img:'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=800&q=80',
     desc:'Crisp romaine, parmesan shavings, croutons and classic Caesar dressing.' },
-  { id:'sl2', name:'Garden Fresh Salad', priceLabel:'Rs. 495', price:495, category:'salads',
+  { id:'sl2', name:'Garden Fresh Salad',    priceLabel:'Rs. 495', price:495, category:'salads',
     img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80',
     desc:'A colourful medley of seasonal vegetables with house vinaigrette.' },
   { id:'sl3', name:'Grilled Chicken Salad', priceLabel:'Rs. 695', price:695, category:'salads', badge:'Most Loved',
@@ -322,79 +245,65 @@ const menuItems: MenuItem[] = [
     desc:'Crispy fried chicken wings with your choice of dipping sauce.', spiceLevel:1 },
 
   // ── Beef ──
-  { id:'bf1', name:'Beef Stir Fry',       priceLabel:'Rs. 895',   price:895,  category:'beef',
+  { id:'bf1', name:'Beef Stir Fry',    priceLabel:'Rs. 895',   price:895,  category:'beef',
     img:'https://images.unsplash.com/photo-1529694157872-4e0c0f3b238b?w=800&q=80',
     desc:'Tender beef strips wok-tossed with vegetables in a rich savoury sauce.', spiceLevel:2 },
-  { id:'bf2', name:'Beef Karahi',         priceLabel:'Rs. 1,295', price:1295, category:'beef', badge:'Bestseller',
+  { id:'bf2', name:'Beef Karahi',      priceLabel:'Rs. 1,295', price:1295, category:'beef', badge:'Bestseller',
     img:'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&q=80',
     desc:'Rich, slow-cooked beef karahi with tomatoes, ginger and aromatic spices.', spiceLevel:2 },
-  { id:'bf3', name:'Beef Seekh Kebab',    priceLabel:'Rs. 795',   price:795,  category:'beef',
+  { id:'bf3', name:'Beef Seekh Kebab', priceLabel:'Rs. 795',   price:795,  category:'beef',
     img:'https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=800&q=80',
     desc:'Juicy minced beef seekh kebabs grilled on skewers with herbs.', spiceLevel:2 },
-  { id:'bf4', name:'Beef Nihari',         priceLabel:'Rs. 1,095', price:1095, category:'beef', badge:'Most Loved',
+  { id:'bf4', name:'Beef Nihari',      priceLabel:'Rs. 1,095', price:1095, category:'beef', badge:'Most Loved',
     img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80',
     desc:'Slow-simmered beef nihari with rich gravy, garnished with ginger and green chillies.', spiceLevel:2 },
 
-  // ── Desserts ── (from your menu photo)
-  { id:'ds1', name:'Thothi Kheer',                      priceLabel:'Rs. 200', price:200, category:'desserts',
+  // ── Desserts ──
+  { id:'ds1', name:'Thothi Kheer',                           priceLabel:'Rs. 200', price:200, category:'desserts',
     img:'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80',
     desc:'Traditional creamy rice pudding made with fresh bottle gourd.' },
-  { id:'ds2', name:'Garam Gulaab Jamun (3 pieces)',     priceLabel:'Rs. 295', price:295, category:'desserts', badge:'Most Loved',
+  { id:'ds2', name:'Garam Gulaab Jamun (3 pieces)',          priceLabel:'Rs. 295', price:295, category:'desserts', badge:'Most Loved',
     img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80',
     desc:'Warm, soft gulab jamun soaked in rose-scented sugar syrup.' },
-  { id:'ds3', name:'Rus Malai',                         priceLabel:'Rs. 350', price:350, category:'desserts',
+  { id:'ds3', name:'Rus Malai',                              priceLabel:'Rs. 350', price:350, category:'desserts',
     img:'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80',
     desc:'Soft chenna dumplings served in chilled, cardamom-scented cream.' },
   { id:'ds4', name:'Saqafat Special Brownie with Ice Cream', priceLabel:'Rs. 445', price:445, category:'desserts', badge:'Bestseller',
     img:'https://images.unsplash.com/photo-1606312619344-64a3c6b6b0c7?w=800&q=80',
     desc:'Our legendary fudgy brownie served warm with a scoop of vanilla ice cream.' },
-  { id:'ds5', name:'Molten Lava Cake with Ice Cream',   priceLabel:'Rs. 545', price:545, category:'desserts', badge:'NEW',
+  { id:'ds5', name:'Molten Lava Cake with Ice Cream',        priceLabel:'Rs. 545', price:545, category:'desserts', badge:'NEW',
     img:'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=80',
     desc:'Warm chocolate cake with a flowing molten centre, served with ice cream.' },
-  { id:'ds6', name:'Walnut Pie / Chocolate Pie',        priceLabel:'Rs. 545', price:545, category:'desserts',
+  { id:'ds6', name:'Walnut Pie / Chocolate Pie',             priceLabel:'Rs. 545', price:545, category:'desserts',
     img:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80',
     desc:'Rich walnut or chocolate pie slice — a classic comfort dessert.' },
-  { id:'ds7', name:'Skillet Brownie with Ice Cream',    priceLabel:'Rs. 595', price:595, category:'desserts',
+  { id:'ds7', name:'Skillet Brownie with Ice Cream',         priceLabel:'Rs. 595', price:595, category:'desserts',
     img:'https://images.unsplash.com/photo-1578775887804-699de7086ff9?w=800&q=80',
     desc:'Cast-iron skillet brownie served sizzling hot with vanilla ice cream.' },
-  { id:'ds8', name:'Cheese Cake Slice',                 priceLabel:'Rs. 645', price:645, category:'desserts',
+  { id:'ds8', name:'Cheese Cake Slice',                      priceLabel:'Rs. 645', price:645, category:'desserts',
     img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80',
     desc:'Creamy New York-style cheesecake on a buttery biscuit base.' },
 
-  // ── Deserts (Ice Cream) ──
-  { id:'ic1', name:'Mango Ice Cream',      priceLabel:'From Rs. 130', price:130, category:'icecream',
-    img:'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80',
-    desc:'Rich, creamy mango ice cream made with real fruit.' },
-  { id:'ic2', name:'Vanilla Ice Cream',    priceLabel:'From Rs. 130', price:130, category:'icecream', badge:'Most Loved',
-    img:'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80',
-    desc:'Classic smooth vanilla — a timeless favourite.' },
-  { id:'ic3', name:'Chocolate Ice Cream',  priceLabel:'From Rs. 130', price:130, category:'icecream',
-    img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80',
-    desc:'Deep, dark chocolate ice cream for the true chocoholic.' },
-  { id:'ic4', name:'Strawberry Ice Cream', priceLabel:'From Rs. 130', price:130, category:'icecream',
-    img:'https://images.unsplash.com/photo-1488900128323-21503983a07e?w=800&q=80',
-    desc:'Fresh strawberry ice cream — fruity, sweet and vibrant.' },
-
-  // ── Beverages (Shakes from your menu photo) ──
-  { id:'bv1', name:'Vanilla Shake',           priceLabel:'Rs. 425', price:425, category:'beverages',
+  // ── Beverages ──
+  { id:'bv1', name:'Vanilla Shake',                 priceLabel:'Rs. 425', price:425, category:'beverages',
     img:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=800&q=80',
     desc:'Classic smooth vanilla milkshake — simple and delicious.' },
-  { id:'bv2', name:'Strawberry Shake',        priceLabel:'Rs. 425', price:425, category:'beverages',
+  { id:'bv2', name:'Strawberry Shake',              priceLabel:'Rs. 425', price:425, category:'beverages',
     img:'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80',
     desc:'Fresh strawberry blended into a thick, fruity shake.' },
-  { id:'bv3', name:'Mango Shake',             priceLabel:'Rs. 425', price:425, category:'beverages',
+  { id:'bv3', name:'Mango Shake',                   priceLabel:'Rs. 425', price:425, category:'beverages',
     img:'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=800&q=80',
     desc:'Fresh mango blended into a thick, tropical shake.' },
-  { id:'bv4', name:'Oreo Shake',              priceLabel:'Rs. 425', price:425, category:'beverages', badge:'Most Loved',
+  { id:'bv4', name:'Oreo Shake',                    priceLabel:'Rs. 425', price:425, category:'beverages', badge:'Most Loved',
     img:'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80',
     desc:'Crushed Oreo cookies blended with creamy vanilla ice cream.' },
-  { id:'bv5', name:'Chocolate Shake',         priceLabel:'Rs. 425', price:425, category:'beverages', badge:'Bestseller',
+  { id:'bv5', name:'Chocolate Shake',               priceLabel:'Rs. 425', price:425, category:'beverages', badge:'Bestseller',
     img:'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80',
     desc:'Thick, creamy chocolate milkshake blended to perfection.' },
-  { id:'bv6', name:'Lotus with Caramel',      priceLabel:'Rs. 495', price:495, category:'beverages', badge:'NEW',
+  { id:'bv6', name:'Lotus with Caramel',            priceLabel:'Rs. 495', price:495, category:'beverages', badge:'NEW',
     img:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=800&q=80',
     desc:'Biscoff-infused shake with a rich caramel swirl.' },
-  { id:'bv7', name:'Peanut Butter & Jam',     priceLabel:'Rs. 595', price:595, category:'beverages',
+  { id:'bv7', name:'Peanut Butter & Jam',           priceLabel:'Rs. 595', price:595, category:'beverages',
     img:'https://images.unsplash.com/photo-1534778101976-62847782c213?w=800&q=80',
     desc:'A nostalgic blend of creamy peanut butter and sweet jam.' },
   { id:'bv8', name:'Nutella / KitKat / Dairy Milk', priceLabel:'Rs. 595', price:595, category:'beverages',
@@ -487,13 +396,11 @@ function ItemModal({ item, onClose }: { item: MenuItem; onClose: () => void }) {
       <div style={st.modal}>
         <button style={st.modalClose} onClick={onClose} aria-label="Close">✕</button>
 
-        {/* Image */}
         <div style={st.modalImgWrap}>
           <Image src={item.img} alt={item.name} fill style={{ objectFit: 'cover' }} sizes="(max-width:768px) 100vw, 560px" />
-          {badge && <span style={{ ...st.badge, ...badgeStyle }}>{badge}</span>}
+          
         </div>
 
-        {/* Content */}
         <div style={st.modalContent}>
           <h2 style={st.modalTitle}>{item.name}</h2>
           <div style={st.modalPriceRow}>
@@ -541,7 +448,7 @@ function ItemModal({ item, onClose }: { item: MenuItem; onClose: () => void }) {
 }
 
 // =============================================================================
-// MENU CARD — shows individual item with its own image
+// MENU CARD — list-style row layout matching the screenshot
 // =============================================================================
 function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: MenuItem) => void }) {
   const [hovered, setHovered] = useState(false);
@@ -557,10 +464,11 @@ function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: MenuItem) =
     <div
       style={{
         ...st.card,
-        transform: hovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0)',
+        background: hovered ? '#fff' : '#fefcf8',
         boxShadow: hovered
-          ? '0 14px 32px rgba(0,0,0,.18)'
-          : '0 2px 14px rgba(0,0,0,.08)',
+          ? '0 8px 28px rgba(200,134,10,0.18), 0 2px 8px rgba(0,0,0,0.06)'
+          : '0 2px 12px rgba(0,0,0,0.07)',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -568,61 +476,60 @@ function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: MenuItem) =
       role="button"
       tabIndex={0}
     >
+      {/* LEFT — square thumbnail */}
       <div style={st.cardImgWrap}>
         <Image
           src={item.img}
           alt={item.name}
           fill
-          style={{
-            objectFit: 'cover',
-            transition: 'transform .5s ease',
-            transform: hovered ? 'scale(1.08)' : 'scale(1)',
-          }}
-          sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 22vw"
+          style={{ objectFit: 'cover' }}
+          sizes="100px"
         />
-
-        {badge && (
-          <span style={{ ...st.badge, ...badgeStyle }}>
-            {badge}
-          </span>
-        )}
       </div>
 
+      {/* MIDDLE — text content */}
       <div style={st.cardBody}>
+        
         <h3 style={st.cardName}>{item.name}</h3>
 
         {item.desc && (
           <p style={st.cardDesc}>{item.desc}</p>
         )}
 
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 10,
-          }}
-        >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 'auto', paddingTop: 6 }}>
           <span style={st.cardPrice}>{item.priceLabel}</span>
           <SpiceIndicator level={item.spiceLevel} />
         </div>
       </div>
+
+      {/* RIGHT — cart button */}
+      <button
+        style={{
+          ...st.cartBtn,
+          background: hovered
+            ? 'linear-gradient(135deg, #d4950e, #b87209)'
+            : 'linear-gradient(135deg, #c8860a, #a86c05)',
+          boxShadow: hovered
+            ? '0 6px 18px rgba(200,134,10,0.45)'
+            : '0 3px 10px rgba(200,134,10,0.3)',
+        }}
+        onClick={(e) => { e.stopPropagation(); onOpen(item); }}
+        aria-label={`Order ${item.name}`}
+      >
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </button>
     </div>
   );
 }
 
 // =============================================================================
-// CATEGORY CARD — shows the category hero image
+// CATEGORY CARD — unchanged, keeps original grid layout
 // =============================================================================
-function CategoryCard({
-  cat,
-  count,
-  onClick,
-}: {
-  cat: Category;
-  count: number;
-  onClick: () => void;
-}) {
+function CategoryCard({ cat, count, onClick }: { cat: Category; count: number; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -652,9 +559,7 @@ function CategoryCard({
           }}
           sizes="(max-width:640px) 48vw, (max-width:1024px) 30vw, 22vw"
         />
-
         <div style={st.catGradient} />
-
         <div style={st.catInfo}>
           <span style={st.catLabel}>{cat.label}</span>
           <span style={st.catDesc}>{cat.description}</span>
@@ -664,8 +569,9 @@ function CategoryCard({
     </div>
   );
 }
+
 // =============================================================================
-// ITEMS VIEW — shown after a category is tapped; renders item cards grid
+// ITEMS VIEW
 // =============================================================================
 function ItemsView({ cat, onBack, onOpen }: { cat: Category; onBack: () => void; onOpen: (i: MenuItem) => void }) {
   const [search, setSearch] = useState('');
@@ -688,7 +594,6 @@ function ItemsView({ cat, onBack, onOpen }: { cat: Category; onBack: () => void;
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <button style={st.backBtn} onClick={onBack}>← Back to Menu</button>
-        {/* Category banner with its own image */}
         <div style={st.catBanner}>
           <Image src={cat.img} alt={cat.label} fill style={{ objectFit: 'cover' }} sizes="100vw" />
           <div style={st.catBannerOverlay} />
@@ -713,11 +618,11 @@ function ItemsView({ cat, onBack, onOpen }: { cat: Category; onBack: () => void;
       </div>
 
       {/* Item count */}
-      <p style={{ fontSize: 13, color: '#9b7a5a', fontFamily: 'sans-serif', margin: '0 0 20px' }}>
+      <p style={{ fontSize: 13, color: '#9b7a5a', fontFamily: 'sans-serif', margin: '0 0 16px' }}>
         {items.length} item{items.length !== 1 ? 's' : ''}
       </p>
 
-      {/* ── ITEM CARDS GRID — every card has its own image ── */}
+      {/* ── LIST OF ITEM CARDS ── */}
       {items.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9b7a5a', fontFamily: 'sans-serif' }}>
           <p style={{ fontSize: 18 }}>No items found.</p>
@@ -737,7 +642,7 @@ function ItemsView({ cat, onBack, onOpen }: { cat: Category; onBack: () => void;
 // =============================================================================
 // MAIN PAGE
 // =============================================================================
-export default function Menu() {
+export default function menu(){
   const searchParams     = useSearchParams();
   const [activeCat,  setActiveCat ] = useState<Category | null>(null);
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
@@ -782,7 +687,6 @@ export default function Menu() {
       {/* ── BODY ── */}
       <div style={st.body}>
         {!activeCat ? (
-          /* ── CATEGORY GRID — each shows category image ── */
           <div>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <h2 style={{ fontSize: 'clamp(1.5rem,3vw,2rem)', fontWeight: 700, color: '#1a0a00', margin: '0 0 8px' }}>
@@ -797,7 +701,6 @@ export default function Menu() {
               </div>
             </div>
 
-            {/* Category cards grid */}
             <div style={st.catGrid}>
               {filteredCats.map((cat) => (
                 <CategoryCard
@@ -810,7 +713,6 @@ export default function Menu() {
             </div>
           </div>
         ) : (
-          /* ── ITEMS VIEW — shows individual item cards ── */
           <ItemsView cat={activeCat} onBack={() => setActiveCat(null)} onOpen={setActiveItem} />
         )}
       </div>
@@ -824,91 +726,150 @@ export default function Menu() {
 // STYLES
 // =============================================================================
 const st: Record<string, React.CSSProperties> = {
-  root:         { fontFamily: "'Georgia','Times New Roman',serif", background: '#fdf8f2', minHeight: '100vh', color: '#1a0a00' },
+  root:        { fontFamily: "'Georgia','Times New Roman',serif", background: '#fdf8f2', minHeight: '100vh', color: '#1a0a00' },
 
-  // Hero
-  hero:         { position: 'relative', height: 380, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  heroVideo:    { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' },
-  heroOverlay:  { position: 'absolute', inset: 0, background: 'linear-gradient(to bottom,rgba(10,3,0,.65) 0%,rgba(10,3,0,.8) 100%)' },
-  heroContent:  { position: 'relative', zIndex: 1, textAlign: 'center', padding: '0 24px' },
-  eyebrow:      { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 12 },
-  eyebrowLine:  { display: 'block', width: 40, height: 1, background: '#c8860a' },
-  eyebrowText:  { color: '#c8860a', fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', fontFamily: 'sans-serif' },
-  heroH1:       { fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, color: '#fff', margin: '0 0 12px', lineHeight: 1.15 },
-  heroAccent:   { color: '#f0b532', fontStyle: 'italic' },
-  heroSub:      { color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,2vw,16px)', margin: 0, fontFamily: 'sans-serif', fontWeight: 300 },
+  // ── Hero ──
+  hero:        { position: 'relative', height: 380, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  heroVideo:   { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' },
+  heroOverlay: { position: 'absolute', inset: 0, background: 'linear-gradient(to bottom,rgba(10,3,0,.65) 0%,rgba(10,3,0,.8) 100%)' },
+  heroContent: { position: 'relative', zIndex: 1, textAlign: 'center', padding: '0 24px' },
+  eyebrow:     { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 12 },
+  eyebrowLine: { display: 'block', width: 40, height: 1, background: '#c8860a' },
+  eyebrowText: { color: '#c8860a', fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', fontFamily: 'sans-serif' },
+  heroH1:      { fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, color: '#fff', margin: '0 0 12px', lineHeight: 1.15 },
+  heroAccent:  { color: '#f0b532', fontStyle: 'italic' },
+  heroSub:     { color: 'rgba(255,255,255,.75)', fontSize: 'clamp(13px,2vw,16px)', margin: 0, fontFamily: 'sans-serif', fontWeight: 300 },
 
-  // Body
-  body:         { maxWidth: 1300, margin: '0 auto', padding: '52px 20px 90px' },
+  // ── Body ──
+  body:        { maxWidth: 1300, margin: '0 auto', padding: '52px 20px 90px' },
 
-  // Category grid — each card has an image
-  catGrid:      { display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))', gap: 22 },
+  // ── Category grid ──
+  catGrid:     { display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))', gap: 22 },
   catCard: {
-  borderRadius: 16,
-  overflow: 'hidden',
-  cursor: 'pointer',
-  height: 210,
-  position: 'relative',
-  boxShadow: '0 4px 20px rgba(0,0,0,.13)',
-  transition: 'transform .35s ease, box-shadow .35s ease',
+    borderRadius: 16,
+    overflow: 'hidden',
+    cursor: 'pointer',
+    height: 210,
+    position: 'relative',
+    boxShadow: '0 4px 20px rgba(0,0,0,.13)',
+    transition: 'transform .35s ease, box-shadow .35s ease',
+  },
+  catImgWrap:        { position: 'relative', width: '100%', height: '100%' },
+  catGradient:       { position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.35) 55%, transparent 100%)' },
+  catInfo:           { position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 2 },
+  catLabel:          { color: '#fff', fontWeight: 700, fontSize: 17, lineHeight: 1.2 },
+  catDesc:           { color: 'rgba(255,255,255,.78)', fontSize: 12, fontFamily: 'sans-serif' },
+  catCount:          { color: 'rgba(255,255,255,.55)', fontSize: 11, fontFamily: 'sans-serif', marginTop: 2 },
+
+  // ── Category banner in items view ──
+  catBanner:         { position: 'relative', height: 160, borderRadius: 14, overflow: 'hidden', marginBottom: 28 },
+  catBannerOverlay:  { position: 'absolute', inset: 0, background: 'rgba(10,3,0,.52)' },
+  catBannerText:     { position: 'absolute', bottom: 0, left: 0, padding: '18px 22px' },
+
+  itemsGrid: {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+  gap: 14,
 },
-  catImgWrap:   { position: 'relative', width: '100%', height: '100%' },
-  catGradient:  { position: 'absolute', inset: 0,
-                  background: 'linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.35) 55%, transparent 100%)' },
-  catInfo:      { position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px',
-                  display: 'flex', flexDirection: 'column', gap: 2 },
-  catLabel:     { color: '#fff', fontWeight: 700, fontSize: 17, lineHeight: 1.2 },
-  catDesc:      { color: 'rgba(255,255,255,.78)', fontSize: 12, fontFamily: 'sans-serif' },
-  catCount:     { color: 'rgba(255,255,255,.55)', fontSize: 11, fontFamily: 'sans-serif', marginTop: 2 },
 
-  // Category banner in items view
-  catBanner:    { position: 'relative', height: 160, borderRadius: 14, overflow: 'hidden', marginBottom: 28 },
-  catBannerOverlay: { position: 'absolute', inset: 0, background: 'rgba(10,3,0,.52)' },
-  catBannerText:{ position: 'absolute', bottom: 0, left: 0, padding: '18px 22px' },
-
-  // Items grid — cards with their own images
-  itemsGrid:    { display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', gap: 20 },
+  // ── Item card — horizontal row ──
   card: {
-  background: '#fff',
-  borderRadius: 14,
-  overflow: 'hidden',
-  cursor: 'pointer',
-  boxShadow: '0 2px 14px rgba(0,0,0,.08)',
-  transition: 'transform .35s ease, box-shadow .35s ease',
-},
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+    background: '#fefcf8',
+    border: '1.5px solid #f0e0c4',
+    borderRadius: 18,
+    padding: '14px 14px',
+    cursor: 'pointer',
+    position: 'relative',
+    transition: 'transform .25s ease, box-shadow .25s ease, background .25s ease',
+    minHeight: 108,
+  },
 
-  cardImgWrap:  { position: 'relative', height: 170 },   // ← item's own image renders here
-  cardBody:     { padding: '12px 14px 15px' },
-  cardName:     { fontSize: 14, fontWeight: 700, margin: '0 0 5px', color: '#1a0a00', lineHeight: 1.3 },
-  cardDesc:     { fontSize: 12, color: '#7a5c3a', margin: 0, lineHeight: 1.5, fontFamily: 'sans-serif',
-                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' },
-  cardPrice:    { fontSize: 13, fontWeight: 700, color: '#c8860a' },
+  // Square thumbnail
+  cardImgWrap: {
+    position: 'relative',
+    width: 88,
+    height: 88,
+    borderRadius: 13,
+    flexShrink: 0,
+    overflow: 'hidden',
+  },
 
-  // Badge
-  badge:        { position: 'absolute', top: 10, left: 10, padding: '3px 9px', borderRadius: 6,
-                  fontSize: 10, fontWeight: 700, fontFamily: 'sans-serif', letterSpacing: .5, textTransform: 'uppercase' },
-  badgeNew:     { background: '#1a6b3c', color: '#fff' },
-  badgeBest:    { background: '#c8860a', color: '#fff' },
-  badgeLoved:   { background: '#b5432a', color: '#fff' },
+  // Text column
+  cardBody: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4,
+    minWidth: 0,
+    position: 'relative',
+    paddingRight: 6,
+  },
 
-  // Controls
-  searchInput:  { width: '100%', boxSizing: 'border-box', border: '1.5px solid #e8d5b8', borderRadius: 10,
-                  padding: '10px 14px 10px 42px', fontSize: 15, background: '#fff', color: '#1a0a00',
-                  outline: 'none', fontFamily: 'sans-serif' },
-  sortSelect:   { border: '1.5px solid #e8d5b8', borderRadius: 10, padding: '10px 14px', fontSize: 14,
-                  background: '#fff', color: '#3d2c1e', cursor: 'pointer', fontFamily: 'sans-serif', outline: 'none' },
-  backBtn:      { background: 'none', border: '1.5px solid #d4a86a', color: '#8a5c2e', borderRadius: 8,
-                  padding: '8px 18px', cursor: 'pointer', fontSize: 14, fontFamily: 'sans-serif',
-                  marginBottom: 16, transition: 'all .2s', display: 'inline-block' },
+  cardName: {
+    fontSize: 15,
+    fontWeight: 700,
+    margin: '0 0 2px',
+    color: '#1a0a00',
+    lineHeight: 1.3,
+    paddingRight: 4,
+  },
 
-  // Modal
-  overlay:      { position: 'fixed', inset: 0, background: 'rgba(10,4,0,.68)', zIndex: 1000,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, backdropFilter: 'blur(4px)' },
-  modal:        { background: '#fff', borderRadius: 20, width: '100%', maxWidth: 520,
-                  maxHeight: '90vh', overflowY: 'auto', position: 'relative' },
-  modalClose:   { position: 'absolute', top: 12, right: 12, zIndex: 10, background: 'rgba(0,0,0,.55)',
-                  color: '#fff', border: 'none', borderRadius: '50%', width: 34, height: 34,
-                  cursor: 'pointer', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  cardDesc: {
+    fontSize: 12,
+    color: '#7a5c3a',
+    margin: 0,
+    lineHeight: 1.5,
+    fontFamily: 'sans-serif',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical' as const,
+    overflow: 'hidden',
+  },
+
+  cardPrice: {
+    fontSize: 14,
+    fontWeight: 700,
+    color: '#c8860a',
+    fontFamily: 'sans-serif',
+  },
+
+  // Cart button — warm gold circle
+  cartBtn: {
+    flexShrink: 0,
+    width: 42,
+    height: 42,
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #c8860a, #a86c05)',
+    border: 'none',
+    color: '#fff',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'transform .2s ease, box-shadow .2s ease, background .2s ease',
+    boxShadow: '0 3px 10px rgba(200,134,10,0.3)',
+    alignSelf: 'center',
+  },
+
+  // ── Badges ──
+  badge:     { position: 'absolute', top: 10, left: 10, padding: '3px 9px', borderRadius: 6, fontSize: 10, fontWeight: 700, fontFamily: 'sans-serif', letterSpacing: .5, textTransform: 'uppercase' },
+  badgeNew:  { background: '#1a6b3c', color: '#fff' },
+  badgeBest: { background: '#c8860a', color: '#fff' },
+  badgeLoved:{ background: '#b5432a', color: '#fff' },
+
+  // ── Controls ──
+  searchInput: { width: '100%', boxSizing: 'border-box', border: '1.5px solid #e8d5b8', borderRadius: 10, padding: '10px 14px 10px 42px', fontSize: 15, background: '#fff', color: '#1a0a00', outline: 'none', fontFamily: 'sans-serif' },
+  sortSelect:  { border: '1.5px solid #e8d5b8', borderRadius: 10, padding: '10px 14px', fontSize: 14, background: '#fff', color: '#3d2c1e', cursor: 'pointer', fontFamily: 'sans-serif', outline: 'none' },
+  backBtn:     { background: 'none', border: '1.5px solid #d4a86a', color: '#8a5c2e', borderRadius: 8, padding: '8px 18px', cursor: 'pointer', fontSize: 14, fontFamily: 'sans-serif', marginBottom: 16, transition: 'all .2s', display: 'inline-block' },
+
+  // ── Modal ──
+  overlay:      { position: 'fixed', inset: 0, background: 'rgba(10,4,0,.68)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, backdropFilter: 'blur(4px)' },
+  modal:        { background: '#fff', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', position: 'relative' },
+  modalClose:   { position: 'absolute', top: 12, right: 12, zIndex: 10, background: 'rgba(0,0,0,.55)', color: '#fff', border: 'none', borderRadius: '50%', width: 34, height: 34, cursor: 'pointer', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' },
   modalImgWrap: { position: 'relative', height: 230 },
   modalContent: { padding: '18px 22px 26px' },
   modalTitle:   { fontSize: 20, fontWeight: 700, margin: '0 0 10px', color: '#1a0a00' },
@@ -922,8 +883,5 @@ const st: Record<string, React.CSSProperties> = {
   qtyRow:       { display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, background: '#fdf3e3', padding: '11px 14px', borderRadius: 10 },
   qtyCtrl:      { display: 'flex', alignItems: 'center', gap: 12, background: '#fff', borderRadius: 8, padding: '4px 8px', border: '1.5px solid #e8d5b8' },
   qtyBtn:       { background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, color: '#c8860a', fontWeight: 700, lineHeight: 1, padding: '0 4px' },
-  waBtn:        { width: '100%', padding: '13px 0', background: '#25D366', color: '#fff', border: 'none',
-                  borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                  fontFamily: 'sans-serif', letterSpacing: .3 },
+  waBtn:        { width: '100%', padding: '13px 0', background: '#25D366', color: '#fff', border: 'none', borderRadius: 12, cursor: 'pointer', fontSize: 15, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, fontFamily: 'sans-serif', letterSpacing: .3 },
 };
