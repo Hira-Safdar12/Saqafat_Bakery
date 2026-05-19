@@ -1,5 +1,4 @@
 import CustomBuffet from "./components/home/CustomOrders";
-
 import HeroSection from "./components/home/Hero";
 
 import Offers from "./components/home/Offers";
