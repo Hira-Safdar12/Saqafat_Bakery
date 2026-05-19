@@ -16,6 +16,7 @@ const leftLinks: NavLink[] = [
   { label: 'Menu', href: '/menu' },
 ];
 
+
 const rightLinks: NavLink[] = [
   { label: 'Order', href: '/order' },
   { label: 'Partners', href: '/partners' },
