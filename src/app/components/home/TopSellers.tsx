@@ -538,7 +538,7 @@ export default function TopSellers() {
           >
 
             <Image
-               src="/Favourites/burger.avif" alt="Burger" 
+               src="/Favourites/burger.jpg" alt="Burger" 
               fill
               priority
             />
@@ -651,7 +651,7 @@ export default function TopSellers() {
           >
 
             <Image
-              src="/Favourites/pasta.jpg"  
+              src="/Favourites/pasta1.jpg"  
               alt="Pasta"
               fill
               priority

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, Amatic_SC } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from './context/AuthContext';
+
 import ClientShell from "./components/ClientShell";
 
-// ─── FONTS ────────────────────────────────────────────────────────────────────
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
@@ -25,7 +26,6 @@ const amatic = Amatic_SC({
   variable: "--font-amatic",
 });
 
-// ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   title: {
     default: "Saqafat Bakery & Cafe",
@@ -50,7 +50,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://saqafatbakery.com"),
 };
 
-// ─── ROOT LAYOUT ─────────────────────────────────────────────────────────────
 export default function RootLayout({
   children,
 }: {
@@ -70,8 +69,9 @@ export default function RootLayout({
           minHeight: "100vh",
         }}
       >
-        {/* All app UI handled here */}
-        <ClientShell>{children}</ClientShell>
+        <AuthProvider>
+          <ClientShell>{children}</ClientShell>
+        </AuthProvider>
       </body>
     </html>
   );
