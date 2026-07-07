@@ -9,9 +9,9 @@ export default function Hero() {
   const [visible, setVisible] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
 
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
+  // useEffect(() => {
+  //   videoRef.current?.play().catch(() => {});
+  // }, []);
 
   // Re-trigger every time section enters viewport
   useEffect(() => {
@@ -207,19 +207,25 @@ export default function Hero() {
         }} />
 
         {/* ── Video ── */}
-        <video
-          ref={videoRef}
-          autoPlay muted loop playsInline preload="auto"
-          style={{
-            position: 'absolute', inset: 0,
-            width: '100%', height: '100%',
-            objectFit: 'cover', zIndex: 1,
-            filter: 'brightness(0.82) contrast(1.05)',
-          }}
-        >
-        
-          <source src="/temp-video.mp4" type="temp-video/mp4" />
-        </video>
+       <video
+  ref={videoRef}
+  autoPlay
+  muted
+  loop
+  playsInline
+  controls
+  preload="auto"
+  style={{
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: 1,
+  }}
+>
+  <source src="/temp-video.mp4" type="video/mp4" />
+</video>
 
         {/* ── Dark overlay ── */}
         <div style={{
