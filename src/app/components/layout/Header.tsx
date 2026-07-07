@@ -244,6 +244,11 @@ export default function Header() {
         @media (min-width: 769px) {
           .sq-hamburger { display: none !important; }
         }
+          @media (max-width: 768px) {
+  .sq-logo-wrap {
+    margin-top: 4px !important;
+  }
+}
       `}</style>
 
       {/* ── HEADER ── */}
@@ -272,12 +277,35 @@ export default function Header() {
         </nav>
 
         {/* LOGO */}
-        <Link href="/" aria-label="Saqafat Bakery Home" className="sq-logo-wrap"
-          style={{ padding: '0 clamp(10px,2vw,28px)', flexShrink: 0 }}>
-          <Image src="/SaqafatLogo.png" alt="Saqafat Bakery"
-            width={190} height={76} priority
-            style={{ objectFit: 'contain', display: 'block' }} />
-        </Link>
+       {/* LOGO */}
+<Link
+  href="/"
+  aria-label="Saqafat Bakery Home"
+  className="sq-logo-wrap"
+  style={{
+    
+    flexShrink: 0,
+    position: 'relative',
+       // don't center — let it hang from the top
+    marginTop: '27px',          // small breathing room from the very top edge
+                 // sits above the header's blurred background
+  }}
+>
+  <Image
+    src="/SaqafatLogo.png"
+    alt="Saqafat Bakery"
+    width={310}
+    height={105}
+    priority
+    style={{
+      objectFit: 'contain',
+      display: 'block',
+      width: 'clamp(110px, 11vw, 200px)', // bigger than before, scales with viewport
+      height: 'auto',
+      filter: 'drop-shadow(0 10px 22px rgba(0,0,0,0.35))', // lifts it off the navbar visually
+    }}
+  />
+</Link>
 
         {/* RIGHT NAV */}
         <nav className="sq-nav-right" aria-label="Right navigation"

@@ -68,19 +68,7 @@ export default function Order() {
         <p>Fill in your details and we'll confirm on WhatsApp</p>
       </div>
 
-      {/* Branch bar */}
-      <div className="op-banner">
-        <div className="op-banner-inner">
-          <div className="op-banner-left">
-            <span>📍</span>
-            <span>{branch || 'No branch selected'}</span>
-          </div>
-          <button className="op-banner-change"
-            onClick={() => window.dispatchEvent(new CustomEvent('saqafat:open-funnel'))}>
-            Change
-          </button>
-        </div>
-      </div>
+      
 
       <div className="op-form-wrap">
         {/* Card 1 — Your details */}
@@ -90,7 +78,7 @@ export default function Order() {
             <label htmlFor="f-name">Full name <span className="op-required">*</span></label>
             <input id="f-name" value={user.name}
               onChange={e => setUser({ ...user, name: e.target.value })}
-              placeholder="e.g. Ahmed Khan" autoComplete="name" />
+              placeholder="Enter your name " autoComplete="name" />
           </div>
           <div className="op-field">
             <label htmlFor="f-phone">Phone number <span className="op-required">*</span></label>
@@ -124,7 +112,7 @@ export default function Order() {
           </div>
           {items.map((item, i) => (
             <div key={i} className="op-item-row">
-              <input value={item.name} placeholder="e.g. Chocolate Cake"
+              <input value={item.name} placeholder="Type item name" className="op-item-name-input"
                 onChange={e => updateItem(i, 'name', e.target.value)} />
               <input type="number" min={1} value={item.qty} className="op-qty-input"
                 onChange={e => updateItem(i, 'qty', Number(e.target.value))} />

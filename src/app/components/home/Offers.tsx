@@ -27,7 +27,7 @@ const offers: Offer[] = [
     subtitle: 'Perfect for the whole crew',
     code: 'FAMILY20',
     image: '/offers/familydeal.png',
-    expires: '2026-06-30T23:59:59',
+    expires: '2027-06-30T23:59:59',
     tag: 'Most Popular',
     accent: '#C97B3A',
   },
@@ -36,16 +36,16 @@ const offers: Offer[] = [
     subtitle: 'Any drink, any size',
     code: 'FREEDRINK',
     image: '/offers/drink.png',
-    expires: '2026-05-31T23:59:59',
+    expires: '2027-05-31T23:59:59',
     tag: 'Ending Soon',
     accent: '#9B5E2A',
   },
   {
-    title: 'Buy 1 Get 1 Free',
+    title: 'Buy 2 Get 1 Free',
     subtitle: 'Double the joy, same price',
     code: 'BOGO3',
-    image: '/offers/free.png',
-    expires: '2026-05-15T23:59:59',
+    image: '/offers/buy.jpg',
+    expires: '2027-05-15T23:59:59',
     tag: 'Flash Deal',
     accent: '#7A3E18',
   },
@@ -544,12 +544,12 @@ export default function Offers() {
 
         /* IMAGE */
         .card-image-wrap {
-          position: relative;
-          width: 100%;
-          height: 173px;
-          background: #35201a;
-          overflow: hidden;
-        }
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: #35201a;
+  overflow: hidden;
+}
 
         .card-image-inner {
           position: absolute;
@@ -625,7 +625,7 @@ export default function Offers() {
         }
 
         .timer-icon {
-          color: rgba(250,220,160,0.5);
+          color: #bc595c;
           display: flex;
           align-items: center;
           flex-shrink: 0;
@@ -637,7 +637,7 @@ export default function Offers() {
           font-weight: 400;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: rgba(250,220,160,0.45);
+          color: #bc595c;
         }
 
         .timer-value {
