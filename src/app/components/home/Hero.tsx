@@ -217,8 +217,8 @@ export default function Hero() {
             filter: 'brightness(0.82) contrast(1.05)',
           }}
         >
-        <source src="/Video.mp4" type="video/mp4" />
         
+          <source src="/temp-video.mp4" type="temp-video/mp4" />
         </video>
 
         {/* ── Dark overlay ── */}
