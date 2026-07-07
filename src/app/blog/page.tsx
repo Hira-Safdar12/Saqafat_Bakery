@@ -163,7 +163,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
       {/* Card body */}
       <div className="bl-card-body">
         <div className="bl-card-meta">
-          <span className="bl-card-author">✍️ {post.author}</span>
+          <span className="bl-card-author"> {post.author}</span>
           <span className="bl-card-dot">·</span>
           <span className="bl-card-date">{post.date}</span>
           <span className="bl-card-dot">·</span>
@@ -203,24 +203,6 @@ export default function BlogPage() {
   return (
     <div className="bl-root">
 
-      {/* ── HERO ── */}
-      <section className="bl-hero">
-        <div className="bl-hero-glow" />
-        <div className="bl-hero-content">
-          <div className="bl-eyebrow">
-            <span className="bl-eyebrow-line" />
-            <span className="bl-eyebrow-text">Saqafat Blog</span>
-            <span className="bl-eyebrow-line" />
-          </div>
-          <h1 className="bl-hero-h1">
-            Recipes, Stories &{' '}
-            <span className="bl-accent">Food Culture</span>
-          </h1>
-          <p className="bl-hero-sub">
-            From our kitchen to your screen — tips, traditions, and tales from the world of Saqafat.
-          </p>
-        </div>
-      </section>
 
       {/* ── FEATURED POST ── */}
       {featured && (
@@ -250,7 +232,7 @@ export default function BlogPage() {
               <h2 className="bl-featured-title">{featured.title}</h2>
               <p className="bl-featured-excerpt">{featured.excerpt}</p>
               <div className="bl-featured-meta">
-                <span>✍️ {featured.author}</span>
+                <span> {featured.author}</span>
                 <span>·</span>
                 <span>{featured.date}</span>
                 <span>·</span>
@@ -382,10 +364,10 @@ export function BlogPost({ slug }: { slug: string }) {
   const shareText = encodeURIComponent(post.title);
 
   const shareLinks = [
-    { label:'WhatsApp',  icon:'💬', url:`https://wa.me/?text=${shareText}%20${shareUrl}`,                        color:'#25d366' },
-    { label:'Facebook',  icon:'📘', url:`https://facebook.com/sharer/sharer.php?u=${shareUrl}`,                  color:'#1877f2' },
-    { label:'Twitter',   icon:'🐦', url:`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,    color:'#1da1f2' },
-    { label:'Instagram', icon:'📸', url:`https://instagram.com`,                                                 color:'#e1306c' },
+    { label:'WhatsApp',   url:`https://wa.me/?text=${shareText}%20${shareUrl}`,                        color:'#25d366' },
+    { label:'Facebook',  url:`https://facebook.com/sharer/sharer.php?u=${shareUrl}`,                  color:'#1877f2' },
+    { label:'Twitter',    url:`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,    color:'#1da1f2' },
+    { label:'Instagram',  url:`https://instagram.com`,                                                 color:'#e1306c' },
   ];
 
   return (
@@ -410,11 +392,11 @@ export function BlogPost({ slug }: { slug: string }) {
           <h1 className="bl-post-title">{post.title}</h1>
           {/* Metadata — SRS §3.10.3 */}
           <div className="bl-post-meta">
-            <span>✍️ {post.author}</span>
+            <span> {post.author}</span>
             <span>·</span>
-            <span>📅 {post.date}</span>
+            <span> {post.date}</span>
             <span>·</span>
-            <span>⏱ {post.readTime} min read</span>
+            <span>{post.readTime} min read</span>
           </div>
         </div>
       </div>
@@ -466,7 +448,7 @@ export function BlogPost({ slug }: { slug: string }) {
                 style={{ '--share-color': s.color } as React.CSSProperties}
                 aria-label={`Share on ${s.label}`}
               >
-                <span>{s.icon}</span>
+                
                 <span>{s.label}</span>
               </a>
             ))}
@@ -502,7 +484,7 @@ export function BlogPost({ slug }: { slug: string }) {
 
         {/* Comments — Phase 2 placeholder (SRS §3.10.3) */}
         <div className="bl-comments-placeholder">
-          <p>💬 Comments coming in Phase 2</p>
+          <p> Comments coming in Phase 2</p>
         </div>
 
         <Link href="/blog" className="bl-back-link">← Back to Blog</Link>

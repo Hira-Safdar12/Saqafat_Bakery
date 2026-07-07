@@ -5,10 +5,13 @@
 ============================================================================= */
 
 /* ── Root ─────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@300;400;500;600&display=swap');
+
 .bl-root {
   background:  #FFFBF3;
   min-height:  100vh;
-  font-family: 'DM Sans', sans-serif;
+font-family: 'Outfit', sans-serif;
 }
 
 /* ── Shared: Eyebrow ──────────────────────────────────────────────────────── */
@@ -24,7 +27,7 @@
   background: #C97B3A; border-radius: 2px;
 }
 .bl-eyebrow-line-gold  { background: #C9A84C; }
-.bl-eyebrow-text       { font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#C97B3A; }
+.bl-eyebrow-text       { font-family: 'Outfit', sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#C97B3A; }
 .bl-eyebrow-text-gold  { color: #C9A84C; }
 .bl-accent             { color:#C97B3A; font-style:italic; }
 .bl-accent-gold        { color:#C9A84C; font-style:italic; }
@@ -49,12 +52,12 @@
 }
 .bl-hero-content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
 .bl-hero-h1 {
-  font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.8rem);
+  font-family: 'Amatic SC', cursive; font-size:clamp(2.2rem,5vw,3.8rem);
   font-weight:900; color:#FAF6EE; margin:0 0 16px; line-height:1.1;
   animation: bl-fade-up 0.8s ease 0.1s both;
 }
 .bl-hero-sub {
-  font-size:clamp(0.95rem,2vw,1.1rem); color:rgba(250,246,238,0.60);
+  font-size:clamp(0.95rem,1vw,0.8rem); color:rgba(250,246,238,0.60);
   line-height:1.75; margin:0; animation:bl-fade-up 0.8s ease 0.3s both;
 }
 .bl-eyebrow {
@@ -116,7 +119,7 @@
   letter-spacing: 0.14em; text-transform:uppercase; color:#C97B3A;
 }
 .bl-featured-title {
-  font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem);
+  font-family: 'Cormorant Garamond', serif;  font-size:clamp(1.4rem,2.5vw,2rem);
   font-weight:800; color:#1E0F06; margin:0; line-height:1.2;
 }
 .bl-featured-excerpt { font-size:0.93rem; color:#5A3E2B; line-height:1.75; margin:0; }
@@ -271,7 +274,7 @@
   top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none;
 }
 .bl-newsletter-title {
-  font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem);
+font-family: 'Cormorant Garamond', serif; font-size:clamp(1.8rem,4vw,2.6rem);
   font-weight:800; color:#FAF6EE; margin:0 0 12px; position:relative;
 }
 .bl-newsletter-sub {

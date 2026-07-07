@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 /* ─────────────────────────────────────────────
-   PAGE
+   PAGE — mobile-first: full-screen backdrop
 ───────────────────────────────────────────── */
 .sf-page {
   position: fixed;
   inset: 0;
   z-index: 1000;
   height: 100vh;
+  height: 100dvh;
   background: linear-gradient(165deg, #f5e9d8 0%, #d4a882 35%, #67352c 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   font-family: 'DM Sans', sans-serif;
   overflow: hidden;
   opacity: 1;
@@ -22,47 +24,76 @@
 }
 
 /* ─────────────────────────────────────────────
-   TOP — logo only, no text
-───────────────────────────────────────────── */
-.sf-top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
- 
-}
-
-.sf-logo {
-  width: clamp(130px, 22vw, 210px);
-  height: auto;
-  display: block;
-  
-}
-
-/* ─────────────────────────────────────────────
-   SLIDE-UP CARD
+   CARD — mobile: bottom sheet
 ───────────────────────────────────────────── */
 .sf-card {
-  position: absolute;
-  bottom: -100%;
-  width: min(90%, 490px);
-  background: rgba(255, 248, 238, 0.55);
+  position: relative;
+  width: min(92%, 460px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  overflow-x: visible;
+  background: rgba(255, 248, 238, 0.72);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border-radius: 28px;
-  padding: clamp(16px, 5vw, 36px) clamp(10px, 5vw, 32px) clamp(10px, 4vw, 28px);
+  border-radius: 26px;
+  padding: 46px 22px 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   text-align: left;
   box-shadow:
-    0 -4px 40px rgba(103, 53, 44, 0.12),
-    0 12px 48px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  transition: bottom 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    0 -4px 40px rgba(103, 53, 44, 0.14),
+    0 12px 48px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  transform: translateY(120%);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-bottom: 0;
 }
 .sf-card-in {
-  bottom: clamp(16px, 3vh, 32px);
+  transform: translateY(0);
+  margin-bottom: clamp(12px, 3vh, 24px);
 }
 .sf-card-out {
-  bottom: -110%;
-  transition: bottom 0.45s cubic-bezier(0.4, 0, 1, 1);
+  transform: translateY(120%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* scrollbar tidy-up for the internal field area on very short screens */
+.sf-card::-webkit-scrollbar { width: 5px; }
+.sf-card::-webkit-scrollbar-thumb { background: rgba(103,53,44,0.25); border-radius: 4px; }
+
+/* ─────────────────────────────────────────────
+   LOGO BADGE — floats above the card, overlapping the top edge
+───────────────────────────────────────────── */
+.sf-logo-badge {
+  position: absolute;
+  
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: sf-float 4.5s ease-in-out infinite;
+}
+
+.sf-logo-badge-ring {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 32% 28%, #fffaf0 0%, #f3e2c8 60%, #e6c99a 100%);
+  box-shadow:
+    0 10px 26px rgba(103, 53, 44, 0.35),
+    0 0 0 5px rgba(255, 250, 240, 0.55),
+    0 0 0 6.5px rgba(201, 168, 76, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  padding: 10px;
+}
+
+
+
+@keyframes sf-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-6px); }
 }
 
 /* ─────────────────────────────────────────────
@@ -70,22 +101,29 @@
 ───────────────────────────────────────────── */
 .sf-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  font-size: clamp(1.35rem, 4.5vw, 1.7rem);
   font-weight: 600;
   color: #67352c;
-  margin: 0 0 clamp(16px, 3.5vw, 22px) 0;
-  line-height: 1.1;
+  margin: 8px 0 18px;
+  line-height: 1.15;
   text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLABLE FIELD AREA
+───────────────────────────────────────────── */
+.sf-form-scroll {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─────────────────────────────────────────────
    FIELD GROUPS
 ───────────────────────────────────────────── */
 .sf-field {
-  margin-bottom: clamp(12px, 2.5vw, 18px);
+  margin-bottom: 16px;
 }
 
-/* ── Field label (Location / Area) ── */
 .sf-label {
   display: flex;
   align-items: center;
@@ -96,10 +134,9 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgb(103, 53, 44);
+  color: #67352c;
 }
 
-/* Red asterisk */
 .sf-required {
   color: #d63b3b;
   font-size: 12px;
@@ -107,9 +144,6 @@
   font-weight: 700;
 }
 
-
-
-/* ── Mood question label ── */
 .sf-question-label {
   display: flex;
   align-items: center;
@@ -119,7 +153,7 @@
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgb(103, 53, 44);
+  color: #67352c;
 }
 
 /* ─────────────────────────────────────────────
@@ -129,7 +163,6 @@
   position: relative;
 }
 
-/* Gold left accent bar on focus */
 .sf-select-wrap::before {
   content: '';
   position: absolute;
@@ -149,48 +182,40 @@
   opacity: 1;
 }
 
-/*
-  No ::after chevron — browser default arrow removed via appearance:none
-  on .sf-input below. We intentionally leave no custom chevron so the
-  "^" / "v" icon is completely gone from all selects.
-*/
-
 /* ─────────────────────────────────────────────
    SELECT INPUT
 ───────────────────────────────────────────── */
 .sf-input {
   width: 100%;
-  padding: 13px 16px;          /* equal padding both sides — no room for chevron */
+  min-height: 46px;
+  padding: 13px 16px;
   border-radius: 12px;
-  border: 1.5px solid rgba(103, 53, 44, 0.12);
+  border: 1.5px solid rgba(103, 53, 44, 0.14);
   outline: none;
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.82rem, 2vw, 0.88rem);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 400;
-  color: #6f3a28a3;
-  background: rgba(255, 250, 242, 0.88);
-
-  /* removes ALL browser-native arrow / chevron */
+  color: #4a2618;
+  background: rgba(255, 250, 242, 0.92);
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   cursor: pointer;
   display: block;
   box-shadow: 0 1px 3px rgba(103, 53, 44, 0.06);
   transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
 }
-.sf-input:focus {
-  border-color: rgba(103, 53, 44, 0.45);
+.sf-input:focus-visible {
+  border-color: rgba(103, 53, 44, 0.5);
   box-shadow:
-    0 0 0 3px rgba(201, 168, 76, 0.15),
+    0 0 0 3px rgba(201, 168, 76, 0.28),
     0 2px 8px rgba(103, 53, 44, 0.08);
-  background: rgba(255, 252, 246, 0.95);
+  background: rgba(255, 252, 246, 0.98);
 }
 .sf-input:disabled {
-  opacity: 0.42;
+  opacity: 0.5;
   cursor: not-allowed;
-  background: rgba(240, 232, 220, 0.5);
+  background: rgba(240, 232, 220, 0.55);
 }
 .sf-input option {
   background: #faf6ee;
@@ -203,14 +228,15 @@
 .sf-btn {
   position: relative;
   width: 100%;
-  padding: clamp(13px, 3vw, 15px);
-  margin-top: clamp(10px, 2vw, 14px);
+  min-height: 48px;
+  padding: 14px;
+  margin-top: 8px;
   border-radius: 50px;
   border: none;
   background: linear-gradient(135deg, #67352c 0%, #cc804d 100%);
   color: #fff;
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.84rem, 2.2vw, 0.92rem);
+  font-size: clamp(0.86rem, 2.2vw, 0.92rem);
   font-weight: 600;
   letter-spacing: 0.06em;
   cursor: pointer;
@@ -222,14 +248,16 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(199, 122, 58, 0.48);
 }
+.sf-btn:focus-visible {
+  outline: 3px solid rgba(201, 168, 76, 0.6);
+  outline-offset: 2px;
+}
 .sf-btn:disabled {
   background: rgba(103, 53, 44, 0.22);
-  color: rgba(103, 53, 44, 0.849);
+  color: rgba(255, 255, 255, 0.75);
   box-shadow: none;
   cursor: not-allowed;
-  
 }
-/* Shine sweep on hover */
 .sf-btn::after {
   content: '';
   position: absolute;
@@ -252,12 +280,13 @@
 .sf-skip {
   display: block;
   width: 100%;
-  margin-top: clamp(10px, 2vw, 14px);
-  padding: 2px 0;
+  min-height: 32px;
+  margin-top: 10px;
+  padding: 4px 0;
   font-family: 'DM Sans', sans-serif;
   font-size: clamp(0.72rem, 1.7vw, 0.78rem);
   font-weight: 400;
-  color: rgba(103, 53, 44, 0.993);
+  color: rgba(103, 53, 44, 0.8);
   background: none;
   border: none;
   cursor: pointer;
@@ -268,13 +297,117 @@
 .sf-skip:hover {
   color: #b55d16;
 }
+.sf-skip:focus-visible {
+  outline: 2px solid rgba(201, 168, 76, 0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ═════════════════════════════════════════════
+   TABLET & UP (≥640px) — switch to a centered
+   dialog instead of a bottom sheet
+═════════════════════════════════════════════ */
+@media (min-width: 640px) {
+  .sf-page {
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .sf-card {
+    max-height: 82dvh;
+    padding: 52px 40px 32px;
+    border-radius: 30px;
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  }
+  .sf-card-in {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    margin-bottom: 0;
+  }
+  .sf-card-out {
+    transform: translateY(12px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.32s ease, opacity 0.3s ease;
+  }
+
+  .sf-logo-badge-ring {
+    width: 104px;
+    height: 104px;
+  }
+  .sf-logo-badge {
+    top: -52px;
+  }
+
+  .sf-field { margin-bottom: 20px; }
+}
+
+/* ═════════════════════════════════════════════
+   DESKTOP (≥1024px) — a touch more breathing room
+═════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .sf-card {
+    width: 480px;
+    padding: 58px 46px 36px;
+  }
+  .sf-logo-badge-ring {
+    width: 114px;
+    height: 114px;
+  }
+  .sf-logo-badge {
+    top: -57px;
+  }
+}
+
+/* ═════════════════════════════════════════════
+   VERY SMALL PHONES (≤360px)
+═════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .sf-card {
+    width: 96%;
+    padding: 42px 16px 20px;
+  }
+  .sf-logo-badge-ring {
+    width: 80px;
+    height: 80px;
+  }
+  .sf-logo-badge {
+    top: -40px;
+  }
+}
+
+/* ═════════════════════════════════════════════
+   SHORT / LANDSCAPE VIEWPORTS
+═════════════════════════════════════════════ */
+@media (max-height: 500px) {
+  .sf-card {
+    max-height: 94dvh;
+    padding-top: 40px;
+  }
+  .sf-logo-badge-ring {
+    width: 64px;
+    height: 64px;
+  }
+  .sf-logo-badge {
+    top: -32px;
+  }
+  .sf-title {
+    margin-bottom: 10px;
+  }
+  .sf-field {
+    margin-bottom: 10px;
+  }
+}
 
 /* ─────────────────────────────────────────────
    REDUCED MOTION
 ───────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .sf-card,
-  .sf-page {
+  .sf-page,
+  .sf-logo-badge {
     transition: none !important;
+    animation: none !important;
   }
 }

@@ -186,9 +186,9 @@ function ReviewCard({
         {/* Review text */}
         <div
           style={{
-            maxHeight: isExpanded ? '200px' : '0px',
+            maxHeight: isExpanded ? '190px' : '0px',
             opacity: isExpanded ? 1 : 0,
-            marginTop: isExpanded ? '16px' : '0px',
+            marginTop: isExpanded ? '1px' : '0px',
             overflow: 'hidden',
             transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.38s ease, margin-top 0.35s ease',
           }}

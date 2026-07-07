@@ -80,73 +80,71 @@ export default function SelectionFunnel({ onComplete }: SelectionFunnelProps) {
       aria-modal="true"
       aria-labelledby="sf-title"
     >
-      {/* ── Logo only — no text beneath ── */}
-      <div className="sf-top">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/saqafatlogo.png" alt="Saqafat Bakery & Cafe" className="sf-logo" />
-      </div>
-
-      {/* ── Slide-up card ── */}
       <div className={cardClass}>
 
-        <h2 id="sf-title" className="sf-title">Welcome to Saqafat </h2>
+       
 
-        {/* Field 1 — Location (required) */}
-        <div className="sf-field">
-          <label className="sf-label" htmlFor="sf-branch">
-            Location <span className="sf-required">*</span>
-          </label>
-          <div className="sf-select-wrap">
-            <select
-              id="sf-branch"
-              className="sf-input"
-              value={form.branch}
-              onChange={(e) => setForm({ ...form, branch: e.target.value, location: '' })}
-              aria-required="true"
-            >
-              <option value="" disabled>Select your nearest branch</option>
-              {branches.map((b) => <option key={b} value={b}>{b}</option>)}
-            </select>
-          </div>
-        </div>
+        <h2 id="sf-title" className="sf-title">Welcome to Saqafat</h2>
 
-        {/* Field 2 — Area (optional) */}
-        <div className="sf-field">
-          <label className="sf-label" htmlFor="sf-location">
-            Area <span className="sf-required">*</span>
-            
-          </label>
-          <div className="sf-select-wrap">
-            <select
-              id="sf-location"
-              className="sf-input"
-              value={form.location}
-              disabled={!form.branch}
-              onChange={(e) => setForm({ ...form, location: e.target.value })}
-            >
-              <option value="">
-                {form.branch ? 'Select your area' : 'Select a location first'}
-              </option>
-              {locations.map((l) => <option key={l} value={l}>{l}</option>)}
-            </select>
-          </div>
-        </div>
+        <div className="sf-form-scroll">
 
-        {/* Field 3 — Mood (no asterisk) */}
-        <div className="sf-field">
-          <span className="sf-question-label">
-            Are you ready to Saqafatify your tastebuds?
-          </span>
-          <div className="sf-select-wrap sf-select-wrap--no-chevron">
-            <select
-              id="sf-mood"
-              className="sf-input"
-              value={form.mood}
-              onChange={(e) => setForm({ ...form, mood: e.target.value })}
-            >
-              {moods.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}
-            </select>
+          {/* Field 1 — Branch (required) */}
+          <div className="sf-field">
+            <label className="sf-label" htmlFor="sf-branch">
+              Location <span className="sf-required">*</span>
+            </label>
+            <div className="sf-select-wrap">
+              <select
+                id="sf-branch"
+                className="sf-input"
+                value={form.branch}
+                onChange={(e) => setForm({ ...form, branch: e.target.value, location: '' })}
+                aria-required="true"
+              >
+                <option value="" disabled>Select your nearest branch</option>
+                {branches.map((b) => <option key={b} value={b}>{b}</option>)}
+              </select>
+            </div>
           </div>
+
+          {/* Field 2 — Area (required once branch chosen) */}
+          <div className="sf-field">
+            <label className="sf-label" htmlFor="sf-location">
+              Area <span className="sf-required">*</span>
+            </label>
+            <div className="sf-select-wrap">
+              <select
+                id="sf-location"
+                className="sf-input"
+                value={form.location}
+                disabled={!form.branch}
+                onChange={(e) => setForm({ ...form, location: e.target.value })}
+              >
+                <option value="">
+                  {form.branch ? 'Select your area' : 'Select a location first'}
+                </option>
+                {locations.map((l) => <option key={l} value={l}>{l}</option>)}
+              </select>
+            </div>
+          </div>
+
+          {/* Field 3 — Mood (no asterisk) */}
+          <div className="sf-field">
+            <label className="sf-question-label" htmlFor="sf-mood">
+              Are you ready to Saqafatify your tastebuds?
+            </label>
+            <div className="sf-select-wrap sf-select-wrap--no-chevron">
+              <select
+                id="sf-mood"
+                className="sf-input"
+                value={form.mood}
+                onChange={(e) => setForm({ ...form, mood: e.target.value })}
+              >
+                {moods.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}
+              </select>
+            </div>
+          </div>
+
         </div>
 
         {/* CTA */}

@@ -692,9 +692,7 @@ export default function menu(){
               <h2 style={{ fontSize: 'clamp(1.5rem,3vw,2rem)', fontWeight: 700, color: '#1a0a00', margin: '0 0 8px' }}>
                 What are you craving?
               </h2>
-              <p style={{ color: '#7a5c3a', fontSize: 15, margin: '0 0 28px', fontFamily: 'sans-serif' }}>
-                Tap a category to see all items
-              </p>
+              
               <div style={{ position: 'relative', maxWidth: 400, margin: '0 auto' }}>
                 <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 15, color: '#9b7a5a' }}>🔍</span>
                 <input style={st.searchInput} placeholder="Search categories..." value={catSearch} onChange={(e) => setCatSearch(e.target.value)} />
